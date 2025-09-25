@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "J+2T3Et0R1E=",
+  "success": true,
+  "projectFilePath": "/Users/christiankristensen/Downloads/esg-as-a-service-5365f6e5e2deccecf28db26f854fa6f0d18416d6/src/EsgAsAService.Application/EsgAsAService.Application.csproj",
+  "expectedPackageFiles": [
+    "/Users/christiankristensen/.nuget/packages/microsoft.extensions.configuration.abstractions/9.0.0/microsoft.extensions.configuration.abstractions.9.0.0.nupkg.sha512",
+    "/Users/christiankristensen/.nuget/packages/microsoft.extensions.configuration.binder/9.0.0/microsoft.extensions.configuration.binder.9.0.0.nupkg.sha512",
+    "/Users/christiankristensen/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/9.0.0/microsoft.extensions.dependencyinjection.abstractions.9.0.0.nupkg.sha512",
+    "/Users/christiankristensen/.nuget/packages/microsoft.extensions.logging.abstractions/9.0.0/microsoft.extensions.logging.abstractions.9.0.0.nupkg.sha512",
+    "/Users/christiankristensen/.nuget/packages/microsoft.extensions.options/9.0.0/microsoft.extensions.options.9.0.0.nupkg.sha512",
+    "/Users/christiankristensen/.nuget/packages/microsoft.extensions.options.configurationextensions/9.0.0/microsoft.extensions.options.configurationextensions.9.0.0.nupkg.sha512",
+    "/Users/christiankristensen/.nuget/packages/microsoft.extensions.primitives/9.0.0/microsoft.extensions.primitives.9.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

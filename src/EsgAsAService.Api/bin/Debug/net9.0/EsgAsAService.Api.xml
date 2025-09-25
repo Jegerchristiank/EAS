@@ -1,0 +1,291 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EsgAsAService.Api</name>
+    </assembly>
+    <members>
+        <member name="M:EsgAsAService.Api.Controllers.ActivitiesController.List(System.Guid,System.String,System.Int32,System.Int32)">
+            <summary>
+            Lists activities for a reporting period with optional free-text filter and paging.
+            </summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Controllers.ActivitiesController.Get(System.Guid)">
+            <summary>
+            Returns a single activity by identifier.
+            </summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Controllers.ActivitiesController.Create(EsgAsAService.Api.Models.ActivityRequest)">
+            <summary>
+            Creates a new activity under a reporting period.
+            Returns 201 Created with Location header to <c>GET /activities/{{id}}</c>.
+            </summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Controllers.Importing.EnergyImportsController">
+            <summary>
+            Ingests supplier energy CSVs by first staging the raw upload and then processing
+            lines into normalized activities + scope entries. Why: decouple IO/parsing from
+            domain writes and keep the flow idempotent across repeated uploads.
+            </summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Controllers.Importing.EnergyImportsController.#ctor(EsgAsAService.Infrastructure.Data.EsgDbContext)">
+            <summary>
+            Ingests supplier energy CSVs by first staging the raw upload and then processing
+            lines into normalized activities + scope entries. Why: decouple IO/parsing from
+            domain writes and keep the flow idempotent across repeated uploads.
+            </summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Controllers.Importing.WasteImportsController">
+            <summary>
+            Waste manifest import. Why: normalize quantity to kg and ensure idempotent processing by
+            tracking a normalized payload-per-line per staging document.
+            </summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Controllers.Importing.WasteImportsController.#ctor(EsgAsAService.Infrastructure.Data.EsgDbContext,EsgAsAService.Api.Services.IUnitConversionService)">
+            <summary>
+            Waste manifest import. Why: normalize quantity to kg and ensure idempotent processing by
+            tracking a normalized payload-per-line per staging document.
+            </summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Controllers.Importing.WaterImportsController">
+            <summary>
+            Water import flow stores the raw upload in staging and processes rows into WaterMeter records.
+            Why: keep ingestion idempotent and flexible on units so we can safely re-run ETL and accept vendor CSVs.
+            </summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Controllers.Importing.WaterImportsController.#ctor(EsgAsAService.Infrastructure.Data.EsgDbContext,EsgAsAService.Api.Services.IUnitConversionService)">
+            <summary>
+            Water import flow stores the raw upload in staging and processes rows into WaterMeter records.
+            Why: keep ingestion idempotent and flexible on units so we can safely re-run ETL and accept vendor CSVs.
+            </summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Controllers.ReportsController.GenerateVsmeBasic(System.Guid)">
+            <summary>
+            Generates a VSME Basic report payload for a given period.
+            </summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Controllers.ReportsController.GenerateJson(System.Guid)">
+            <summary>
+            Generates the full ESG JSON report for a period (B1–B11, C placeholders).
+            Feature-gated via FeatureManagement key <c>FullEsgJson</c>.
+            </summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Infrastructure.RoutePrefixConvention">
+            <summary>
+            Adds a global route prefix (e.g., "v1") to all attribute‑routed controllers.
+            Why: introduce API versioning without touching every controller attribute.
+            </summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Infrastructure.RoutePrefixConvention.#ctor(System.String)">
+            <summary>
+            Adds a global route prefix (e.g., "v1") to all attribute‑routed controllers.
+            Why: introduce API versioning without touching every controller attribute.
+            </summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Models.OrganisationRequest">
+            <summary>
+            Request DTO for creating or updating an organisation.
+            Why: keep public API stable and avoid leaking persistence fields.
+            </summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Models.OrganisationRequest.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Request DTO for creating or updating an organisation.
+            Why: keep public API stable and avoid leaking persistence fields.
+            </summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Models.ReportingPeriodRequest">
+            <summary>
+            Request DTO for creating or updating a reporting period (V2).
+            </summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Models.ReportingPeriodRequest.#ctor(System.Guid,System.Int32,System.DateOnly,System.DateOnly)">
+            <summary>
+            Request DTO for creating or updating a reporting period (V2).
+            </summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Models.ActivityRequest">
+            <summary>
+            Request DTO for adding an activity to a reporting period.
+            Category examples: Fuel/Diesel, Electricity, DistrictHeating.
+            </summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Models.ActivityRequest.#ctor(System.Guid,System.Guid,System.String,System.Nullable{System.DateOnly},System.Double,System.Guid)">
+            <summary>
+            Request DTO for adding an activity to a reporting period.
+            Category examples: Fuel/Diesel, Electricity, DistrictHeating.
+            </summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Models.PagedResponse`1">
+            <summary>
+            Standard container for paginated list responses.
+            </summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Models.PagedResponse`1.#ctor(System.Int32,System.Int32,System.Int32,System.Collections.Generic.IReadOnlyList{`0})">
+            <summary>
+            Standard container for paginated list responses.
+            </summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Models.UnitResponse">
+            <summary>Read model for reference data units.</summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Models.UnitResponse.#ctor(System.Guid,System.String,System.String)">
+            <summary>Read model for reference data units.</summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Models.UnitConversionResponse">
+            <summary>Read model for unit conversions.</summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Models.UnitConversionResponse.#ctor(System.Guid,System.Guid,System.Guid,System.Double)">
+            <summary>Read model for unit conversions.</summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Models.EmissionFactorResponse">
+            <summary>Read model for emission factors.</summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Models.EmissionFactorResponse.#ctor(System.Guid,System.String,System.Int32,System.String,System.Guid,System.Double,System.Nullable{System.DateOnly},System.Nullable{System.DateOnly},System.Nullable{System.Guid})">
+            <summary>Read model for emission factors.</summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Models.ActivityResponse">
+            <summary>Read model for activities (energy/material entries).</summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Models.ActivityResponse.#ctor(System.Guid,System.Guid,System.Guid,System.String,System.Nullable{System.DateOnly},System.Double,System.Guid,System.String)">
+            <summary>Read model for activities (energy/material entries).</summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Models.ScopeEntryResponse">
+            <summary>Read model for scope entries that tie activities to scopes/emission factors.</summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Models.ScopeEntryResponse.#ctor(System.Guid,System.Guid,System.Int32,System.Nullable{System.Guid},System.Nullable{System.Double})">
+            <summary>Read model for scope entries that tie activities to scopes/emission factors.</summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Models.DeviationResponse">
+            <summary>Read model for deviations applied to calculation results.</summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Models.DeviationResponse.#ctor(System.Guid,System.Guid,System.String)">
+            <summary>Read model for deviations applied to calculation results.</summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Models.DataSourceResponse">
+            <summary>Read model for data sources.</summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Models.DataSourceResponse.#ctor(System.Guid,System.String,System.String,System.String)">
+            <summary>Read model for data sources.</summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Models.LocationResponse">
+            <summary>Read model for locations.</summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Models.LocationResponse.#ctor(System.Guid,System.Guid,System.String,System.Nullable{System.Double},System.Nullable{System.Double},System.Boolean,System.String)">
+            <summary>Read model for locations.</summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Models.WaterMeterResponse">
+            <summary>Read model for water meter entries.</summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Models.WaterMeterResponse.#ctor(System.Guid,System.Guid,System.Guid,System.Nullable{System.Guid},System.Double,System.Nullable{System.Double},System.String)">
+            <summary>Read model for water meter entries.</summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Models.WasteManifestResponse">
+            <summary>Read model for waste manifests.</summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Models.WasteManifestResponse.#ctor(System.Guid,System.Guid,System.Guid,System.Nullable{System.Guid},System.String,System.Double,System.String,System.String,System.String)">
+            <summary>Read model for waste manifests.</summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Models.MaterialFlowResponse">
+            <summary>Read model for material flows.</summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Models.MaterialFlowResponse.#ctor(System.Guid,System.Guid,System.Guid,System.String,System.Double,System.String)">
+            <summary>Read model for material flows.</summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Models.PollutionRegisterResponse">
+            <summary>Read model for pollution register entries.</summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Models.PollutionRegisterResponse.#ctor(System.Guid,System.Guid,System.Guid,System.Nullable{System.Guid},System.String,System.Double,System.Guid,System.String,System.String)">
+            <summary>Read model for pollution register entries.</summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Models.GovernanceCaseResponse">
+            <summary>Read model for governance cases.</summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Models.GovernanceCaseResponse.#ctor(System.Guid,System.Guid,System.Guid,System.String,System.String,System.Nullable{System.Double},System.String)">
+            <summary>Read model for governance cases.</summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Models.HRHeadcountResponse">
+            <summary>Read model for HR headcount rows.</summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Models.HRHeadcountResponse.#ctor(System.Guid,System.Guid,System.Guid,System.Double,System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.Double},System.String)">
+            <summary>Read model for HR headcount rows.</summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Models.HRPayrollResponse">
+            <summary>Read model for HR payroll aggregates.</summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Models.HRPayrollResponse.#ctor(System.Guid,System.Guid,System.Guid,System.Nullable{System.Double},System.Nullable{System.Double},System.Nullable{System.Double})">
+            <summary>Read model for HR payroll aggregates.</summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Models.HRTrainingResponse">
+            <summary>Read model for HR training aggregates.</summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Models.HRTrainingResponse.#ctor(System.Guid,System.Guid,System.Guid,System.Nullable{System.Double})">
+            <summary>Read model for HR training aggregates.</summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Models.SafetyIncidentResponse">
+            <summary>Read model for safety incidents.</summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Models.SafetyIncidentResponse.#ctor(System.Guid,System.Guid,System.Guid,System.Int32,System.Double,System.String)">
+            <summary>Read model for safety incidents.</summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Models.FinancialsResponse">
+            <summary>Read model for financial snapshots.</summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Models.FinancialsResponse.#ctor(System.Guid,System.Guid,System.Guid,System.Double,System.String)">
+            <summary>Read model for financial snapshots.</summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Models.PolicyRegisterResponse">
+            <summary>Read model for policy registers.</summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Models.PolicyRegisterResponse.#ctor(System.Guid,System.Guid,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String,System.String,System.String,System.Boolean,System.String)">
+            <summary>Read model for policy registers.</summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Models.VsmeMappingResponse">
+            <summary>Read model for VSME mapping snapshots.</summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Models.VsmeMappingResponse.#ctor(System.Guid,System.String,System.DateTimeOffset)">
+            <summary>Read model for VSME mapping snapshots.</summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Models.ReportDraftResponse">
+            <summary>Read model for report drafts.</summary>
+        </member>
+        <member name="M:EsgAsAService.Api.Models.ReportDraftResponse.#ctor(System.Guid,System.Guid,System.String,System.DateTimeOffset)">
+            <summary>Read model for report drafts.</summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Services.IEmissionFactorCache">
+            <summary>
+            Read‑through cache for emission factors by (country, year, type).
+            Why: reduce DB load for hot lookups and provide simple TTL invalidation.
+            </summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Services.ICalculationRunner">
+            <summary>
+            Executes deterministic calculations for a period’s scope entries,
+            enforcing preconditions (evidence or deviation) before computing CO2e.
+            </summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Services.ICsvImportService">
+            <summary>
+            Analyzes and imports CSV files to staging and core tables.
+            Why: isolate parsing/mapping and keep controllers thin and testable.
+            </summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Services.CsvImportService">
+            <summary>
+            CSV import helper for energy activities. Why: keep parsing/mapping isolated and testable,
+            and use UnitConversionService to normalize quantities up front to reduce downstream complexity.
+            </summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Services.IUnitConversionService">
+            <summary>
+            Converts quantities between units using UnitConversion rows.
+            Why: normalize inputs early so downstream calculations stay simple.
+            </summary>
+        </member>
+        <member name="T:EsgAsAService.Api.Services.IVsmeReportService">
+            <summary>
+            Builds the VSME “basic” report from stored indicators for a period.
+            Why: keeps aggregation logic separate from controllers and easy to test.
+            </summary>
+        </member>
+    </members>
+</doc>

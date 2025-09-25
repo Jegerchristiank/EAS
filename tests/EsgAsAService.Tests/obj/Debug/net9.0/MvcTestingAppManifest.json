@@ -1,0 +1,7 @@
+{
+  "EsgAsAService.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/christiankristensen\/Desktop\/ESG-as-a-service\/src\/EsgAsAService.Api",
+  "EsgAsAService.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/christiankristensen\/Desktop\/ESG-as-a-service\/src\/EsgAsAService.Application",
+  "EsgAsAService.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/christiankristensen\/Desktop\/ESG-as-a-service\/src\/EsgAsAService.Domain",
+  "EsgAsAService.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/christiankristensen\/Desktop\/ESG-as-a-service\/src\/EsgAsAService.Infrastructure",
+  "EsgAsAService.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "\/Users\/christiankristensen\/Desktop\/ESG-as-a-service\/src\/EsgAsAService.Web"
+}

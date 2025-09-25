@@ -1,0 +1,11 @@
+/Users/christiankristensen/Desktop/ESG-as-a-service/src/EsgAsAService.Domain/bin/Debug/net9.0/EsgAsAService.Domain.deps.json
+/Users/christiankristensen/Desktop/ESG-as-a-service/src/EsgAsAService.Domain/bin/Debug/net9.0/EsgAsAService.Domain.dll
+/Users/christiankristensen/Desktop/ESG-as-a-service/src/EsgAsAService.Domain/bin/Debug/net9.0/EsgAsAService.Domain.pdb
+/Users/christiankristensen/Desktop/ESG-as-a-service/src/EsgAsAService.Domain/obj/Debug/net9.0/EsgAsAService.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/christiankristensen/Desktop/ESG-as-a-service/src/EsgAsAService.Domain/obj/Debug/net9.0/EsgAsAService.Domain.AssemblyInfoInputs.cache
+/Users/christiankristensen/Desktop/ESG-as-a-service/src/EsgAsAService.Domain/obj/Debug/net9.0/EsgAsAService.Domain.AssemblyInfo.cs
+/Users/christiankristensen/Desktop/ESG-as-a-service/src/EsgAsAService.Domain/obj/Debug/net9.0/EsgAsAService.Domain.csproj.CoreCompileInputs.cache
+/Users/christiankristensen/Desktop/ESG-as-a-service/src/EsgAsAService.Domain/obj/Debug/net9.0/EsgAsAService.Domain.dll
+/Users/christiankristensen/Desktop/ESG-as-a-service/src/EsgAsAService.Domain/obj/Debug/net9.0/refint/EsgAsAService.Domain.dll
+/Users/christiankristensen/Desktop/ESG-as-a-service/src/EsgAsAService.Domain/obj/Debug/net9.0/EsgAsAService.Domain.pdb
+/Users/christiankristensen/Desktop/ESG-as-a-service/src/EsgAsAService.Domain/obj/Debug/net9.0/ref/EsgAsAService.Domain.dll

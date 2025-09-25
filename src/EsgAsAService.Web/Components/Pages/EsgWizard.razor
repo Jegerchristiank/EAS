@@ -1,0 +1,783 @@
+@page "/wizard"
+@attribute [Authorize]
+@rendermode InteractiveServer
+@using System.Linq
+@using Microsoft.AspNetCore.Authorization
+@using EsgAsAService.Application.Abstractions
+@using EsgAsAService.Application.Models
+@using EsgAsAService.Domain.Entities
+@inject IEsgDataService Data
+@inject ICalculationService Calculator
+@inject NavigationManager Nav
+@inject ILogger<EsgWizard> Logger
+@inject IDiagnosticService Diag
+@inject IModuleCatalog ModuleCatalog
+
+<PageTitle>ESG Wizard</PageTitle>
+
+<h1>ESG Reporting Wizard</h1>
+
+<div class="progress mb-3" role="progressbar" aria-label="Wizard progress" aria-valuenow="@ProgressPercent" aria-valuemin="0" aria-valuemax="100">
+  <div class="progress-bar" style="width:@($"{ProgressPercent}%")"></div>
+  <span class="ms-2">Step @CurrentStep of @TotalSteps</span>
+  </div>
+
+@if (CurrentStep == 1)
+{
+    @if (!string.IsNullOrEmpty(LastValidationError))
+    {
+        <div class="alert alert-danger" role="alert">
+            Please fix the highlighted fields to continue.
+        </div>
+    }
+    <EditForm @key="Company" Model="Company" OnValidSubmit="NextStep" OnInvalidSubmit="OnInvalidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <fieldset disabled="@IsBusy">
+            <div class="mb-2">
+                <label class="form-label">Company name</label>
+            <InputText @key="Company.Name" class="form-control" @bind-Value="Company.Name" />
+                <ValidationMessage For="@(()=> Company.Name)" />
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="form-label">Industry</label>
+                <InputText @key="Company.Industry" class="form-control" @bind-Value="Company.Industry" />
+                </div>
+                <div class="col">
+                    <label class="form-label">Country code</label>
+                <InputText @key="Company.CountryCode" class="form-control" maxlength="2" placeholder="e.g. DK" @bind-Value="Company.CountryCode" />
+                </div>
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Organization number</label>
+            <InputText @key="Company.OrganizationNumber" class="form-control" @bind-Value="Company.OrganizationNumber" />
+            </div>
+        </fieldset>
+        <button class="btn btn-primary" type="submit" disabled="@IsBusy">
+            @if (IsBusy)
+            {
+                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                <span>@BusyLabel</span>
+            }
+            else { <span>Save & Next</span> }
+        </button>
+    </EditForm>
+}
+else if (CurrentStep == 2)
+{
+    <EditForm Model="Period" OnValidSubmit="NextStep">
+        <DataAnnotationsValidator />
+        <fieldset disabled="@IsBusy">
+            <div class="row">
+                <div class="col">
+                    <label class="form-label">Year</label>
+                    <InputNumber class="form-control" @bind-Value="Period.Year" />
+                </div>
+                <div class="col">
+                    <label class="form-label">Start</label>
+                    <InputDate class="form-control" @bind-Value="PeriodStart" />
+                </div>
+                <div class="col">
+                    <label class="form-label">End</label>
+                    <InputDate class="form-control" @bind-Value="PeriodEnd" />
+                </div>
+            </div>
+        </fieldset>
+        <button class="btn btn-secondary me-2" @onclick="PrevStep" disabled="@IsBusy">Back</button>
+        <button class="btn btn-primary" type="submit" disabled="@IsBusy">
+            @if (IsBusy)
+            {
+                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                <span>@BusyLabel</span>
+            }
+            else { <span>Save & Next</span> }
+        </button>
+    </EditForm>
+}
+else if (CurrentStep == 3)
+{
+    <h3>Environmental: Sample activities</h3>
+    <EditForm Model="Scope1Fuel" OnValidSubmit="CalculateAndNext">
+        <DataAnnotationsValidator />
+        <fieldset disabled="@IsBusy">
+            <div class="row">
+                <div class="col">
+                    <label class="form-label">Diesel liters (Scope 1)</label>
+                    <InputNumber class="form-control" @bind-Value="Scope1Fuel.Quantity" />
+                </div>
+                <div class="col">
+                    <label class="form-label">Electricity kWh (Scope 2)</label>
+                    <InputNumber class="form-control" @bind-Value="Scope2Elec.Quantity" />
+                </div>
+            </div>
+        </fieldset>
+        <div class="mt-2">
+            <button class="btn btn-secondary me-2" @onclick="PrevStep" disabled="@IsBusy">Back</button>
+            <button class="btn btn-primary" type="submit" disabled="@IsBusy">
+                @if (IsBusy)
+                {
+                    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    <span>Calculating...</span>
+                }
+                else { <span>Calculate & Next</span> }
+            </button>
+        </div>
+        <div class="mt-3">
+            <p>Scope 1 CO2e: @Scope1Fuel.CO2eKg.ToString("N0") kg | Scope 2 CO2e: @Scope2Elec.CO2eKg.ToString("N0") kg</p>
+        </div>
+    </EditForm>
+}
+else if (CurrentStep == 4)
+{
+    <EditForm Model="Social" OnValidSubmit="NextStep">
+        <DataAnnotationsValidator />
+        <fieldset disabled="@IsBusy">
+            <div class="row">
+                <div class="col">
+                    <label class="form-label">Employees</label>
+                    <InputNumber class="form-control" @bind-Value="Social.EmployeeCount" />
+                </div>
+                <div class="col">
+                    <label class="form-label">% Female</label>
+                    <InputNumber class="form-control" @bind-Value="Social.PercentFemaleEmployees" />
+                </div>
+                <div class="col">
+                    <label class="form-label">Hours worked</label>
+                    <InputNumber class="form-control" @bind-Value="Social.TotalHoursWorked" />
+                </div>
+            </div>
+        </fieldset>
+        <div class="mt-2">
+            <button class="btn btn-secondary me-2" @onclick="PrevStep" disabled="@IsBusy">Back</button>
+            <button class="btn btn-primary" type="submit" disabled="@IsBusy">
+                @if (IsBusy)
+                {
+                    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    <span>@BusyLabel</span>
+                }
+                else { <span>Save & Next</span> }
+            </button>
+        </div>
+    </EditForm>
+}
+else if (CurrentStep == 5)
+{
+    <EditForm Model="Gov" OnValidSubmit="NextStep">
+        <DataAnnotationsValidator />
+        <fieldset disabled="@IsBusy">
+            <div class="row">
+                <div class="col">
+                    <label class="form-label">% Female Board</label>
+                    <InputNumber class="form-control" @bind-Value="Gov.PercentFemaleBoard" />
+                </div>
+                <div class="col">
+                    <div class="form-check mt-4">
+                        <InputCheckbox class="form-check-input" @bind-Value="Gov.AntiCorruptionPolicy" />
+                        <label class="form-check-label">Anti-corruption policy</label>
+                    </div>
+                    <div class="form-check">
+                        <InputCheckbox class="form-check-input" @bind-Value="Gov.DataPrivacyPolicy" />
+                        <label class="form-check-label">Data privacy policy</label>
+                    </div>
+                    <div class="form-check">
+                        <InputCheckbox class="form-check-input" @bind-Value="Gov.WhistleblowerPolicy" />
+                        <label class="form-check-label">Whistleblower policy</label>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="mt-2">
+            <button class="btn btn-secondary me-2" @onclick="PrevStep" disabled="@IsBusy">Back</button>
+            <button class="btn btn-primary" type="submit" disabled="@IsBusy">
+                @if (IsBusy)
+                {
+                    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    <span>@BusyLabel</span>
+                }
+                else { <span>Save & Next</span> }
+            </button>
+        </div>
+    </EditForm>
+}
+else if (CurrentStep == 6)
+{
+    <h3>ESRS-moduler</h3>
+    <p class="text-muted">Udfyld felterne for de moduler, der er relevante for rapporteringen. Brug tomme felter for oplysninger, der ikke gælder.</p>
+    @if (!string.IsNullOrWhiteSpace(ModulesStatus))
+    {
+        <div class="alert alert-info" role="alert">@ModulesStatus</div>
+    }
+    @if (LoadingModules)
+    {
+        <div class="d-flex align-items-center gap-2">
+            <div class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></div>
+            <span>Indlæser modulkatalog...</span>
+        </div>
+    }
+    else if (ModuleSections.Count == 0)
+    {
+        <div class="alert alert-warning" role="alert">Modulkataloget kunne ikke indlæses. Prøv igen.</div>
+        <button class="btn btn-primary" @onclick="EnsureModulesReadyAsync" disabled="@IsBusy">Prøv igen</button>
+    }
+    else
+    {
+        <div class="accordion" id="moduleAccordion">
+            @foreach (var moduleSection in ModuleSections)
+            {
+                <div class="accordion-item" @key="moduleSection.SectionCode">
+                    <h2 class="accordion-header" id="heading-@moduleSection.SectionCode">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@moduleSection.SectionCode" aria-expanded="false" aria-controls="collapse-@moduleSection.SectionCode">
+                            @moduleSection.SectionCode – @moduleSection.SectionName <span class="text-muted ms-2">(@moduleSection.ModuleName)</span>
+                        </button>
+                    </h2>
+                    <div id="collapse-@moduleSection.SectionCode" class="accordion-collapse collapse" data-bs-parent="#moduleAccordion">
+                        <div class="accordion-body">
+                            @foreach (var field in moduleSection.Fields)
+                            {
+                                <div class="mb-3" @key="(field.Section, field.Metric)">
+                                    <label class="form-label">@field.Label
+                                        @if (!string.IsNullOrWhiteSpace(field.Unit))
+                                        {
+                                            <span class="badge bg-light text-dark ms-1">@field.Unit</span>
+                                        }
+                                        @if (!string.IsNullOrWhiteSpace(field.Requirement))
+                                        {
+                                            <span class="badge bg-primary ms-1">@field.Requirement</span>
+                                        }
+                                    </label>
+                                    @if (field.ShowSelect)
+                                    {
+                                        <select class="form-select" @bind="field.TextValue">
+                                            <option value="">(ingen)</option>
+                                            @foreach (var option in field.Options)
+                                            {
+                                                <option value="@option">@option</option>
+                                            }
+                                        </select>
+                                    }
+                                    else if (field.IsNumeric)
+                                    {
+                                        <InputNumber class="form-control" @bind-Value="field.NumericValue" step="any" />
+                                    }
+                                    else if (field.UseTextArea)
+                                    {
+                                        <InputTextArea class="form-control" rows="3" @bind-Value="field.TextValue" />
+                                    }
+                                    else
+                                    {
+                                        <InputText class="form-control" @bind-Value="field.TextValue" />
+                                    }
+                                    @if (!string.IsNullOrWhiteSpace(field.Notes))
+                                    {
+                                        <div class="form-text">@field.Notes</div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="mt-3">
+            <button class="btn btn-secondary me-2" @onclick="PrevStep" disabled="@IsBusy">Tilbage</button>
+            <button class="btn btn-primary" @onclick="SaveModulesAndNext" disabled="@IsBusy">
+                @if (IsBusy)
+                {
+                    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    <span>@BusyLabel</span>
+                }
+                else { <span>Gem & næste</span> }
+            </button>
+        </div>
+    }
+}
+else if (CurrentStep == 7)
+{
+    <h3>Review</h3>
+    @if (!string.IsNullOrEmpty(LastValidationError))
+    {
+        <div class="alert alert-danger" role="alert">@LastValidationError</div>
+    }
+    <p><strong>Company:</strong> @Company.Name (@Company.CountryCode)</p>
+    <p><strong>Period:</strong> @Period.Year (@PeriodStart.ToString("yyyy-MM-dd") to @PeriodEnd.ToString("yyyy-MM-dd"))</p>
+    <p><strong>GHG:</strong> S1 @Scope1Fuel.CO2eKg.ToString("N0") kg, S2 @Scope2Elec.CO2eKg.ToString("N0") kg</p>
+    <div class="mt-2">
+        <button class="btn btn-secondary me-2" @onclick="PrevStep" disabled="@IsBusy">Back</button>
+        <button class="btn btn-success" @onclick="SaveAll" disabled="@IsBusy">
+            @if (IsBusy)
+            {
+                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                <span>Saving...</span>
+            }
+            else { <span>Save</span> }
+        </button>
+        @if (Saved)
+        {
+            <a class="btn btn-outline-primary ms-2" href="/api/report/pdf/@Period.Id">Download PDF</a>
+            <a class="btn btn-outline-secondary ms-2" href="/api/report/xbrl/@Period.Id">Download XBRL</a>
+        }
+    </div>
+
+    <hr class="my-4" />
+    <h4>V2 Enrichment (optional)</h4>
+    <p class="text-muted">Link this V1 period to a V2 period to add Water, Waste, Materials and Financials for a more complete report.</p>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label class="form-label">V2 Period Id (GUID)</label>
+            <InputText class="form-control" @bind-Value="V2PeriodIdInput" />
+            <div class="form-text">If you have an existing V2 period, paste its Id and save the mapping.</div>
+            <button class="btn btn-sm btn-primary mt-2" @onclick="SaveMapping" disabled="@IsBusy">Save mapping</button>
+            @if (!string.IsNullOrEmpty(MappingStatus)) { <div class="mt-2 text-muted">@MappingStatus</div> }
+            @if (V2MappedPeriodId is not null) { <div class="mt-1"><span class="badge bg-success">Mapped</span> @V2MappedPeriodId</div> }
+        </div>
+    </div>
+
+    @if (V2MappedPeriodId is not null)
+    {
+        <div class="row g-4 mt-3">
+            <div class="col-md-6">
+                <h5>Water</h5>
+                <div class="mb-2"><label class="form-label">Intake (m³)</label><InputNumber class="form-control" @bind-Value="WaterIntake" /></div>
+                <div class="mb-2"><label class="form-label">Discharge (m³)</label><InputNumber class="form-control" @bind-Value="WaterDischarge" /></div>
+                <button class="btn btn-sm btn-primary" @onclick="AddWater" disabled="@IsBusy">Add</button>
+            </div>
+            <div class="col-md-6">
+                <h5>Financials</h5>
+                <div class="mb-2"><label class="form-label">Revenue</label><InputNumber class="form-control" @bind-Value="Revenue" /></div>
+                <div class="mb-2"><label class="form-label">Currency</label><InputText class="form-control" @bind-Value="Currency" /></div>
+                <button class="btn btn-sm btn-primary" @onclick="SaveFinancials" disabled="@IsBusy">Save</button>
+            </div>
+        </div>
+        <div class="row g-4 mt-3">
+            <div class="col-md-6">
+                <h5>Waste (EAK)</h5>
+                <div class="mb-2"><label class="form-label">EAK code</label><InputText class="form-control" @bind-Value="WasteEak" /></div>
+                <div class="mb-2"><label class="form-label">Quantity (kg)</label><InputNumber class="form-control" @bind-Value="WasteQtyKg" /></div>
+                <div class="mb-2"><label class="form-label">Disposition</label><InputText class="form-control" @bind-Value="WasteDisposition" /></div>
+                <button class="btn btn-sm btn-primary" @onclick="AddWaste" disabled="@IsBusy">Add</button>
+            </div>
+            <div class="col-md-6">
+                <h5>Materials</h5>
+                <div class="mb-2"><label class="form-label">Material</label><InputText class="form-control" @bind-Value="MaterialName" /></div>
+                <div class="mb-2"><label class="form-label">Quantity (tonnes)</label><InputNumber class="form-control" @bind-Value="MaterialQtyTonnes" /></div>
+                <button class="btn btn-sm btn-primary" @onclick="AddMaterial" disabled="@IsBusy">Add</button>
+            </div>
+        </div>
+    }
+}
+
+@code {
+    const int TotalSteps = 7;
+    string? LastValidationError;
+    bool IsBusy { get; set; }
+    string BusyLabel { get; set; } = "Saving...";
+    int CurrentStep { get; set; } = 1;
+    int ProgressPercent => (int)Math.Round(CurrentStep / (double)TotalSteps * 100);
+
+    Company Company { get; set; } = new();
+    ReportingPeriod Period { get; set; } = new();
+    DateTime PeriodStart { get => Period.StartDate.ToDateTime(TimeOnly.MinValue); set => Period.StartDate = DateOnly.FromDateTime(value); }
+    DateTime PeriodEnd { get => Period.EndDate.ToDateTime(TimeOnly.MinValue); set => Period.EndDate = DateOnly.FromDateTime(value); }
+
+    Scope1Activity Scope1Fuel { get; set; } = new() { Category = "Fuel/Diesel", Unit = "L" };
+    Scope2Activity Scope2Elec { get; set; } = new() { Category = "Electricity/Consumption", Unit = "kWh" };
+    SocialIndicators Social { get; set; } = new();
+    GovernancePractices Gov { get; set; } = new();
+
+    bool Saved { get; set; }
+    // V2 Enrichment state
+    Guid? V2MappedPeriodId { get; set; }
+    string? V2PeriodIdInput { get; set; }
+    string? MappingStatus { get; set; }
+    double WaterIntake { get; set; }
+    double? WaterDischarge { get; set; }
+    string WasteEak { get; set; } = string.Empty;
+    double WasteQtyKg { get; set; }
+    string WasteDisposition { get; set; } = string.Empty;
+    string MaterialName { get; set; } = string.Empty;
+    double MaterialQtyTonnes { get; set; }
+    double Revenue { get; set; }
+    string? Currency { get; set; }
+
+    List<ModuleSectionState> ModuleSections { get; set; } = new();
+    bool LoadingModules { get; set; }
+    bool ModulesInitialized { get; set; }
+    bool ModuleValuesLoaded { get; set; }
+    string? ModulesStatus { get; set; }
+
+    private sealed class ModuleSectionState
+    {
+        public string SectionCode { get; init; } = string.Empty;
+        public string SectionName { get; init; } = string.Empty;
+        public string ModuleName { get; init; } = string.Empty;
+        public List<ModuleFieldState> Fields { get; init; } = new();
+    }
+
+    private sealed class ModuleFieldState
+    {
+        private static readonly string[] BooleanOptions = ["JA", "NEJ"];
+
+        public string Section { get; init; } = string.Empty;
+        public string Metric { get; init; } = string.Empty;
+        public string Label { get; init; } = string.Empty;
+        public string DataType { get; init; } = string.Empty;
+        public string? Unit { get; init; }
+        public string? Requirement { get; init; }
+        public IReadOnlyList<string> AllowedValues { get; init; } = Array.Empty<string>();
+        public string? Notes { get; init; }
+
+        public double? NumericValue { get; set; }
+        public string TextValue { get; set; } = string.Empty;
+
+        public bool HasOptions => AllowedValues.Count > 0;
+        public bool IsBoolean => string.Equals(DataType, "boolean", StringComparison.OrdinalIgnoreCase);
+        public bool ShowSelect => HasOptions || IsBoolean;
+        public IReadOnlyList<string> Options => HasOptions ? AllowedValues : (IsBoolean ? BooleanOptions : Array.Empty<string>());
+        public bool IsNumeric => string.Equals(DataType, "number", StringComparison.OrdinalIgnoreCase) || string.Equals(DataType, "integer", StringComparison.OrdinalIgnoreCase);
+        public bool UseTextArea => DataType.Contains("array", StringComparison.OrdinalIgnoreCase) || DataType.Contains("object", StringComparison.OrdinalIgnoreCase) || string.Equals(DataType, "string[]", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private sealed class ModuleMetricComparer : IEqualityComparer<(string Section, string Metric)>
+    {
+        public bool Equals((string Section, string Metric) x, (string Section, string Metric) y)
+            => string.Equals(x.Section, y.Section, StringComparison.OrdinalIgnoreCase)
+               && string.Equals(x.Metric, y.Metric, StringComparison.OrdinalIgnoreCase);
+
+        public int GetHashCode((string Section, string Metric) obj)
+        {
+            var sectionHash = obj.Section is null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(obj.Section);
+            var metricHash = obj.Metric is null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(obj.Metric);
+            return HashCode.Combine(sectionHash, metricHash);
+        }
+    }
+
+    async Task NextStep()
+    {
+        Saved = false;
+        try
+        {
+            IsBusy = true;
+            BusyLabel = "Saving...";
+
+            if (CurrentStep == 1)
+            {
+                await Data.UpsertCompanyAsync(Company);
+                LastValidationError = null;
+            }
+            else if (CurrentStep == 2)
+            {
+                // Basic logical validation for dates
+                if (Period.Year <= 0 || PeriodStart > PeriodEnd)
+                {
+                    LastValidationError = "Enter a valid reporting period (start before end).";
+                    return;
+                }
+                if (Period.CompanyId == Guid.Empty) Period.CompanyId = Company.Id;
+                Period = await Data.UpsertReportingPeriodAsync(Period);
+                LastValidationError = null;
+                await EnsureModulesReadyAsync();
+            }
+            else if (CurrentStep == 5)
+            {
+                await EnsureModulesReadyAsync();
+            }
+
+            CurrentStep = Math.Min(TotalSteps, CurrentStep + 1);
+        }
+        catch (Exception ex)
+        {
+            var code = Diag.Capture(ex, $"Wizard.Step{CurrentStep}", new { Company = Company?.Name, PeriodYear = Period?.Year });
+            Logger.LogError(ex, "Wizard step {Step} failed (code {Code})", CurrentStep, code);
+            LastValidationError = $"Something went wrong. Support code: {code}.";
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
+
+    void OnInvalidSubmit()
+    {
+        // keep a lightweight marker that validation failed
+        LastValidationError = "Validation failed";
+    }
+
+    void PrevStep() => CurrentStep = Math.Max(1, CurrentStep - 1);
+
+    async Task CalculateAndNext()
+    {
+        try
+        {
+            IsBusy = true;
+            BusyLabel = "Calculating...";
+            Scope1Fuel.ReportingPeriodId = Period.Id;
+            Scope2Elec.ReportingPeriodId = Period.Id;
+            await Calculator.CalculateAsync(Scope1Fuel);
+            await Calculator.CalculateAsync(Scope2Elec);
+            // Avoid duplicates when recalculating
+            Period.EnvironmentalActivities.Remove(Scope1Fuel);
+            Period.EnvironmentalActivities.Remove(Scope2Elec);
+            Period.EnvironmentalActivities.Add(Scope1Fuel);
+            Period.EnvironmentalActivities.Add(Scope2Elec);
+            CurrentStep = 4;
+        }
+        catch (Exception ex)
+        {
+            var code = Diag.Capture(ex, "Wizard.Calculate", new { PeriodId = Period.Id });
+            Logger.LogError(ex, "Wizard calculation failed for period {PeriodId} (code {Code})", Period.Id, code);
+            LastValidationError = $"Unable to calculate. Support code: {code}.";
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
+
+    async Task SaveAll()
+    {
+        try
+        {
+            IsBusy = true;
+            BusyLabel = "Saving...";
+            // Attach related entities and save via Upsert
+            if (Period.CompanyId == Guid.Empty) Period.CompanyId = Company.Id;
+            // Ensure proper FK linkage before saving
+            if (Social is not null)
+            {
+                Social.ReportingPeriodId = Period.Id;
+            }
+            if (Gov is not null)
+            {
+                Gov.ReportingPeriodId = Period.Id;
+            }
+            Period.SocialIndicators = Social;
+            Period.GovernancePractices = Gov;
+            Period = await Data.UpsertReportingPeriodAsync(Period);
+            Saved = true;
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            var code = Diag.Capture(ex, "Wizard.SaveAll", new { PeriodId = Period.Id });
+            Logger.LogError(ex, "Wizard final save failed for period {PeriodId} (code {Code})", Period.Id, code);
+            LastValidationError = $"Unable to save. Support code: {code}.";
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
+    protected override async void OnInitialized()
+    {
+        if (Period.Year <= 0)
+        {
+            var y = DateTime.UtcNow.Year;
+            Period.Year = y;
+            PeriodStart = new DateTime(y, 1, 1);
+            PeriodEnd = new DateTime(y, 12, 31);
+        }
+        try { V2MappedPeriodId = await Data.GetMappedV2PeriodAsync(Period.Id); } catch { }
+        await EnsureModulesReadyAsync();
+    }
+
+    async Task EnsureModulesReadyAsync()
+    {
+        if (LoadingModules)
+        {
+            return;
+        }
+
+        try
+        {
+            LoadingModules = true;
+            ModulesStatus = null;
+
+            if (!ModulesInitialized)
+            {
+                var definitions = await ModuleCatalog.GetModulesAsync();
+                ModuleSections = definitions
+                    .OrderBy(d => d.SectionCode, StringComparer.OrdinalIgnoreCase)
+                    .Select(d => new ModuleSectionState
+                    {
+                        SectionCode = d.SectionCode,
+                        SectionName = d.SectionName,
+                        ModuleName = d.Module,
+                        Fields = d.Datapoints
+                            .OrderBy(dp => dp.Key, StringComparer.OrdinalIgnoreCase)
+                            .Select(dp => new ModuleFieldState
+                            {
+                                Section = d.SectionCode,
+                                Metric = dp.Key,
+                                Label = dp.Label,
+                                DataType = dp.DataType ?? string.Empty,
+                                Unit = dp.Unit,
+                                Requirement = dp.Requirement,
+                                AllowedValues = dp.AllowedValues,
+                                Notes = dp.Notes
+                            }).ToList()
+                    }).ToList();
+                ModulesInitialized = true;
+            }
+
+            if (!ModuleValuesLoaded && Period.Id != Guid.Empty)
+            {
+                var existing = await Data.GetSectionMetricsAsync(Period.Id);
+                ApplyModuleValues(existing);
+                ModuleValuesLoaded = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            var code = Diag.Capture(ex, "Wizard.ModulesLoad", new { PeriodId = Period.Id });
+            ModulesStatus = $"Kunne ikke indlæse moduler (kode {code})";
+        }
+        finally
+        {
+            LoadingModules = false;
+            StateHasChanged();
+        }
+    }
+
+    void ApplyModuleValues(IReadOnlyList<SectionMetricValue> values)
+    {
+        if (values.Count == 0 || ModuleSections.Count == 0) return;
+
+        var comparer = new ModuleMetricComparer();
+        var lookup = values.ToDictionary(v => (v.Section, v.Metric), v => v, comparer);
+
+        foreach (var section in ModuleSections)
+        {
+            foreach (var field in section.Fields)
+            {
+                if (!lookup.TryGetValue((field.Section, field.Metric), out var value))
+                {
+                    continue;
+                }
+
+                field.NumericValue = value.NumericValue;
+                field.TextValue = value.TextValue ?? string.Empty;
+            }
+        }
+    }
+
+    List<SectionMetricValue> BuildModuleValues()
+    {
+        var results = new List<SectionMetricValue>();
+        foreach (var section in ModuleSections)
+        {
+            foreach (var field in section.Fields)
+            {
+                double? numeric = field.IsNumeric ? field.NumericValue : null;
+                string? text = field.IsNumeric ? null : NormalizeText(field.TextValue);
+
+                if (!(numeric.HasValue || !string.IsNullOrWhiteSpace(text)))
+                {
+                    continue;
+                }
+
+                results.Add(new SectionMetricValue(
+                    field.Section,
+                    field.Metric,
+                    numeric,
+                    text,
+                    string.IsNullOrWhiteSpace(field.Unit) ? null : field.Unit,
+                    null));
+            }
+        }
+
+        return results;
+    }
+
+    async Task SaveModulesAndNext()
+    {
+        try
+        {
+            if (!ModulesInitialized || Period.Id == Guid.Empty)
+            {
+                await EnsureModulesReadyAsync();
+            }
+
+            IsBusy = true;
+            BusyLabel = "Saving modules...";
+
+            if (ModuleSections.Count == 0)
+            {
+                ModulesStatus = "Modulkataloget er ikke tilgængeligt.";
+                return;
+            }
+
+            var organisationId = Period.CompanyId != Guid.Empty ? Period.CompanyId : Company.Id;
+            var values = BuildModuleValues();
+            await Data.SaveSectionMetricsAsync(Period.Id, organisationId, values);
+            ModulesStatus = "Moduldata gemt.";
+            ModuleValuesLoaded = true;
+            CurrentStep = Math.Min(TotalSteps, CurrentStep + 1);
+        }
+        catch (Exception ex)
+        {
+            var code = Diag.Capture(ex, "Wizard.SaveModules", new { PeriodId = Period.Id });
+            ModulesStatus = $"Kunne ikke gemme moduldata (kode {code})";
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
+
+    static string? NormalizeText(string? value)
+    {
+        if (string.IsNullOrWhiteSpace(value)) return null;
+        return value.Trim();
+    }
+
+    async Task SaveMapping()
+    {
+        try
+        {
+            IsBusy = true; BusyLabel = "Saving mapping...";
+            if (!Guid.TryParse(V2PeriodIdInput, out var v2)) { MappingStatus = "Invalid GUID"; return; }
+            await Data.SavePeriodMappingAsync(Period.Id, v2);
+            V2MappedPeriodId = v2; MappingStatus = "Mapping saved";
+        }
+        catch (Exception ex)
+        {
+            var code = Diag.Capture(ex, "Wizard.MapV2", new { PeriodId = Period.Id, V2 = V2PeriodIdInput });
+            MappingStatus = $"Failed to save mapping ({code})";
+        }
+        finally { IsBusy = false; }
+    }
+
+    async Task AddWater()
+    {
+        if (V2MappedPeriodId is not Guid v2) return;
+        try { IsBusy = true; BusyLabel = "Saving..."; await Data.AddWaterAsync(v2, WaterIntake, WaterDischarge); }
+        catch (Exception ex) { var code = Diag.Capture(ex, "Wizard.AddWater", new { Period.Id }); LastValidationError = $"Water save failed ({code})"; }
+        finally { IsBusy = false; }
+    }
+
+    async Task AddWaste()
+    {
+        if (V2MappedPeriodId is not Guid v2) return;
+        try { IsBusy = true; BusyLabel = "Saving..."; await Data.AddWasteAsync(v2, WasteEak, WasteQtyKg, WasteDisposition); WasteEak = WasteDisposition = string.Empty; WasteQtyKg = 0; }
+        catch (Exception ex) { var code = Diag.Capture(ex, "Wizard.AddWaste", new { Period.Id }); LastValidationError = $"Waste save failed ({code})"; }
+        finally { IsBusy = false; }
+    }
+
+    async Task AddMaterial()
+    {
+        if (V2MappedPeriodId is not Guid v2) return;
+        try { IsBusy = true; BusyLabel = "Saving..."; await Data.AddMaterialAsync(v2, MaterialName, MaterialQtyTonnes); MaterialName = string.Empty; MaterialQtyTonnes = 0; }
+        catch (Exception ex) { var code = Diag.Capture(ex, "Wizard.AddMaterial", new { Period.Id }); LastValidationError = $"Material save failed ({code})"; }
+        finally { IsBusy = false; }
+    }
+
+    async Task SaveFinancials()
+    {
+        if (V2MappedPeriodId is not Guid v2) return;
+        try { IsBusy = true; BusyLabel = "Saving..."; await Data.UpsertFinancialsAsync(v2, Revenue, Currency); }
+        catch (Exception ex) { var code = Diag.Capture(ex, "Wizard.SaveFin", new { Period.Id }); LastValidationError = $"Financials save failed ({code})"; }
+        finally { IsBusy = false; }
+    }
+}

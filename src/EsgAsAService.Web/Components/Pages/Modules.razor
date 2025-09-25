@@ -1,0 +1,113 @@
+@page "/modules"
+@attribute [Authorize]
+@rendermode InteractiveServer
+@using Microsoft.AspNetCore.Authorization
+@using EsgAsAService.Application.Abstractions
+@using EsgAsAService.Application.Models
+@inject IModuleCatalog ModuleCatalog
+
+<PageTitle>ESG Moduler</PageTitle>
+
+<h1>ESG-moduler</h1>
+
+@if (IsLoading)
+{
+    <p>Indlæser modulkatalog...</p>
+}
+else if (LoadError is not null)
+{
+    <div class="alert alert-danger" role="alert">@LoadError</div>
+}
+else if (ModuleSections.Count == 0)
+{
+    <div class="alert alert-warning" role="alert">Ingen moduldefinitioner blev fundet. Kontroller at CSV-filen er tilgængelig.</div>
+}
+else
+{
+    <p class="text-muted">Oversigt over alle moduler og datapunkter (B1-B11 samt C1-C9) hentet fra det vedlagte CSV-dokument.</p>
+    @foreach (var module in ModuleSections)
+    {
+        <section class="mb-4">
+            <h2>@module.SectionCode – @module.SectionName <small class="text-muted">(@module.Module)</small></h2>
+            <div class="table-responsive">
+                <table class="table table-sm table-striped align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">Nøgle</th>
+                            <th scope="col">Datapunkt</th>
+                            <th scope="col">Datatype</th>
+                            <th scope="col">Enhed</th>
+                            <th scope="col">Krav</th>
+                            <th scope="col">Tilladte værdier</th>
+                            <th scope="col">Afhængighed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var datapoint in module.Datapoints)
+                    {
+                        <tr>
+                            <td><code>@datapoint.Key</code></td>
+                            <td>
+                                <div>@datapoint.Label</div>
+                                @if (!string.IsNullOrWhiteSpace(datapoint.Notes))
+                                {
+                                    <div class="text-muted small">@datapoint.Notes</div>
+                                }
+                            </td>
+                            <td>@(string.IsNullOrWhiteSpace(datapoint.DataType) ? "-" : datapoint.DataType)</td>
+                            <td>@(string.IsNullOrWhiteSpace(datapoint.Unit) ? "-" : datapoint.Unit)</td>
+                            <td>
+                                @if (string.IsNullOrWhiteSpace(datapoint.Requirement))
+                                {
+                                    <span class="badge text-bg-secondary">ukendt</span>
+                                }
+                                else
+                                {
+                                    <span class="badge text-bg-primary text-uppercase">@datapoint.Requirement</span>
+                                }
+                            </td>
+                            <td>
+                                @if (datapoint.AllowedValues.Count == 0)
+                                {
+                                    <span class="text-muted">-</span>
+                                }
+                                else
+                                {
+                                    <span>@string.Join(", ", datapoint.AllowedValues)</span>
+                                }
+                            </td>
+                            <td>@(string.IsNullOrWhiteSpace(datapoint.DependsOn) ? "-" : datapoint.DependsOn)</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    }
+}
+
+@code {
+    private List<EsgModuleDefinition> ModuleSections { get; set; } = new();
+    private bool IsLoading { get; set; } = true;
+    private string? LoadError { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var result = await ModuleCatalog.GetModulesAsync();
+            ModuleSections = result
+                .OrderBy(m => m.SectionCode, System.StringComparer.OrdinalIgnoreCase)
+                .ThenBy(m => m.SectionName, System.StringComparer.OrdinalIgnoreCase)
+                .ToList();
+        }
+        catch (Exception ex)
+        {
+            LoadError = $"Kunne ikke indlæse moduler: {ex.Message}";
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+}

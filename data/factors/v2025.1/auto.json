@@ -1,0 +1,38 @@
+{
+  "version": "v2025.1",
+  "factors": [
+    {
+      "name": "electricity.dk.location",
+      "unit": "kgCO2e/kWh",
+      "value": 0.192,
+      "source": "Energinet klimafaktorer 2024",
+      "region": "DK",
+      "year": 2024,
+      "valid_from": "2024-01-01",
+      "valid_to": "2024-12-31",
+      "methodology": "Location-based emissions for Danish grid mix."
+    },
+    {
+      "name": "fuel.generic.mwh",
+      "unit": "kgCO2e/kWh",
+      "value": 0.25,
+      "source": "EEA Emission Inventory 2023 (konverteret)",
+      "region": "EU",
+      "year": 2023,
+      "valid_from": "2023-01-01",
+      "valid_to": "2025-12-31",
+      "methodology": "Konverteret fra 69 kg CO2e/GJ til kWh for generiske fossile brændsler."
+    },
+    {
+      "name": "district_heat.dk",
+      "unit": "kgCO2e/kWh",
+      "value": 0.105,
+      "source": "Energistyrelsen fjernvarme 2024",
+      "region": "DK",
+      "year": 2024,
+      "valid_from": "2024-01-01",
+      "valid_to": "2024-12-31",
+      "methodology": "Average emission intensity for Danish district heating."
+    }
+  ]
+}

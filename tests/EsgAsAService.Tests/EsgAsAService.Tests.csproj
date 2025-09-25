@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="FluentAssertions" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="Moq" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+    <!-- bUnit UI tests are currently disabled due to JSInterop v9 on this SDK.
+         Re-enable with compatible versions when available. -->
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\EsgAsAService.Application\EsgAsAService.Application.csproj" />
+    <ProjectReference Include="..\..\src\EsgAsAService.Domain\EsgAsAService.Domain.csproj" />
+    <ProjectReference Include="..\..\src\EsgAsAService.Api\EsgAsAService.Api.csproj" />
+    <ProjectReference Include="..\..\src\EsgAsAService.Infrastructure\EsgAsAService.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\EsgAsAService.Web\EsgAsAService.Web.csproj" />
+  </ItemGroup>
+
+</Project>

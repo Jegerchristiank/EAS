@@ -1,0 +1,355 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/christiankristensen/Downloads/esg-as-a-service-5365f6e5e2deccecf28db26f854fa6f0d18416d6/src/EsgAsAService.Infrastructure/EsgAsAService.Infrastructure.csproj": {}
+  },
+  "projects": {
+    "/Users/christiankristensen/Downloads/esg-as-a-service-5365f6e5e2deccecf28db26f854fa6f0d18416d6/src/EsgAsAService.Application/EsgAsAService.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/christiankristensen/Downloads/esg-as-a-service-5365f6e5e2deccecf28db26f854fa6f0d18416d6/src/EsgAsAService.Application/EsgAsAService.Application.csproj",
+        "projectName": "EsgAsAService.Application",
+        "projectPath": "/Users/christiankristensen/Downloads/esg-as-a-service-5365f6e5e2deccecf28db26f854fa6f0d18416d6/src/EsgAsAService.Application/EsgAsAService.Application.csproj",
+        "packagesPath": "/Users/christiankristensen/.nuget/packages/",
+        "outputPath": "/Users/christiankristensen/Downloads/esg-as-a-service-5365f6e5e2deccecf28db26f854fa6f0d18416d6/src/EsgAsAService.Application/obj/",
+        "projectStyle": "PackageReference",
+        "centralPackageVersionsManagementEnabled": true,
+        "configFilePaths": [
+          "/Users/christiankristensen/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "/Users/christiankristensen/Downloads/esg-as-a-service-5365f6e5e2deccecf28db26f854fa6f0d18416d6/src/EsgAsAService.Domain/EsgAsAService.Domain.csproj": {
+                "projectPath": "/Users/christiankristensen/Downloads/esg-as-a-service-5365f6e5e2deccecf28db26f854fa6f0d18416d6/src/EsgAsAService.Domain/EsgAsAService.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.Extensions.Logging.Abstractions": {
+              "target": "Package",
+              "version": "[9.0.0, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.Extensions.Options.ConfigurationExtensions": {
+              "target": "Package",
+              "version": "[9.0.0, )",
+              "versionCentrallyManaged": true
+            }
+          },
+          "centralPackageVersions": {
+            "coverlet.collector": "6.0.4",
+            "CsvHelper": "30.0.1",
+            "FluentAssertions": "6.12.1",
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "9.0.9",
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.9",
+            "Microsoft.AspNetCore.Mvc.Testing": "9.0.1",
+            "Microsoft.EntityFrameworkCore": "9.0.9",
+            "Microsoft.EntityFrameworkCore.Design": "9.0.9",
+            "Microsoft.EntityFrameworkCore.InMemory": "9.0.9",
+            "Microsoft.EntityFrameworkCore.Sqlite": "9.0.9",
+            "Microsoft.EntityFrameworkCore.Tools": "9.0.9",
+            "Microsoft.Extensions.DependencyInjection": "9.0.9",
+            "Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore": "9.0.9",
+            "Microsoft.Extensions.Hosting": "9.0.9",
+            "Microsoft.Extensions.Http.Polly": "9.0.9",
+            "Microsoft.Extensions.Logging.Abstractions": "9.0.0",
+            "Microsoft.Extensions.Logging.Console": "9.0.9",
+            "Microsoft.Extensions.Options.ConfigurationExtensions": "9.0.0",
+            "Microsoft.FeatureManagement.AspNetCore": "3.2.0",
+            "Microsoft.NET.Test.Sdk": "17.14.1",
+            "Moq": "4.20.72",
+            "OpenTelemetry.Exporter.Console": "1.9.0",
+            "OpenTelemetry.Exporter.OpenTelemetryProtocol": "1.9.0",
+            "OpenTelemetry.Extensions.Hosting": "1.9.0",
+            "OpenTelemetry.Instrumentation.AspNetCore": "1.9.0",
+            "OpenTelemetry.Instrumentation.EntityFrameworkCore": "1.10.0-beta.1",
+            "OpenTelemetry.Instrumentation.Http": "1.9.0",
+            "QuestPDF": "2024.10.0",
+            "Swashbuckle.AspNetCore": "6.6.2",
+            "Swashbuckle.AspNetCore.Filters": "8.0.2",
+            "System.Xml.ReaderWriter": "4.3.1",
+            "xunit": "2.9.3",
+            "xunit.runner.visualstudio": "2.5.3"
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.100-rc.1.25451.107/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/christiankristensen/Downloads/esg-as-a-service-5365f6e5e2deccecf28db26f854fa6f0d18416d6/src/EsgAsAService.Domain/EsgAsAService.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/christiankristensen/Downloads/esg-as-a-service-5365f6e5e2deccecf28db26f854fa6f0d18416d6/src/EsgAsAService.Domain/EsgAsAService.Domain.csproj",
+        "projectName": "EsgAsAService.Domain",
+        "projectPath": "/Users/christiankristensen/Downloads/esg-as-a-service-5365f6e5e2deccecf28db26f854fa6f0d18416d6/src/EsgAsAService.Domain/EsgAsAService.Domain.csproj",
+        "packagesPath": "/Users/christiankristensen/.nuget/packages/",
+        "outputPath": "/Users/christiankristensen/Downloads/esg-as-a-service-5365f6e5e2deccecf28db26f854fa6f0d18416d6/src/EsgAsAService.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "centralPackageVersionsManagementEnabled": true,
+        "configFilePaths": [
+          "/Users/christiankristensen/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "centralPackageVersions": {
+            "coverlet.collector": "6.0.4",
+            "CsvHelper": "30.0.1",
+            "FluentAssertions": "6.12.1",
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "9.0.9",
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.9",
+            "Microsoft.AspNetCore.Mvc.Testing": "9.0.1",
+            "Microsoft.EntityFrameworkCore": "9.0.9",
+            "Microsoft.EntityFrameworkCore.Design": "9.0.9",
+            "Microsoft.EntityFrameworkCore.InMemory": "9.0.9",
+            "Microsoft.EntityFrameworkCore.Sqlite": "9.0.9",
+            "Microsoft.EntityFrameworkCore.Tools": "9.0.9",
+            "Microsoft.Extensions.DependencyInjection": "9.0.9",
+            "Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore": "9.0.9",
+            "Microsoft.Extensions.Hosting": "9.0.9",
+            "Microsoft.Extensions.Http.Polly": "9.0.9",
+            "Microsoft.Extensions.Logging.Abstractions": "9.0.0",
+            "Microsoft.Extensions.Logging.Console": "9.0.9",
+            "Microsoft.Extensions.Options.ConfigurationExtensions": "9.0.0",
+            "Microsoft.FeatureManagement.AspNetCore": "3.2.0",
+            "Microsoft.NET.Test.Sdk": "17.14.1",
+            "Moq": "4.20.72",
+            "OpenTelemetry.Exporter.Console": "1.9.0",
+            "OpenTelemetry.Exporter.OpenTelemetryProtocol": "1.9.0",
+            "OpenTelemetry.Extensions.Hosting": "1.9.0",
+            "OpenTelemetry.Instrumentation.AspNetCore": "1.9.0",
+            "OpenTelemetry.Instrumentation.EntityFrameworkCore": "1.10.0-beta.1",
+            "OpenTelemetry.Instrumentation.Http": "1.9.0",
+            "QuestPDF": "2024.10.0",
+            "Swashbuckle.AspNetCore": "6.6.2",
+            "Swashbuckle.AspNetCore.Filters": "8.0.2",
+            "System.Xml.ReaderWriter": "4.3.1",
+            "xunit": "2.9.3",
+            "xunit.runner.visualstudio": "2.5.3"
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.100-rc.1.25451.107/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/christiankristensen/Downloads/esg-as-a-service-5365f6e5e2deccecf28db26f854fa6f0d18416d6/src/EsgAsAService.Infrastructure/EsgAsAService.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/christiankristensen/Downloads/esg-as-a-service-5365f6e5e2deccecf28db26f854fa6f0d18416d6/src/EsgAsAService.Infrastructure/EsgAsAService.Infrastructure.csproj",
+        "projectName": "EsgAsAService.Infrastructure",
+        "projectPath": "/Users/christiankristensen/Downloads/esg-as-a-service-5365f6e5e2deccecf28db26f854fa6f0d18416d6/src/EsgAsAService.Infrastructure/EsgAsAService.Infrastructure.csproj",
+        "packagesPath": "/Users/christiankristensen/.nuget/packages/",
+        "outputPath": "/Users/christiankristensen/Downloads/esg-as-a-service-5365f6e5e2deccecf28db26f854fa6f0d18416d6/src/EsgAsAService.Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "centralPackageVersionsManagementEnabled": true,
+        "configFilePaths": [
+          "/Users/christiankristensen/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "/Users/christiankristensen/Downloads/esg-as-a-service-5365f6e5e2deccecf28db26f854fa6f0d18416d6/src/EsgAsAService.Application/EsgAsAService.Application.csproj": {
+                "projectPath": "/Users/christiankristensen/Downloads/esg-as-a-service-5365f6e5e2deccecf28db26f854fa6f0d18416d6/src/EsgAsAService.Application/EsgAsAService.Application.csproj"
+              },
+              "/Users/christiankristensen/Downloads/esg-as-a-service-5365f6e5e2deccecf28db26f854fa6f0d18416d6/src/EsgAsAService.Domain/EsgAsAService.Domain.csproj": {
+                "projectPath": "/Users/christiankristensen/Downloads/esg-as-a-service-5365f6e5e2deccecf28db26f854fa6f0d18416d6/src/EsgAsAService.Domain/EsgAsAService.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.9, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.9, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.9, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[9.0.9, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.Extensions.Http.Polly": {
+              "target": "Package",
+              "version": "[9.0.9, )",
+              "versionCentrallyManaged": true
+            },
+            "QuestPDF": {
+              "target": "Package",
+              "version": "[2024.10.0, )",
+              "versionCentrallyManaged": true
+            },
+            "System.Xml.ReaderWriter": {
+              "target": "Package",
+              "version": "[4.3.1, )",
+              "versionCentrallyManaged": true
+            }
+          },
+          "centralPackageVersions": {
+            "coverlet.collector": "6.0.4",
+            "CsvHelper": "30.0.1",
+            "FluentAssertions": "6.12.1",
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "9.0.9",
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.9",
+            "Microsoft.AspNetCore.Mvc.Testing": "9.0.1",
+            "Microsoft.EntityFrameworkCore": "9.0.9",
+            "Microsoft.EntityFrameworkCore.Design": "9.0.9",
+            "Microsoft.EntityFrameworkCore.InMemory": "9.0.9",
+            "Microsoft.EntityFrameworkCore.Sqlite": "9.0.9",
+            "Microsoft.EntityFrameworkCore.Tools": "9.0.9",
+            "Microsoft.Extensions.DependencyInjection": "9.0.9",
+            "Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore": "9.0.9",
+            "Microsoft.Extensions.Hosting": "9.0.9",
+            "Microsoft.Extensions.Http.Polly": "9.0.9",
+            "Microsoft.Extensions.Logging.Abstractions": "9.0.0",
+            "Microsoft.Extensions.Logging.Console": "9.0.9",
+            "Microsoft.Extensions.Options.ConfigurationExtensions": "9.0.0",
+            "Microsoft.FeatureManagement.AspNetCore": "3.2.0",
+            "Microsoft.NET.Test.Sdk": "17.14.1",
+            "Moq": "4.20.72",
+            "OpenTelemetry.Exporter.Console": "1.9.0",
+            "OpenTelemetry.Exporter.OpenTelemetryProtocol": "1.9.0",
+            "OpenTelemetry.Extensions.Hosting": "1.9.0",
+            "OpenTelemetry.Instrumentation.AspNetCore": "1.9.0",
+            "OpenTelemetry.Instrumentation.EntityFrameworkCore": "1.10.0-beta.1",
+            "OpenTelemetry.Instrumentation.Http": "1.9.0",
+            "QuestPDF": "2024.10.0",
+            "Swashbuckle.AspNetCore": "6.6.2",
+            "Swashbuckle.AspNetCore.Filters": "8.0.2",
+            "System.Xml.ReaderWriter": "4.3.1",
+            "xunit": "2.9.3",
+            "xunit.runner.visualstudio": "2.5.3"
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.100-rc.1.25451.107/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

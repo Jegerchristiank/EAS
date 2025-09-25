@@ -1,0 +1,29 @@
+Section,Field,Description,Format/Example,Required
+Organisation,OrganisationName,Registered company name,Acme ApS,Yes
+Organisation,CVR,Company registration number,12345678,Yes
+Organisation,LegalForm,Legal form,ApS / A/S / IVS,Yes
+Organisation,NACE,NACE code,25.62,Yes
+Organisation,Country,ISO 3166-1 alpha-2,DK,Yes
+Organisation,Address,Head office address,Nyvej 1, 2100 København Ø,Yes
+Organisation,Locations,Owned/controlled sites with lat;lon;type,"55.6761;12.5683;HQ | 55.4038;10.4024;Factory",Yes
+Organisation,FTE,Full-time equivalents (average),42,Yes
+Period,Year,Reporting year,2024,Yes
+Period,StartDate,Start date,2024-01-01,Yes
+Period,EndDate,End date,2024-12-31,Yes
+Energy,Electricity_kWh,Electricity consumption,kWh total,Yes
+Energy,Heat_kWh,Heating consumption,kWh total,IfRelevant
+Energy,Diesel_L,Diesel fuel liters,L,IfRelevant
+Energy,Gasoline_L,Gasoline fuel liters,L,IfRelevant
+Energy,NaturalGas_m3,Natural gas cubic meters,m3,IfRelevant
+Energy,RenewableGeneration_MWh,On-site renewable generation,MWh,IfRelevant
+Policies,EnvironmentalPolicy,Has environmental policy,Yes/No,Yes
+Policies,ClimatePolicy,Has climate policy,Yes/No,IfRelevant
+Social,Employees,Headcount at year end,integer,Yes
+Social,PercentFemaleEmployees,%,0-100,IfRelevant
+Social,TotalHoursWorked,hours,decimal,IfRelevant
+Social,LostTimeInjuries,count,integer,IfRelevant
+Governance,AntiCorruptionPolicy,Has policy,Yes/No,Yes
+Governance,DataPrivacyPolicy,Has policy,Yes/No,Yes
+Governance,WhistleblowerPolicy,Has policy,Yes/No,IfRelevant
+Notes,Scope3_Categories,Scope 3 categories and activity data,Free text,Optional
+Notes,Confidentiality,Any confidential omissions,Free text,Optional

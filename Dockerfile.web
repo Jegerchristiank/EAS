@@ -1,0 +1,27 @@
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+WORKDIR /src
+
+# Copy only project files first to leverage Docker layer caching
+COPY Directory.*.props ./
+COPY src/EsgAsAService.Web/*.csproj src/EsgAsAService.Web/
+COPY src/EsgAsAService.Infrastructure/*.csproj src/EsgAsAService.Infrastructure/
+COPY src/EsgAsAService.Application/*.csproj src/EsgAsAService.Application/
+COPY src/EsgAsAService.Domain/*.csproj src/EsgAsAService.Domain/
+
+# Restore only the Web project
+RUN dotnet restore src/EsgAsAService.Web/EsgAsAService.Web.csproj --nologo
+
+# Now bring in the full source and publish
+COPY src ./src
+RUN dotnet publish src/EsgAsAService.Web/EsgAsAService.Web.csproj -c Release -o /app/publish --no-restore
+
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS final
+WORKDIR /app
+COPY --from=build /app/publish .
+
+ENV ASPNETCORE_URLS=http://0.0.0.0:5097
+EXPOSE 5097
+
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 CMD curl -fsS http://localhost:5097/health || exit 1
+
+ENTRYPOINT ["dotnet", "EsgAsAService.Web.dll"]

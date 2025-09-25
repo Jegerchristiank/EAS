@@ -1,0 +1,1157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ESG Wizard Input",
+  "type": "object",
+  "additionalProperties": false,
+  "x-generatedAtUtc": "2025-09-18T13:54:56.1354590\u002B00:00",
+  "x-source": "/Users/christiankristensen/Desktop/ESG-as-a-service/docs/ESG_datapunkter__B1-B11__C1-C9_.csv",
+  "properties": {
+    "B1": {
+      "type": "object",
+      "additionalProperties": false,
+      "x-module": "Basismodul",
+      "x-sectionName": "Grundlag for udarbejdelse",
+      "properties": {
+        "antal_ansatte": {
+          "title": "Antal ansatte",
+          "type": "integer",
+          "x-unit": "personer"
+        },
+        "balancesum_eur": {
+          "title": "Balancesum (i Euro)",
+          "type": "number",
+          "x-unit": "EUR"
+        },
+        "certifikater_miljoemaerker": {
+          "title": "Kort beskrivelse af ESG-certifikater/milj\u00F8m\u00E6rker",
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "x-requirement": "conditional"
+        },
+        "datterselskaber": {
+          "title": "Oversigt over datterselskaber (navn og adresse)",
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "Kun ved konsolideret rapportering"
+        },
+        "juridisk_form": {
+          "title": "Virksomhedsform",
+          "type": "string"
+        },
+        "modul_valg_basismodul": {
+          "title": "Opg\u00F8relsen er baseret p\u00E5 Basismodulet",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "modul_valg_basismodul_udvidet": {
+          "title": "Opg\u00F8relsen er baseret p\u00E5 Basismodul \u002B Udvidet Modul",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "nace_koder": {
+          "title": "NACE sektor kode(r)",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "omsaetning_eur": {
+          "title": "Oms\u00E6tning (i Euro)",
+          "type": "number",
+          "x-unit": "EUR"
+        },
+        "rapport_individuel": {
+          "title": "Opg\u00F8relsen er udarbejdet p\u00E5 individuel basis",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "rapport_konsolideret": {
+          "title": "Opg\u00F8relsen er udarbejdet p\u00E5 et konsolideret grundlag",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "sites": {
+          "title": "Adresser og geolokation p\u00E5 v\u00E6sentlige aktiver og anl\u00E6g",
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "Adresse, postnr, by, land, koordinater"
+        },
+        "udeladelser_fortrolighed": {
+          "title": "Eventuelle udeladelser grundet fortrolighed",
+          "type": "string",
+          "x-requirement": "conditional"
+        }
+      },
+      "required": [
+        "antal_ansatte",
+        "balancesum_eur",
+        "datterselskaber",
+        "juridisk_form",
+        "modul_valg_basismodul",
+        "modul_valg_basismodul_udvidet",
+        "nace_koder",
+        "omsaetning_eur",
+        "rapport_individuel",
+        "rapport_konsolideret",
+        "sites"
+      ]
+    },
+    "B10": {
+      "type": "object",
+      "additionalProperties": false,
+      "x-module": "Basismodul",
+      "x-sectionName": "Egen arbejdsstyrke: Vederlag, overenskomster og uddannelse",
+      "properties": {
+        "loenforskel_maend_kvinder_pct": {
+          "title": "L\u00F8nforskel mellem m\u00E6nd og kvinder",
+          "type": "number",
+          "x-unit": "%",
+          "description": "Kun p\u00E5kr\u00E6vet ved \u003E150 ansatte",
+          "x-requirement": "conditional"
+        },
+        "minimunsloen_overholdes": {
+          "title": "Alle ansatte modtager mindst minimumsl\u00F8n",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "overenskomst_daeckning_pct": {
+          "title": "Procentvis ansatte d\u00E6kket af kollektiv overenskomst",
+          "type": "number",
+          "x-unit": "%"
+        },
+        "uddannelsestimer_andre": {
+          "title": "Uddannelsestimer pr. ansat: Andre",
+          "type": "number",
+          "x-unit": "timer/\u00E5r"
+        },
+        "uddannelsestimer_kvinder": {
+          "title": "Uddannelsestimer pr. ansat: Kvindelige ansatte",
+          "type": "number",
+          "x-unit": "timer/\u00E5r"
+        },
+        "uddannelsestimer_maend": {
+          "title": "Uddannelsestimer pr. ansat: Mandlige ansatte",
+          "type": "number",
+          "x-unit": "timer/\u00E5r"
+        }
+      },
+      "required": [
+        "minimunsloen_overholdes",
+        "overenskomst_daeckning_pct",
+        "uddannelsestimer_andre",
+        "uddannelsestimer_kvinder",
+        "uddannelsestimer_maend"
+      ]
+    },
+    "B11": {
+      "type": "object",
+      "additionalProperties": false,
+      "x-module": "Basismodul",
+      "x-sectionName": "Virksomhedsledelse: Korruption \u0026 bestikkelse",
+      "properties": {
+        "boeder_samlet_kroner": {
+          "title": "Samlede b\u00F8dest\u00F8rrelse",
+          "type": "number",
+          "x-unit": "DKK",
+          "x-requirement": "conditional"
+        },
+        "domme_antal": {
+          "title": "Antal domme i relation til korruption/bestikkelse",
+          "type": "integer",
+          "x-requirement": "conditional"
+        }
+      }
+    },
+    "B2": {
+      "type": "object",
+      "additionalProperties": false,
+      "x-module": "Basismodul",
+      "x-sectionName": "Indsatser, politikker og fremtidige initiativer",
+      "properties": {
+        "beroerte_samfund_har_maal_initiativer": {
+          "title": "Ber\u00F8rte samfund: Indeholder m\u00E5ls\u00E6tninger/fremtidige initiativer",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "beroerte_samfund_har_politik": {
+          "title": "Ber\u00F8rte samfund: Har konkret politik/indsats",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "beroerte_samfund_offentlig": {
+          "title": "Ber\u00F8rte samfund: Offentligt tilg\u00E6ngelig",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "biodiversitet_har_maal_initiativer": {
+          "title": "Biodiversitet og \u00F8kosystemer: Indeholder m\u00E5ls\u00E6tninger/fremtidige initiativer",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "biodiversitet_har_politik": {
+          "title": "Biodiversitet og \u00F8kosystemer: Har konkret politik/indsats",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "biodiversitet_offentlig": {
+          "title": "Biodiversitet og \u00F8kosystemer: Offentligt tilg\u00E6ngelig",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "cirkoekonomi_har_maal_initiativer": {
+          "title": "Ressourceforbrug, cirkul\u00E6r \u00F8konomi og affald: Indeholder m\u00E5ls\u00E6tninger/fremtidige initiativer",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "cirkoekonomi_har_politik": {
+          "title": "Ressourceforbrug, cirkul\u00E6r \u00F8konomi og affald: Har konkret politik/indsats",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "cirkoekonomi_offentlig": {
+          "title": "Ressourceforbrug, cirkul\u00E6r \u00F8konomi og affald: Offentligt tilg\u00E6ngelig",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "egen_arbejdsstyrke_har_maal_initiativer": {
+          "title": "Egen arbejdsstyrke: Indeholder m\u00E5ls\u00E6tninger/fremtidige initiativer",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "egen_arbejdsstyrke_har_politik": {
+          "title": "Egen arbejdsstyrke: Har konkret politik/indsats",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "egen_arbejdsstyrke_offentlig": {
+          "title": "Egen arbejdsstyrke: Offentligt tilg\u00E6ngelig",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "forbrugere_har_maal_initiativer": {
+          "title": "Forbrugere og slutbrugere: Indeholder m\u00E5ls\u00E6tninger/fremtidige initiativer",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "forbrugere_har_politik": {
+          "title": "Forbrugere og slutbrugere: Har konkret politik/indsats",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "forbrugere_offentlig": {
+          "title": "Forbrugere og slutbrugere: Offentligt tilg\u00E6ngelig",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "forurening_har_maal_initiativer": {
+          "title": "Forurening af luft, vand og jord: Indeholder m\u00E5ls\u00E6tninger/fremtidige initiativer",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "forurening_har_politik": {
+          "title": "Forurening af luft, vand og jord: Har konkret politik/indsats",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "forurening_offentlig": {
+          "title": "Forurening af luft, vand og jord: Offentligt tilg\u00E6ngelig",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "klima_har_maal_initiativer": {
+          "title": "Klima og drivhusgasudledninger: Indeholder m\u00E5ls\u00E6tninger/fremtidige initiativer",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "klima_har_politik": {
+          "title": "Klima og drivhusgasudledninger: Har konkret politik/indsats",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "klima_offentlig": {
+          "title": "Klima og drivhusgasudledninger: Offentligt tilg\u00E6ngelig",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "vaerdikaede_arbejdere_har_maal_initiativer": {
+          "title": "Arbejdere i v\u00E6rdik\u00E6den: Indeholder m\u00E5ls\u00E6tninger/fremtidige initiativer",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "vaerdikaede_arbejdere_har_politik": {
+          "title": "Arbejdere i v\u00E6rdik\u00E6den: Har konkret politik/indsats",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "vaerdikaede_arbejdere_offentlig": {
+          "title": "Arbejdere i v\u00E6rdik\u00E6den: Offentligt tilg\u00E6ngelig",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "vand_hav_har_maal_initiativer": {
+          "title": "Vand og havressourcer: Indeholder m\u00E5ls\u00E6tninger/fremtidige initiativer",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "vand_hav_har_politik": {
+          "title": "Vand og havressourcer: Har konkret politik/indsats",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "vand_hav_offentlig": {
+          "title": "Vand og havressourcer: Offentligt tilg\u00E6ngelig",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "virksomhedsledelse_har_maal_initiativer": {
+          "title": "Virksomhedsledelse: Indeholder m\u00E5ls\u00E6tninger/fremtidige initiativer",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "virksomhedsledelse_har_politik": {
+          "title": "Virksomhedsledelse: Har konkret politik/indsats",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "virksomhedsledelse_offentlig": {
+          "title": "Virksomhedsledelse: Offentligt tilg\u00E6ngelig",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        }
+      },
+      "required": [
+        "beroerte_samfund_har_maal_initiativer",
+        "beroerte_samfund_har_politik",
+        "beroerte_samfund_offentlig",
+        "biodiversitet_har_maal_initiativer",
+        "biodiversitet_har_politik",
+        "biodiversitet_offentlig",
+        "cirkoekonomi_har_maal_initiativer",
+        "cirkoekonomi_har_politik",
+        "cirkoekonomi_offentlig",
+        "egen_arbejdsstyrke_har_maal_initiativer",
+        "egen_arbejdsstyrke_har_politik",
+        "egen_arbejdsstyrke_offentlig",
+        "forbrugere_har_maal_initiativer",
+        "forbrugere_har_politik",
+        "forbrugere_offentlig",
+        "forurening_har_maal_initiativer",
+        "forurening_har_politik",
+        "forurening_offentlig",
+        "klima_har_maal_initiativer",
+        "klima_har_politik",
+        "klima_offentlig",
+        "vaerdikaede_arbejdere_har_maal_initiativer",
+        "vaerdikaede_arbejdere_har_politik",
+        "vaerdikaede_arbejdere_offentlig",
+        "vand_hav_har_maal_initiativer",
+        "vand_hav_har_politik",
+        "vand_hav_offentlig",
+        "virksomhedsledelse_har_maal_initiativer",
+        "virksomhedsledelse_har_politik",
+        "virksomhedsledelse_offentlig"
+      ]
+    },
+    "B3": {
+      "type": "object",
+      "additionalProperties": false,
+      "x-module": "Basismodul",
+      "x-sectionName": "Energiforbrug",
+      "properties": {
+        "anden_energi_mwh": {
+          "title": "Anden energi",
+          "type": "number",
+          "x-unit": "MWh",
+          "x-requirement": "optional"
+        },
+        "braendstof_ikke_vedvarende_mwh": {
+          "title": "Br\u00E6ndstoffer: Ikke-vedvarende",
+          "type": "number",
+          "x-unit": "MWh"
+        },
+        "braendstof_vedvarende_mwh": {
+          "title": "Br\u00E6ndstoffer: Vedvarende",
+          "type": "number",
+          "x-unit": "MWh"
+        },
+        "co2e_aar": {
+          "title": "\u00C5r",
+          "type": "integer"
+        },
+        "co2e_intensitet": {
+          "title": "CO\u2082e-intensitet",
+          "type": "number",
+          "x-unit": "ton CO2e pr. enhed",
+          "description": "Formel angives i rapporten"
+        },
+        "co2e_total_s1_s2_ton": {
+          "title": "CO\u2082e-udledning i alt (Scope 1 \u002B Scope 2)",
+          "type": "number",
+          "x-unit": "ton CO2e"
+        },
+        "co2e_total_s1_s3_ton": {
+          "title": "CO\u2082e-udledning i alt (Scope 1 \u002B Scope 2 \u002B Scope 3)",
+          "type": "number",
+          "x-unit": "ton CO2e",
+          "x-requirement": "conditional"
+        },
+        "el_ikke_vedvarende_mwh": {
+          "title": "Elektricitet: Ikke-vedvarende",
+          "type": "number",
+          "x-unit": "MWh"
+        },
+        "el_vedvarende_mwh": {
+          "title": "Elektricitet: Vedvarende",
+          "type": "number",
+          "x-unit": "MWh"
+        },
+        "energi_aar": {
+          "title": "\u00C5r",
+          "type": "integer"
+        },
+        "energi_i_alt_mwh": {
+          "title": "I alt",
+          "type": "number",
+          "x-unit": "MWh"
+        },
+        "scope1_ton": {
+          "title": "Scope 1 CO\u2082e-udledninger",
+          "type": "number",
+          "x-unit": "ton CO2e"
+        },
+        "scope2_ton": {
+          "title": "Scope 2 CO\u2082e-udledninger",
+          "type": "number",
+          "x-unit": "ton CO2e"
+        },
+        "scope3_ton": {
+          "title": "Scope 3 CO\u2082e-udledninger",
+          "type": "number",
+          "x-unit": "ton CO2e",
+          "x-requirement": "conditional"
+        }
+      },
+      "required": [
+        "braendstof_ikke_vedvarende_mwh",
+        "braendstof_vedvarende_mwh",
+        "co2e_aar",
+        "co2e_intensitet",
+        "co2e_total_s1_s2_ton",
+        "el_ikke_vedvarende_mwh",
+        "el_vedvarende_mwh",
+        "energi_aar",
+        "energi_i_alt_mwh",
+        "scope1_ton",
+        "scope2_ton"
+      ]
+    },
+    "B4": {
+      "type": "object",
+      "additionalProperties": false,
+      "x-module": "Basismodul",
+      "x-sectionName": "Forurening af luft, vand og jord",
+      "properties": {
+        "forurening_aar": {
+          "title": "\u00C5r",
+          "type": "integer",
+          "x-requirement": "conditional"
+        },
+        "forurening_maengde": {
+          "title": "M\u00E6ngde af forurening",
+          "type": "number",
+          "x-unit": "kg",
+          "x-requirement": "conditional"
+        },
+        "forurening_medium": {
+          "title": "Milj\u00F8medie (Luft/Vand/Jord)",
+          "type": "string",
+          "enum": [
+            "Luft",
+            "Vand",
+            "Jord"
+          ],
+          "x-requirement": "conditional"
+        },
+        "forurening_type": {
+          "title": "Type af forurening",
+          "type": "string",
+          "x-requirement": "conditional"
+        }
+      }
+    },
+    "B5": {
+      "type": "object",
+      "additionalProperties": false,
+      "x-module": "Basismodul",
+      "x-sectionName": "Biodiversitet",
+      "properties": {
+        "arealforbrug_aendring_pct": {
+          "title": "Procentvis \u00E6ndring i arealforbrug",
+          "type": "number",
+          "x-unit": "%",
+          "description": "V\u00E6kst ift. seneste afsluttede \u00E5r"
+        },
+        "arealforbrug_rapportaar_hektar": {
+          "title": "Arealforbrug i rapporterings\u00E5ret",
+          "type": "number",
+          "x-unit": "hektar"
+        },
+        "arealforbrug_seneste_aar_hektar": {
+          "title": "Arealforbrug i seneste afsluttede \u00E5r",
+          "type": "number",
+          "x-unit": "hektar"
+        },
+        "bio_f\u00F8lsomme_omraader": {
+          "title": "Omr\u00E5der i n\u00E6rheden af eller i \u0027biodiversitetsf\u00F8lsomme omr\u00E5der\u0027 (placering, areal, navn, n\u00E6r/inde)",
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "x-requirement": "conditional"
+        }
+      },
+      "required": [
+        "arealforbrug_aendring_pct",
+        "arealforbrug_rapportaar_hektar",
+        "arealforbrug_seneste_aar_hektar"
+      ]
+    },
+    "B6": {
+      "type": "object",
+      "additionalProperties": false,
+      "x-module": "Basismodul",
+      "x-sectionName": "Vand",
+      "properties": {
+        "vand_forbrug_m3": {
+          "title": "Vandforbrug",
+          "type": "number",
+          "x-unit": "m3"
+        },
+        "vand_udtagning_m3": {
+          "title": "Udtagning af vand",
+          "type": "number",
+          "x-unit": "m3"
+        }
+      },
+      "required": [
+        "vand_forbrug_m3",
+        "vand_udtagning_m3"
+      ]
+    },
+    "B7": {
+      "type": "object",
+      "additionalProperties": false,
+      "x-module": "Basismodul",
+      "x-sectionName": "Ressourceforbrug, cirkul\u00E6r \u00F8konomi og affaldsh\u00E5ndtering",
+      "properties": {
+        "affald_til_genbrug_genanvendelse_ton": {
+          "title": "M\u00E6ngde affald til genbrug/genanvendelse",
+          "type": "number",
+          "x-unit": "ton"
+        },
+        "affald_total_farligt_ton": {
+          "title": "Total m\u00E6ngde affald \u00E5rligt: Farligt",
+          "type": "number",
+          "x-unit": "ton"
+        },
+        "affald_total_ikke_farligt_ton": {
+          "title": "Total m\u00E6ngde affald \u00E5rligt: Ikke-farligt",
+          "type": "number",
+          "x-unit": "ton"
+        },
+        "cirkulaer_beskrivelse": {
+          "title": "Hvis JA: beskrivelse af arbejdet med cirkul\u00E6r \u00F8konomi",
+          "type": "string",
+          "x-requirement": "conditional",
+          "x-dependsOn": "cirkulaer_ja==JA"
+        },
+        "cirkulaer_ja": {
+          "title": "Anvendes principper fra cirkul\u00E6r \u00F8konomi",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "materiale_masseflow": {
+          "title": "V\u00E6sentlige materialer og \u00E5rligt masse-flow",
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "x-unit": "fx ton/m3",
+          "description": "Kun for materialetunge sektorer",
+          "x-requirement": "conditional"
+        }
+      },
+      "required": [
+        "affald_til_genbrug_genanvendelse_ton",
+        "affald_total_farligt_ton",
+        "affald_total_ikke_farligt_ton",
+        "cirkulaer_ja"
+      ]
+    },
+    "B8": {
+      "type": "object",
+      "additionalProperties": false,
+      "x-module": "Basismodul",
+      "x-sectionName": "Egen arbejdsstyrke: Generelle karakteristika",
+      "properties": {
+        "ansatte_pr_land": {
+          "title": "Antal ansatte pr. land (DK og \u00F8vrige)",
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "x-unit": "personer/FTE",
+          "x-requirement": "conditional"
+        },
+        "koen_andet": {
+          "title": "K\u00F8n: Andet",
+          "type": "integer",
+          "x-unit": "personer/FTE"
+        },
+        "koen_ikke_reg": {
+          "title": "K\u00F8n: Ikke registreret",
+          "type": "integer",
+          "x-unit": "personer/FTE"
+        },
+        "koen_kvinder": {
+          "title": "K\u00F8n: Kvinde",
+          "type": "integer",
+          "x-unit": "personer/FTE"
+        },
+        "koen_maend": {
+          "title": "K\u00F8n: Mand",
+          "type": "integer",
+          "x-unit": "personer/FTE"
+        },
+        "koen_total": {
+          "title": "K\u00F8n: Totalt antal ansatte",
+          "type": "integer",
+          "x-unit": "personer/FTE"
+        },
+        "kontrakttype_fast": {
+          "title": "Kontrakttype: Fastans\u00E6ttelse",
+          "type": "integer",
+          "x-unit": "personer/FTE"
+        },
+        "kontrakttype_midlt": {
+          "title": "Kontrakttype: Midlertidig ans\u00E6ttelse",
+          "type": "integer",
+          "x-unit": "personer/FTE"
+        },
+        "kontrakttype_total": {
+          "title": "Kontrakttype: Totalt antal ansatte",
+          "type": "integer",
+          "x-unit": "personer/FTE"
+        },
+        "medarbejderomsaetning_pct": {
+          "title": "Medarbejderoms\u00E6tning",
+          "type": "number",
+          "x-unit": "%",
+          "description": "Kun hvis \u226550 ansatte",
+          "x-requirement": "conditional"
+        }
+      },
+      "required": [
+        "koen_andet",
+        "koen_ikke_reg",
+        "koen_kvinder",
+        "koen_maend",
+        "koen_total",
+        "kontrakttype_fast",
+        "kontrakttype_midlt",
+        "kontrakttype_total"
+      ]
+    },
+    "B9": {
+      "type": "object",
+      "additionalProperties": false,
+      "x-module": "Basismodul",
+      "x-sectionName": "Egen arbejdsstyrke: Sundhed og sikkerhed",
+      "properties": {
+        "doedsfald_helbred": {
+          "title": "Arbejdsrelaterede d\u00F8dsfald: som f\u00F8lge af arbejdsrelateret d\u00E5rligt helbred",
+          "type": "integer"
+        },
+        "doedsfald_skade": {
+          "title": "Arbejdsrelaterede d\u00F8dsfald: som f\u00F8lge af arbejdsskade/-ulykke",
+          "type": "integer"
+        },
+        "ulykker_aar": {
+          "title": "Registrerede arbejdsulykker: \u00C5r",
+          "type": "integer"
+        },
+        "ulykker_antal": {
+          "title": "Registrerede arbejdsulykker: Antal",
+          "type": "integer"
+        },
+        "ulykker_frekvens": {
+          "title": "Registrerede arbejdsulykker: Frekvens",
+          "type": "number",
+          "x-unit": "pr. 100 fuldtidsansatte"
+        }
+      },
+      "required": [
+        "doedsfald_helbred",
+        "doedsfald_skade",
+        "ulykker_aar",
+        "ulykker_antal",
+        "ulykker_frekvens"
+      ]
+    },
+    "C1": {
+      "type": "object",
+      "additionalProperties": false,
+      "x-module": "Udvidet Modul",
+      "x-sectionName": "Strategi: Forretningsmodel og b\u00E6redygtighedsrelaterede initiativer",
+      "properties": {
+        "b\u00E6redygtighedsorientering_vurdering": {
+          "title": "Vurdering af forretningens orientering mod b\u00E6redygtighedsm\u00E5l",
+          "type": "string"
+        },
+        "due_diligence_beskrivelse": {
+          "title": "Due diligence-processer ift. b\u00E6redygtighedsrisici",
+          "type": "string"
+        },
+        "forretningsforbindelser_beskrivelse": {
+          "title": "Beskrivelse af prim\u00E6re forretningsforbindelser",
+          "type": "string"
+        },
+        "hoejeste_ansvarlige_niveau": {
+          "title": "H\u00F8jeste ansvarlige niveau for b\u00E6redygtighed",
+          "type": "string"
+        },
+        "incitamenter_beskrivelse": {
+          "title": "\u00D8konomiske incitamenter knyttet til b\u00E6redygtighedsm\u00E5l",
+          "type": "string"
+        },
+        "ledelsesorgan_rolle": {
+          "title": "Ledelsesorganets rolle i overv\u00E5gning af b\u00E6redygtighedstemaer",
+          "type": "string"
+        },
+        "markeder_beskrivelse": {
+          "title": "Beskrivelse af v\u00E6sentlige markeder",
+          "type": "string"
+        },
+        "produkter_tjenester_beskrivelse": {
+          "title": "Beskrivelse af v\u00E6sentlige produkter/tjenesteydelser",
+          "type": "string"
+        },
+        "risikostyring_beskrivelse": {
+          "title": "Risikostyring ift. b\u00E6redygtighedsrisici",
+          "type": "string"
+        },
+        "strategiske_maal": {
+          "title": "Strategiske m\u00E5ls\u00E6tninger for b\u00E6redygtighed",
+          "type": "string"
+        }
+      },
+      "required": [
+        "b\u00E6redygtighedsorientering_vurdering",
+        "due_diligence_beskrivelse",
+        "forretningsforbindelser_beskrivelse",
+        "hoejeste_ansvarlige_niveau",
+        "incitamenter_beskrivelse",
+        "ledelsesorgan_rolle",
+        "markeder_beskrivelse",
+        "produkter_tjenester_beskrivelse",
+        "risikostyring_beskrivelse",
+        "strategiske_maal"
+      ]
+    },
+    "C2": {
+      "type": "object",
+      "additionalProperties": false,
+      "x-module": "Udvidet Modul",
+      "x-sectionName": "Beskrivelse af indsatser, politikker og fremtidige initiativer",
+      "properties": {
+        "ansvarsniveau_beskrivelse": {
+          "title": "H\u00F8jeste ansvarlige niveau for indsatser/politikker",
+          "type": "string"
+        },
+        "indsatser_og_politikker_beskrivelse": {
+          "title": "Beskrivelse af eksisterende indsatser/politikker/arbejdsplaner",
+          "type": "string",
+          "x-dependsOn": "B2.*==JA"
+        },
+        "offentlig_tilg\u00E6ngelighed_beskrivelse": {
+          "title": "Oplysning om offentlig tilg\u00E6ngelighed (hvor/hvordan)",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ansvarsniveau_beskrivelse",
+        "indsatser_og_politikker_beskrivelse",
+        "offentlig_tilg\u00E6ngelighed_beskrivelse"
+      ]
+    },
+    "C3": {
+      "type": "object",
+      "additionalProperties": false,
+      "x-module": "Udvidet Modul",
+      "x-sectionName": "CO\u2082e-reduktionsm\u00E5l og klimaomstilling",
+      "properties": {
+        "baseline_aar": {
+          "title": "Baseline\u00E5r for CO\u2082e-udledning",
+          "type": "integer"
+        },
+        "handlinger_liste": {
+          "title": "Liste over handlinger til at n\u00E5 CO\u2082e-reduktionsm\u00E5l",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "omstillingsplan_beskrivelse": {
+          "title": "Omstillingsplan for modvirkning af klimaforandringer",
+          "type": "string"
+        },
+        "reduktionsmaal": {
+          "title": "CO\u2082e-reduktionsm\u00E5l (pr. scope)",
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "Angiv scope, basis\u00E5r, enhed og m\u00E5l\u00E5r"
+        }
+      },
+      "required": [
+        "baseline_aar",
+        "handlinger_liste",
+        "omstillingsplan_beskrivelse",
+        "reduktionsmaal"
+      ]
+    },
+    "C4": {
+      "type": "object",
+      "additionalProperties": false,
+      "x-module": "Udvidet Modul",
+      "x-sectionName": "Klimarisici",
+      "properties": {
+        "eksponering_sa\u030Arbarhed": {
+          "title": "Eksponering og s\u00E5rbarhed for aktiver, aktiviteter og v\u00E6rdik\u00E6de",
+          "type": "string"
+        },
+        "finansiel_p\u00E5virkning_beskrivelse": {
+          "title": "Potentiel negativ p\u00E5virkning p\u00E5 finansiel pr\u00E6station/forretningsdrift",
+          "type": "string"
+        },
+        "klimarisici_beskrivelse": {
+          "title": "Beskrivelse af klimarelaterede risici og/eller omstillingsrisici",
+          "type": "string"
+        },
+        "tidshorisont": {
+          "title": "Tidshorisont for hvorn\u00E5r risici kan p\u00E5virke virksomheden",
+          "type": "string"
+        },
+        "tilpasning_ja": {
+          "title": "Oplysning om klimatilpasning",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        }
+      },
+      "required": [
+        "eksponering_sa\u030Arbarhed",
+        "finansiel_p\u00E5virkning_beskrivelse",
+        "klimarisici_beskrivelse",
+        "tidshorisont",
+        "tilpasning_ja"
+      ]
+    },
+    "C5": {
+      "type": "object",
+      "additionalProperties": false,
+      "x-module": "Udvidet Modul",
+      "x-sectionName": "Supplerende (generelle) oplysninger om arbejdsstyrken",
+      "properties": {
+        "forhold_kvinder_maend_ledelsesniveau": {
+          "title": "Forhold mellem kvinder og m\u00E6nd p\u00E5 ledelsesniveau",
+          "type": "number"
+        },
+        "selvstaendige_antal": {
+          "title": "Antal selvst\u00E6ndige (uden egne ansatte)",
+          "type": "integer",
+          "x-requirement": "optional"
+        },
+        "vikarer_antal": {
+          "title": "Antal vikarer (via vikarbureau)",
+          "type": "integer",
+          "x-requirement": "optional"
+        }
+      },
+      "required": [
+        "forhold_kvinder_maend_ledelsesniveau"
+      ]
+    },
+    "C6": {
+      "type": "object",
+      "additionalProperties": false,
+      "x-module": "Udvidet Modul",
+      "x-sectionName": "Menneskerettighedspolitikker og -processer (egen arbejdsstyrke)",
+      "properties": {
+        "code_of_conduct_eller_mr_politik": {
+          "title": "Ansvarlighedspolitik/menneskerettighedspolitik for egen arbejdsstyrke",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "klagemekanisme_ansatte": {
+          "title": "Klagemekanisme for virksomhedens egne ansatte",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ]
+        },
+        "mr_processer_beskrivelse": {
+          "title": "Procesbeskrivelse for identifikation/h\u00E5ndtering (hvis JA)",
+          "type": "string",
+          "x-requirement": "conditional"
+        }
+      },
+      "required": [
+        "code_of_conduct_eller_mr_politik",
+        "klagemekanisme_ansatte"
+      ]
+    },
+    "C7": {
+      "type": "object",
+      "additionalProperties": false,
+      "x-module": "Udvidet Modul",
+      "x-sectionName": "Alvorlige negative menneskerettighedsh\u00E6ndelser",
+      "properties": {
+        "haendelser_egen_arbejdsstyrke": {
+          "title": "Bekr\u00E6ftede h\u00E6ndelser: egen arbejdsstyrke (b\u00F8rnearbejde, tvangsarbejde, menneskehandel, diskrimination)",
+          "type": "object",
+          "x-requirement": "conditional"
+        },
+        "haendelser_vaerdikaede": {
+          "title": "Bekr\u00E6ftede h\u00E6ndelser i v\u00E6rdik\u00E6den (arbejdstagere, ber\u00F8rte samfund, forbrugere/slutbrugere)",
+          "type": "object",
+          "x-requirement": "conditional"
+        },
+        "handlinger_egen_arbejdsstyrke": {
+          "title": "Handlinger iv\u00E6rksat ifm. h\u00E6ndelser (egen arbejdsstyrke)",
+          "type": "string",
+          "x-requirement": "conditional"
+        },
+        "handlinger_vaerdikaede": {
+          "title": "Handlinger iv\u00E6rksat ifm. h\u00E6ndelser (v\u00E6rdik\u00E6de)",
+          "type": "string",
+          "x-requirement": "conditional"
+        }
+      }
+    },
+    "C8": {
+      "type": "object",
+      "additionalProperties": false,
+      "x-module": "Udvidet Modul",
+      "x-sectionName": "Indt\u00E6gter fra bestemte aktiviteter og udelukkelse fra EU-referencebenchmarks",
+      "properties": {
+        "eu_benchmark_el_100g_over50pct": {
+          "title": "EU-benchmark: \u226550% indt\u00E6gter fra elproduktion \u003E100 g CO\u2082e/kWh",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ],
+          "x-requirement": "conditional"
+        },
+        "eu_benchmark_gas_over50pct": {
+          "title": "EU-benchmark: \u226550% indt\u00E6gter fra gasbaserede br\u00E6ndstoffer (efterforskning/udvinding/fremstilling/distribution)",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ],
+          "x-requirement": "conditional"
+        },
+        "eu_benchmark_kul_over1pct": {
+          "title": "EU-benchmark: \u22651% indt\u00E6gter fra kul (efterforskning/minedrift/udvinding/distribution/raffinering)",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ],
+          "x-requirement": "conditional"
+        },
+        "eu_benchmark_olie_over10pct": {
+          "title": "EU-benchmark: \u226510% indt\u00E6gter fra olie (efterforskning/udvinding/distribution/raffinering)",
+          "type": "string",
+          "enum": [
+            "JA",
+            "NEJ"
+          ],
+          "x-requirement": "conditional"
+        },
+        "indt\u00E6gt_gas_dkk": {
+          "title": "Indt\u00E6gt: Fossile br\u00E6ndstoffer gas/naturgas",
+          "type": "number",
+          "x-unit": "DKK",
+          "x-requirement": "conditional"
+        },
+        "indt\u00E6gt_kontroversielle_vaaben_dkk": {
+          "title": "Indt\u00E6gt: Kontroversielle v\u00E5ben",
+          "type": "number",
+          "x-unit": "DKK",
+          "x-requirement": "conditional"
+        },
+        "indt\u00E6gt_kul_dkk": {
+          "title": "Indt\u00E6gt: Fossile br\u00E6ndstoffer kul",
+          "type": "number",
+          "x-unit": "DKK",
+          "x-requirement": "conditional"
+        },
+        "indt\u00E6gt_olie_dkk": {
+          "title": "Indt\u00E6gt: Fossile br\u00E6ndstoffer olie",
+          "type": "number",
+          "x-unit": "DKK",
+          "x-requirement": "conditional"
+        },
+        "indt\u00E6gt_pesticid_kemi_dkk": {
+          "title": "Indt\u00E6gt: Kemikalieproduktion til pesticider/agrokemiske produkter",
+          "type": "number",
+          "x-unit": "DKK",
+          "x-requirement": "conditional"
+        },
+        "indt\u00E6gt_tobak_dkk": {
+          "title": "Indt\u00E6gt: Dyrkning/produktion af tobak",
+          "type": "number",
+          "x-unit": "DKK",
+          "x-requirement": "conditional"
+        }
+      }
+    },
+    "C9": {
+      "type": "object",
+      "additionalProperties": false,
+      "x-module": "Udvidet Modul",
+      "x-sectionName": "K\u00F8nsfordeling i \u00F8verste ledelsesorgan",
+      "properties": {
+        "koens_forhold_best": {
+          "title": "Forhold mellem kvinder og m\u00E6nd i \u00F8verste ledelsesorgan",
+          "type": "number",
+          "x-requirement": "conditional"
+        }
+      }
+    }
+  }
+}

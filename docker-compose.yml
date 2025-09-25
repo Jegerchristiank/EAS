@@ -1,0 +1,38 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    ports:
+      - "${API_PORT:-5198}:5198"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
+      - ConnectionStrings__DefaultConnection=DataSource=/data/app.db;Cache=Shared
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OpenAI__BaseUrl=${OPENAI_BASE_URL:-https://api.openai.com/v1}
+      - OpenAI__Model=${OPENAI_MODEL:-gpt-5}
+      - ESG_ENABLE_AI_NARRATIVES=${ESG_ENABLE_AI_NARRATIVES:-false}
+      - FeatureManagement__FullEsgJson=${FEATURE_FULL_ESG_JSON:-true}
+      # Observability (optional)
+      - OTEL_EXPORTER_OTLP_ENDPOINT=${OTEL_EXPORTER_OTLP_ENDPOINT:-}
+    volumes:
+      - esg-data:/data
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    ports:
+      - "${WEB_PORT:-5097}:5097"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
+      - ConnectionStrings__DefaultConnection=DataSource=/data/app.db;Cache=Shared
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OpenAI__BaseUrl=${OPENAI_BASE_URL:-https://api.openai.com/v1}
+      - OpenAI__Model=${OPENAI_MODEL:-gpt-5}
+      - ESG_ENABLE_AI_NARRATIVES=${ESG_ENABLE_AI_NARRATIVES:-false}
+    depends_on:
+      - api
+    volumes:
+      - esg-data:/data
+volumes:
+  esg-data: {}

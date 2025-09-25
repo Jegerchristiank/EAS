@@ -1,0 +1,22 @@
+@using EsgAsAService.Application.Abstractions
+@inject IDiagnosticService Diag
+@inject ILogger<ErrorDisplay> Logger
+@inject NavigationManager NavigationManager
+
+@code {
+    [Parameter] public Exception Exception { get; set; } = default!;
+    private string? _code;
+    private void Reload() => NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true);
+    protected override void OnInitialized()
+    {
+        _code = Diag.Capture(Exception, "UI.ErrorBoundary");
+        Logger.LogError(Exception, "Unhandled UI error (code {Code})", _code);
+    }
+}
+
+<div class="alert alert-danger" role="alert">
+    An unexpected error occurred. Please share this support code: <strong>@_code</strong>
+    <div class="mt-2">
+        <button class="btn btn-sm btn-outline-secondary" @onclick="Reload">Reload</button>
+    </div>
+</div>

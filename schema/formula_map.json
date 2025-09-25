@@ -1,0 +1,975 @@
+[
+  {
+    "section": "B1",
+    "datapoint": "antal_ansatte",
+    "module_calculation": "RunB1",
+    "formula_reference": "docs/esg-formulas.md#b1--company--basis",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B1",
+    "datapoint": "balancesum_eur",
+    "module_calculation": "RunB1",
+    "formula_reference": "docs/esg-formulas.md#b1--company--basis",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B1",
+    "datapoint": "certifikater_miljoemaerker",
+    "module_calculation": "RunB1",
+    "formula_reference": "docs/esg-formulas.md#b1--company--basis",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B1",
+    "datapoint": "datterselskaber",
+    "module_calculation": null,
+    "formula_reference": null,
+    "coverage_status": "wizard_input"
+  },
+  {
+    "section": "B1",
+    "datapoint": "juridisk_form",
+    "module_calculation": null,
+    "formula_reference": null,
+    "coverage_status": "wizard_input"
+  },
+  {
+    "section": "B1",
+    "datapoint": "modul_valg_basismodul",
+    "module_calculation": null,
+    "formula_reference": null,
+    "coverage_status": "wizard_input"
+  },
+  {
+    "section": "B1",
+    "datapoint": "modul_valg_basismodul_udvidet",
+    "module_calculation": null,
+    "formula_reference": null,
+    "coverage_status": "wizard_input"
+  },
+  {
+    "section": "B1",
+    "datapoint": "nace_koder",
+    "module_calculation": null,
+    "formula_reference": null,
+    "coverage_status": "wizard_input"
+  },
+  {
+    "section": "B1",
+    "datapoint": "omsaetning_eur",
+    "module_calculation": "RunB1",
+    "formula_reference": "docs/esg-formulas.md#b1--company--basis",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B1",
+    "datapoint": "rapport_individuel",
+    "module_calculation": null,
+    "formula_reference": null,
+    "coverage_status": "wizard_input"
+  },
+  {
+    "section": "B1",
+    "datapoint": "rapport_konsolideret",
+    "module_calculation": null,
+    "formula_reference": null,
+    "coverage_status": "wizard_input"
+  },
+  {
+    "section": "B1",
+    "datapoint": "sites",
+    "module_calculation": "RunB1",
+    "formula_reference": "docs/esg-formulas.md#b1--company--basis",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B1",
+    "datapoint": "udeladelser_fortrolighed",
+    "module_calculation": null,
+    "formula_reference": null,
+    "coverage_status": "wizard_input"
+  },
+  {
+    "section": "B10",
+    "datapoint": "loenforskel_maend_kvinder_pct",
+    "module_calculation": "RunB10",
+    "formula_reference": "docs/esg-formulas.md#b10--pay--training",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B10",
+    "datapoint": "minimunsloen_overholdes",
+    "module_calculation": null,
+    "formula_reference": null,
+    "coverage_status": "wizard_input"
+  },
+  {
+    "section": "B10",
+    "datapoint": "overenskomst_daeckning_pct",
+    "module_calculation": "RunB10",
+    "formula_reference": "docs/esg-formulas.md#b10--pay--training",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B10",
+    "datapoint": "uddannelsestimer_andre",
+    "module_calculation": "RunB10",
+    "formula_reference": "docs/esg-formulas.md#b10--pay--training",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B10",
+    "datapoint": "uddannelsestimer_kvinder",
+    "module_calculation": "RunB10",
+    "formula_reference": "docs/esg-formulas.md#b10--pay--training",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B10",
+    "datapoint": "uddannelsestimer_maend",
+    "module_calculation": "RunB10",
+    "formula_reference": "docs/esg-formulas.md#b10--pay--training",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B11",
+    "datapoint": "boeder_samlet_kroner",
+    "module_calculation": "RunB11",
+    "formula_reference": "docs/esg-formulas.md#b11--business-conduct",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B11",
+    "datapoint": "domme_antal",
+    "module_calculation": "RunB11",
+    "formula_reference": "docs/esg-formulas.md#b11--business-conduct",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "beroerte_samfund_har_maal_initiativer",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "beroerte_samfund_har_politik",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "beroerte_samfund_offentlig",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "biodiversitet_har_maal_initiativer",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "biodiversitet_har_politik",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "biodiversitet_offentlig",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "cirkoekonomi_har_maal_initiativer",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "cirkoekonomi_har_politik",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "cirkoekonomi_offentlig",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "egen_arbejdsstyrke_har_maal_initiativer",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "egen_arbejdsstyrke_har_politik",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "egen_arbejdsstyrke_offentlig",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "forbrugere_har_maal_initiativer",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "forbrugere_har_politik",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "forbrugere_offentlig",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "forurening_har_maal_initiativer",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "forurening_har_politik",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "forurening_offentlig",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "klima_har_maal_initiativer",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "klima_har_politik",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "klima_offentlig",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "vaerdikaede_arbejdere_har_maal_initiativer",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "vaerdikaede_arbejdere_har_politik",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "vaerdikaede_arbejdere_offentlig",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "vand_hav_har_maal_initiativer",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "vand_hav_har_politik",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "vand_hav_offentlig",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "virksomhedsledelse_har_maal_initiativer",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "virksomhedsledelse_har_politik",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B2",
+    "datapoint": "virksomhedsledelse_offentlig",
+    "module_calculation": "RunB2",
+    "formula_reference": "docs/esg-formulas.md#b2--policies",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B3",
+    "datapoint": "anden_energi_mwh",
+    "module_calculation": "RunB3",
+    "formula_reference": "docs/esg-formulas.md#b3--energy--emissions",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B3",
+    "datapoint": "braendstof_ikke_vedvarende_mwh",
+    "module_calculation": "RunB3",
+    "formula_reference": "docs/esg-formulas.md#b3--energy--emissions",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B3",
+    "datapoint": "braendstof_vedvarende_mwh",
+    "module_calculation": "RunB3",
+    "formula_reference": "docs/esg-formulas.md#b3--energy--emissions",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B3",
+    "datapoint": "co2e_aar",
+    "module_calculation": null,
+    "formula_reference": null,
+    "coverage_status": "wizard_input"
+  },
+  {
+    "section": "B3",
+    "datapoint": "co2e_intensitet",
+    "module_calculation": null,
+    "formula_reference": null,
+    "coverage_status": "wizard_input"
+  },
+  {
+    "section": "B3",
+    "datapoint": "co2e_total_s1_s2_ton",
+    "module_calculation": null,
+    "formula_reference": null,
+    "coverage_status": "wizard_input"
+  },
+  {
+    "section": "B3",
+    "datapoint": "co2e_total_s1_s3_ton",
+    "module_calculation": null,
+    "formula_reference": null,
+    "coverage_status": "wizard_input"
+  },
+  {
+    "section": "B3",
+    "datapoint": "el_ikke_vedvarende_mwh",
+    "module_calculation": "RunB3",
+    "formula_reference": "docs/esg-formulas.md#b3--energy--emissions",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B3",
+    "datapoint": "el_vedvarende_mwh",
+    "module_calculation": "RunB3",
+    "formula_reference": "docs/esg-formulas.md#b3--energy--emissions",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B3",
+    "datapoint": "energi_aar",
+    "module_calculation": null,
+    "formula_reference": null,
+    "coverage_status": "wizard_input"
+  },
+  {
+    "section": "B3",
+    "datapoint": "energi_i_alt_mwh",
+    "module_calculation": null,
+    "formula_reference": null,
+    "coverage_status": "wizard_input"
+  },
+  {
+    "section": "B3",
+    "datapoint": "scope1_ton",
+    "module_calculation": "RunB3",
+    "formula_reference": "docs/esg-formulas.md#b3--energy--emissions",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B3",
+    "datapoint": "scope2_ton",
+    "module_calculation": "RunB3",
+    "formula_reference": "docs/esg-formulas.md#b3--energy--emissions",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B3",
+    "datapoint": "scope3_ton",
+    "module_calculation": "RunB3",
+    "formula_reference": "docs/esg-formulas.md#b3--energy--emissions",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B4",
+    "datapoint": "forurening_aar",
+    "module_calculation": null,
+    "formula_reference": null,
+    "coverage_status": "wizard_input"
+  },
+  {
+    "section": "B4",
+    "datapoint": "forurening_maengde",
+    "module_calculation": "RunB4",
+    "formula_reference": "docs/esg-formulas.md#b4--pollution",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B4",
+    "datapoint": "forurening_medium",
+    "module_calculation": "RunB4",
+    "formula_reference": "docs/esg-formulas.md#b4--pollution",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B4",
+    "datapoint": "forurening_type",
+    "module_calculation": "RunB4",
+    "formula_reference": "docs/esg-formulas.md#b4--pollution",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B5",
+    "datapoint": "arealforbrug_aendring_pct",
+    "module_calculation": "RunB5",
+    "formula_reference": "docs/esg-formulas.md#b5--biodiversity",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B5",
+    "datapoint": "arealforbrug_rapportaar_hektar",
+    "module_calculation": "RunB5",
+    "formula_reference": "docs/esg-formulas.md#b5--biodiversity",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B5",
+    "datapoint": "arealforbrug_seneste_aar_hektar",
+    "module_calculation": "RunB5",
+    "formula_reference": "docs/esg-formulas.md#b5--biodiversity",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B5",
+    "datapoint": "bio_f\u00F8lsomme_omraader",
+    "module_calculation": "RunB5",
+    "formula_reference": "docs/esg-formulas.md#b5--biodiversity",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B6",
+    "datapoint": "vand_forbrug_m3",
+    "module_calculation": "RunB6",
+    "formula_reference": "docs/esg-formulas.md#b6--water",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B6",
+    "datapoint": "vand_udtagning_m3",
+    "module_calculation": "RunB6",
+    "formula_reference": "docs/esg-formulas.md#b6--water",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B7",
+    "datapoint": "affald_til_genbrug_genanvendelse_ton",
+    "module_calculation": "RunB7",
+    "formula_reference": "docs/esg-formulas.md#b7--resources--waste",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B7",
+    "datapoint": "affald_total_farligt_ton",
+    "module_calculation": "RunB7",
+    "formula_reference": "docs/esg-formulas.md#b7--resources--waste",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B7",
+    "datapoint": "affald_total_ikke_farligt_ton",
+    "module_calculation": "RunB7",
+    "formula_reference": "docs/esg-formulas.md#b7--resources--waste",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B7",
+    "datapoint": "cirkulaer_beskrivelse",
+    "module_calculation": null,
+    "formula_reference": null,
+    "coverage_status": "wizard_input"
+  },
+  {
+    "section": "B7",
+    "datapoint": "cirkulaer_ja",
+    "module_calculation": "RunB7",
+    "formula_reference": "docs/esg-formulas.md#b7--resources--waste",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B7",
+    "datapoint": "materiale_masseflow",
+    "module_calculation": null,
+    "formula_reference": null,
+    "coverage_status": "wizard_input"
+  },
+  {
+    "section": "B8",
+    "datapoint": "ansatte_pr_land",
+    "module_calculation": null,
+    "formula_reference": null,
+    "coverage_status": "wizard_input"
+  },
+  {
+    "section": "B8",
+    "datapoint": "koen_andet",
+    "module_calculation": "RunB8",
+    "formula_reference": "docs/esg-formulas.md#b8--workforce",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B8",
+    "datapoint": "koen_ikke_reg",
+    "module_calculation": "RunB8",
+    "formula_reference": "docs/esg-formulas.md#b8--workforce",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B8",
+    "datapoint": "koen_kvinder",
+    "module_calculation": "RunB8",
+    "formula_reference": "docs/esg-formulas.md#b8--workforce",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B8",
+    "datapoint": "koen_maend",
+    "module_calculation": "RunB8",
+    "formula_reference": "docs/esg-formulas.md#b8--workforce",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B8",
+    "datapoint": "koen_total",
+    "module_calculation": null,
+    "formula_reference": null,
+    "coverage_status": "wizard_input"
+  },
+  {
+    "section": "B8",
+    "datapoint": "kontrakttype_fast",
+    "module_calculation": null,
+    "formula_reference": null,
+    "coverage_status": "wizard_input"
+  },
+  {
+    "section": "B8",
+    "datapoint": "kontrakttype_midlt",
+    "module_calculation": "RunB8",
+    "formula_reference": "docs/esg-formulas.md#b8--workforce",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B8",
+    "datapoint": "kontrakttype_total",
+    "module_calculation": "RunB8",
+    "formula_reference": "docs/esg-formulas.md#b8--workforce",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B8",
+    "datapoint": "medarbejderomsaetning_pct",
+    "module_calculation": "RunB8",
+    "formula_reference": "docs/esg-formulas.md#b8--workforce",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B9",
+    "datapoint": "doedsfald_helbred",
+    "module_calculation": "RunB9",
+    "formula_reference": "docs/esg-formulas.md#b9--health--safety",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B9",
+    "datapoint": "doedsfald_skade",
+    "module_calculation": "RunB9",
+    "formula_reference": "docs/esg-formulas.md#b9--health--safety",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B9",
+    "datapoint": "ulykker_aar",
+    "module_calculation": null,
+    "formula_reference": null,
+    "coverage_status": "wizard_input"
+  },
+  {
+    "section": "B9",
+    "datapoint": "ulykker_antal",
+    "module_calculation": "RunB9",
+    "formula_reference": "docs/esg-formulas.md#b9--health--safety",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "B9",
+    "datapoint": "ulykker_frekvens",
+    "module_calculation": "RunB9",
+    "formula_reference": "docs/esg-formulas.md#b9--health--safety",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C1",
+    "datapoint": "b\u00E6redygtighedsorientering_vurdering",
+    "module_calculation": "RunC1",
+    "formula_reference": "docs/esg-formulas.md#c1--strategy--targets",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C1",
+    "datapoint": "due_diligence_beskrivelse",
+    "module_calculation": "RunC1",
+    "formula_reference": "docs/esg-formulas.md#c1--strategy--targets",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C1",
+    "datapoint": "forretningsforbindelser_beskrivelse",
+    "module_calculation": "RunC1",
+    "formula_reference": "docs/esg-formulas.md#c1--strategy--targets",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C1",
+    "datapoint": "hoejeste_ansvarlige_niveau",
+    "module_calculation": "RunC1",
+    "formula_reference": "docs/esg-formulas.md#c1--strategy--targets",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C1",
+    "datapoint": "incitamenter_beskrivelse",
+    "module_calculation": "RunC1",
+    "formula_reference": "docs/esg-formulas.md#c1--strategy--targets",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C1",
+    "datapoint": "ledelsesorgan_rolle",
+    "module_calculation": "RunC1",
+    "formula_reference": "docs/esg-formulas.md#c1--strategy--targets",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C1",
+    "datapoint": "markeder_beskrivelse",
+    "module_calculation": "RunC1",
+    "formula_reference": "docs/esg-formulas.md#c1--strategy--targets",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C1",
+    "datapoint": "produkter_tjenester_beskrivelse",
+    "module_calculation": "RunC1",
+    "formula_reference": "docs/esg-formulas.md#c1--strategy--targets",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C1",
+    "datapoint": "risikostyring_beskrivelse",
+    "module_calculation": "RunC1",
+    "formula_reference": "docs/esg-formulas.md#c1--strategy--targets",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C1",
+    "datapoint": "strategiske_maal",
+    "module_calculation": "RunC1",
+    "formula_reference": "docs/esg-formulas.md#c1--strategy--targets",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C2",
+    "datapoint": "ansvarsniveau_beskrivelse",
+    "module_calculation": "RunC2",
+    "formula_reference": "docs/esg-formulas.md#c2--risks",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C2",
+    "datapoint": "indsatser_og_politikker_beskrivelse",
+    "module_calculation": "RunC2",
+    "formula_reference": "docs/esg-formulas.md#c2--risks",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C2",
+    "datapoint": "offentlig_tilg\u00E6ngelighed_beskrivelse",
+    "module_calculation": "RunC2",
+    "formula_reference": "docs/esg-formulas.md#c2--risks",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C3",
+    "datapoint": "baseline_aar",
+    "module_calculation": "RunC3",
+    "formula_reference": "docs/esg-formulas.md#c3--human-rights",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C3",
+    "datapoint": "handlinger_liste",
+    "module_calculation": "RunC3",
+    "formula_reference": "docs/esg-formulas.md#c3--human-rights",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C3",
+    "datapoint": "omstillingsplan_beskrivelse",
+    "module_calculation": "RunC3",
+    "formula_reference": "docs/esg-formulas.md#c3--human-rights",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C3",
+    "datapoint": "reduktionsmaal",
+    "module_calculation": "RunC3",
+    "formula_reference": "docs/esg-formulas.md#c3--human-rights",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C4",
+    "datapoint": "eksponering_sa\u030Arbarhed",
+    "module_calculation": "RunC4",
+    "formula_reference": "docs/esg-formulas.md#c4--governance",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C4",
+    "datapoint": "finansiel_p\u00E5virkning_beskrivelse",
+    "module_calculation": "RunC4",
+    "formula_reference": "docs/esg-formulas.md#c4--governance",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C4",
+    "datapoint": "klimarisici_beskrivelse",
+    "module_calculation": "RunC4",
+    "formula_reference": "docs/esg-formulas.md#c4--governance",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C4",
+    "datapoint": "tidshorisont",
+    "module_calculation": "RunC4",
+    "formula_reference": "docs/esg-formulas.md#c4--governance",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C4",
+    "datapoint": "tilpasning_ja",
+    "module_calculation": "RunC4",
+    "formula_reference": "docs/esg-formulas.md#c4--governance",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C5",
+    "datapoint": "forhold_kvinder_maend_ledelsesniveau",
+    "module_calculation": "RunC5",
+    "formula_reference": "docs/esg-formulas.md#c5--board-diversity",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C5",
+    "datapoint": "selvstaendige_antal",
+    "module_calculation": "RunC5",
+    "formula_reference": "docs/esg-formulas.md#c5--board-diversity",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C5",
+    "datapoint": "vikarer_antal",
+    "module_calculation": "RunC5",
+    "formula_reference": "docs/esg-formulas.md#c5--board-diversity",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C6",
+    "datapoint": "code_of_conduct_eller_mr_politik",
+    "module_calculation": "RunC6",
+    "formula_reference": "docs/esg-formulas.md#c6--stakeholders",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C6",
+    "datapoint": "klagemekanisme_ansatte",
+    "module_calculation": "RunC6",
+    "formula_reference": "docs/esg-formulas.md#c6--stakeholders",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C6",
+    "datapoint": "mr_processer_beskrivelse",
+    "module_calculation": "RunC6",
+    "formula_reference": "docs/esg-formulas.md#c6--stakeholders",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C7",
+    "datapoint": "haendelser_egen_arbejdsstyrke",
+    "module_calculation": "RunC7",
+    "formula_reference": "docs/esg-formulas.md#c7--value-chain",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C7",
+    "datapoint": "haendelser_vaerdikaede",
+    "module_calculation": "RunC7",
+    "formula_reference": "docs/esg-formulas.md#c7--value-chain",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C7",
+    "datapoint": "handlinger_egen_arbejdsstyrke",
+    "module_calculation": "RunC7",
+    "formula_reference": "docs/esg-formulas.md#c7--value-chain",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C7",
+    "datapoint": "handlinger_vaerdikaede",
+    "module_calculation": "RunC7",
+    "formula_reference": "docs/esg-formulas.md#c7--value-chain",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C8",
+    "datapoint": "eu_benchmark_el_100g_over50pct",
+    "module_calculation": "RunC8",
+    "formula_reference": "docs/esg-formulas.md#c8--assurance",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C8",
+    "datapoint": "eu_benchmark_gas_over50pct",
+    "module_calculation": "RunC8",
+    "formula_reference": "docs/esg-formulas.md#c8--assurance",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C8",
+    "datapoint": "eu_benchmark_kul_over1pct",
+    "module_calculation": "RunC8",
+    "formula_reference": "docs/esg-formulas.md#c8--assurance",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C8",
+    "datapoint": "eu_benchmark_olie_over10pct",
+    "module_calculation": "RunC8",
+    "formula_reference": "docs/esg-formulas.md#c8--assurance",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C8",
+    "datapoint": "indt\u00E6gt_gas_dkk",
+    "module_calculation": "RunC8",
+    "formula_reference": "docs/esg-formulas.md#c8--assurance",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C8",
+    "datapoint": "indt\u00E6gt_kontroversielle_vaaben_dkk",
+    "module_calculation": "RunC8",
+    "formula_reference": "docs/esg-formulas.md#c8--assurance",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C8",
+    "datapoint": "indt\u00E6gt_kul_dkk",
+    "module_calculation": "RunC8",
+    "formula_reference": "docs/esg-formulas.md#c8--assurance",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C8",
+    "datapoint": "indt\u00E6gt_olie_dkk",
+    "module_calculation": "RunC8",
+    "formula_reference": "docs/esg-formulas.md#c8--assurance",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C8",
+    "datapoint": "indt\u00E6gt_pesticid_kemi_dkk",
+    "module_calculation": "RunC8",
+    "formula_reference": "docs/esg-formulas.md#c8--assurance",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C8",
+    "datapoint": "indt\u00E6gt_tobak_dkk",
+    "module_calculation": "RunC8",
+    "formula_reference": "docs/esg-formulas.md#c8--assurance",
+    "coverage_status": "derived"
+  },
+  {
+    "section": "C9",
+    "datapoint": "koens_forhold_best",
+    "module_calculation": "RunC9",
+    "formula_reference": "docs/esg-formulas.md#c9--methodology",
+    "coverage_status": "derived"
+  }
+]
