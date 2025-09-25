@@ -1,0 +1,24 @@
+.topbar {
+    backdrop-filter: blur(8px);
+}
+
+.topbar .form-select,
+.topbar input {
+    min-width: 180px;
+}
+
+.topbar .btn {
+    white-space: nowrap;
+}
+
+@media (max-width: 992px) {
+    .topbar {
+        flex-wrap: wrap;
+        gap: 0.75rem !important;
+    }
+
+    .topbar .form-select,
+    .topbar input {
+        min-width: 140px;
+    }
+}

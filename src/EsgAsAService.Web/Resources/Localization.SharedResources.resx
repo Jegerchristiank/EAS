@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="LandingDashboard" xml:space="preserve">
+    <value>Landing dashboard</value>
+  </data>
+  <data name="DataCollection" xml:space="preserve">
+    <value>Data collection</value>
+  </data>
+  <data name="Reports" xml:space="preserve">
+    <value>Reports &amp; insights</value>
+  </data>
+  <data name="Administration" xml:space="preserve">
+    <value>Administration</value>
+  </data>
+  <data name="Wizard" xml:space="preserve">
+    <value>Guided wizard</value>
+  </data>
+  <data name="HelpSupport" xml:space="preserve">
+    <value>Help &amp; support</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Search metrics, tasks or people...</value>
+  </data>
+  <data name="SelectOrganization" xml:space="preserve">
+    <value>Select organisation</value>
+  </data>
+  <data name="SelectPeriod" xml:space="preserve">
+    <value>Select reporting period</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="ActiveOrganizations" xml:space="preserve">
+    <value>Active organisations</value>
+  </data>
+  <data name="ReportingPeriods" xml:space="preserve">
+    <value>Reporting periods</value>
+  </data>
+  <data name="RecentActivities" xml:space="preserve">
+    <value>Recent activities</value>
+  </data>
+  <data name="OpenTasks" xml:space="preserve">
+    <value>Open tasks</value>
+  </data>
+  <data name="QuickActions" xml:space="preserve">
+    <value>Quick start</value>
+  </data>
+  <data name="ViewAll" xml:space="preserve">
+    <value>View all</value>
+  </data>
+  <data name="NoData" xml:space="preserve">
+    <value>No data available</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Deadline" xml:space="preserve">
+    <value>Deadline</value>
+  </data>
+  <data name="Owner" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="Completion" xml:space="preserve">
+    <value>Completion</value>
+  </data>
+  <data name="Due" xml:space="preserve">
+    <value>Due</value>
+  </data>
+  <data name="Assignee" xml:space="preserve">
+    <value>Assignee</value>
+  </data>
+  <data name="Progress" xml:space="preserve">
+    <value>Progress</value>
+  </data>
+  <data name="LanguageToggle" xml:space="preserve">
+    <value>DA / EN</value>
+  </data>
+  <data name="SupportCentre" xml:space="preserve">
+    <value>Support centre</value>
+  </data>
+  <data name="TaskBadge" xml:space="preserve">
+    <value>Open tasks</value>
+  </data>
+  <data name="DiagnosticsBadge" xml:space="preserve">
+    <value>Diagnostics</value>
+  </data>
+</root>

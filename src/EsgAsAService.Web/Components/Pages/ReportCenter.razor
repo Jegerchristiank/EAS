@@ -1,0 +1,56 @@
+@page "/reports/center"
+@using EsgAsAService.Web.Services
+
+<PageTitle>Rapportcentral</PageTitle>
+
+<div class="panel">
+    <div class="panel-header">
+        <h1 class="h4">Rapportcentral</h1>
+        <button class="btn btn-sm btn-primary">Generer ny rapport</button>
+    </div>
+    <table class="table table-hover align-middle">
+        <thead>
+            <tr>
+                <th>Rapportnavn</th>
+                <th>Skabelon</th>
+                <th>Fingerprint</th>
+                <th>Status</th>
+                <th>Seneste kørsel</th>
+                <th>Størrelse</th>
+                <th class="text-end">Handlinger</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in _reports)
+            {
+                <tr>
+                    <td>@row.Name</td>
+                    <td>@row.Template</td>
+                    <td><code>@row.Fingerprint</code></td>
+                    <td><span class="badge rounded-pill bg-success">@row.Status</span></td>
+                    <td>@row.LastRun</td>
+                    <td>@row.Size</td>
+                    <td class="text-end">
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Rapporthandlinger for @row.Name">
+                            <button class="btn btn-outline-secondary">PDF</button>
+                            <button class="btn btn-outline-secondary">XBRL</button>
+                            <button class="btn btn-outline-secondary">JSON</button>
+                            <button class="btn btn-outline-secondary">Vis input</button>
+                            <button class="btn btn-outline-secondary">Genbrug input</button>
+                            <button class="btn btn-outline-secondary">Regenerér</button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@code {
+    private readonly IReadOnlyList<(string Name, string Template, string Fingerprint, string Status, string LastRun, string Size)> _reports = new[]
+    {
+        ("ESG-rapport 2023", "Efrag VSME", "c13f22", "Færdig", "12-03-2024 09:23", "5.2 MB"),
+        ("CO2-intensitet", "Metrics", "ab9d31", "Under opbygning", "10-03-2024 14:17", "1.1 MB"),
+        ("Dobbelt væsentlighed", "Analyse", "fe4421", "Klar", "05-03-2024 08:02", "3.6 MB"),
+    };
+}

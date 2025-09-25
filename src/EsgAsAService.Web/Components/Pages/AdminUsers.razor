@@ -1,0 +1,44 @@
+@page "/admin/users"
+
+<PageTitle>Brugere & roller</PageTitle>
+
+<div class="panel">
+    <div class="panel-header">
+        <h1 class="h4">Brugere & roller</h1>
+        <button class="btn btn-sm btn-primary">Inviter bruger</button>
+    </div>
+    <table class="table align-middle">
+        <thead>
+            <tr>
+                <th>Navn</th>
+                <th>E-mail</th>
+                <th>Rolle</th>
+                <th>Sidst aktiv</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in _users)
+            {
+                <tr>
+                    <td>@user.Name</td>
+                    <td>@user.Email</td>
+                    <td>@user.Role</td>
+                    <td>@user.LastActive</td>
+                    <td><span class="badge text-bg-@user.StatusVariant">@user.Status</span></td>
+                    <td class="text-end"><button class="btn btn-sm btn-outline-secondary">Rediger</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@code {
+    private readonly IReadOnlyList<(string Name, string Email, string Role, string LastActive, string Status, string StatusVariant)> _users = new[]
+    {
+        ("Maja Holm", "maja@nr.dk", "Administrator", "I dag", "Aktiv", "success"),
+        ("Jonas Madsen", "jonas@gm.dk", "Reviewer", "I går", "Aktiv", "success"),
+        ("Sofie Kragh", "sofie@cf.dk", "Indberetter", "7 dage siden", "Inaktiv", "warning"),
+    };
+}

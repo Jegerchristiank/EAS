@@ -1,0 +1,44 @@
+@page "/admin/organisations"
+
+<PageTitle>Organisationer</PageTitle>
+
+<div class="panel">
+    <div class="panel-header">
+        <h1 class="h4">Organisationer</h1>
+        <button class="btn btn-sm btn-primary">Ny organisation</button>
+    </div>
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Navn</th>
+                <th>Sektor</th>
+                <th>Status</th>
+                <th>Kontakt</th>
+                <th>Åbne opgaver</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var org in _orgs)
+            {
+                <tr>
+                    <td>@org.Name</td>
+                    <td>@org.Sector</td>
+                    <td><span class="badge text-bg-success">@org.Status</span></td>
+                    <td>@org.Contact</td>
+                    <td>@org.OpenTasks</td>
+                    <td class="text-end"><button class="btn btn-sm btn-outline-secondary">Detaljer</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@code {
+    private readonly IReadOnlyList<(string Name, string Sector, string Status, string Contact, int OpenTasks)> _orgs = new[]
+    {
+        ("Nordic Renewables", "Energi", "Aktiv", "maja@nr.dk", 4),
+        ("Green Manufacturing", "Industri", "Aktiv", "jonas@gm.dk", 2),
+        ("Circular Foods", "FMCG", "Pilot", "sofia@cf.dk", 5),
+    };
+}

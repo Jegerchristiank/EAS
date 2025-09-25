@@ -1,7 +1,196 @@
-﻿@page "/"
+@page "/"
+@using EsgAsAService.Web.Localization
+@using EsgAsAService.Web.Models
+@using EsgAsAService.Web.Services
+@implements IDisposable
 
-<PageTitle>Home</PageTitle>
+@inject DashboardDataService Dashboard
+@inject AppState AppState
+@inject LocalizationService L10n
 
-<h1>Hello, world!</h1>
+<PageTitle>Dashboard</PageTitle>
 
-Welcome to your new app.
+@if (_loading)
+{
+    <div class="d-flex justify-content-center py-5">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+}
+else if (_overview is null)
+{
+    <p class="text-muted">@L10n["NoData"]</p>
+}
+else
+{
+    <div class="dashboard-grid">
+        <div class="stat-card">
+            <div class="stat-title">@L10n["ActiveOrganizations"]</div>
+            <div class="stat-value">@_overview.ActiveOrganizations.Count</div>
+            <div class="stat-sub">@string.Join(", ", _overview.ActiveOrganizations.Take(3).Select(o => o.Name))</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-title">@L10n["ReportingPeriods"]</div>
+            <div class="stat-value">@_overview.ReportingPeriods.Count</div>
+            <div class="stat-sub">@(_overview.ReportingPeriods.FirstOrDefault()?.Status ?? "-")</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-title">@L10n["OpenTasks"]</div>
+            <div class="stat-value">@_overview.OpenTasks.Count</div>
+            <div class="stat-sub">@L10n["TaskBadge"]</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-title">@L10n["RecentActivities"]</div>
+            <div class="stat-value">@_overview.RecentActivities.Count</div>
+            <div class="stat-sub">@_overview.RecentActivities.FirstOrDefault()?.OccurredDisplay</div>
+        </div>
+    </div>
+
+    <div class="row g-4 mt-1">
+        <div class="col-lg-6">
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>@L10n["ReportingPeriods"]</h2>
+                    <a class="btn btn-sm btn-outline-secondary" href="/admin/periods">@L10n["ViewAll"]</a>
+                </div>
+                <table class="table align-middle">
+                    <thead>
+                        <tr>
+                            <th>Periode</th>
+                            <th>@L10n["Status"]</th>
+                            <th>@L10n["Deadline"]</th>
+                            <th>@L10n["Owner"]</th>
+                            <th>@L10n["Completion"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var period in _overview.ReportingPeriods)
+                        {
+                            <tr>
+                                <td>@period.Name</td>
+                                <td><span class="badge rounded-pill bg-primary">@period.Status</span></td>
+                                <td>@period.DeadlineDisplay</td>
+                                <td>@period.Owner</td>
+                                <td>
+                                    <div class="progress" role="progressbar" aria-valuenow="@period.CompletionPercent" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress-bar" style="width:@period.CompletionPercent%"></div>
+                                    </div>
+                                    <div class="small text-muted">@FormatHelpers.Percentage(period.Completion)</div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>@L10n["OpenTasks"]</h2>
+                    <a class="btn btn-sm btn-outline-secondary" href="/tasks">@L10n["ViewAll"]</a>
+                </div>
+                <table class="table align-middle">
+                    <thead>
+                        <tr>
+                            <th>Opgave</th>
+                            <th>Kategori</th>
+                            <th>@L10n["Assignee"]</th>
+                            <th>@L10n["Due"]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var task in _overview.OpenTasks)
+                        {
+                            <tr>
+                                <td><a href="@task.Link">@task.Title</a></td>
+                                <td><span class="badge rounded-pill bg-secondary">@task.Category</span></td>
+                                <td>@task.Assignee</td>
+                                <td>@task.DueDisplay</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mt-1">
+        <div class="col-lg-6">
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>@L10n["RecentActivities"]</h2>
+                </div>
+                <ul class="timeline list-unstyled mb-0">
+                    @foreach (var activity in _overview.RecentActivities)
+                    {
+                        <li>
+                            <div class="timeline-time">@activity.OccurredDisplay</div>
+                            <div class="timeline-body">
+                                <strong>@activity.Actor</strong>
+                                <div>@activity.Description</div>
+                                <div class="progress mt-2" aria-hidden="true">
+                                    <div class="progress-bar bg-success" style="width:@activity.ProgressPercent%"></div>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>@L10n["QuickActions"]</h2>
+                </div>
+                <div class="row g-3">
+                    @foreach (var action in _overview.QuickActions)
+                    {
+                        <div class="col-12">
+                            <a class="quick-card" href="@action.Href">
+                                <div class="icon"><span class="bi @action.Icon"></span></div>
+                                <div>
+                                    <div class="quick-title">@action.Title</div>
+                                    <div class="quick-text">@action.Description</div>
+                                </div>
+                                <span class="btn btn-sm btn-primary">@action.CtaText</span>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private DashboardOverview? _overview;
+    private bool _loading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        AppState.StateChanged += HandleStateChanged;
+        await AppState.EnsureInitializedAsync();
+        await LoadAsync();
+    }
+
+    private async Task LoadAsync()
+    {
+        _loading = true;
+        StateHasChanged();
+        _overview = await Dashboard.GetOverviewAsync(AppState.SelectedOrganization?.Id, AppState.SelectedPeriod?.Id);
+        _loading = false;
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async void HandleStateChanged(object? sender, AppStateChangedEventArgs e)
+    {
+        await LoadAsync();
+        await InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        AppState.StateChanged -= HandleStateChanged;
+    }
+}

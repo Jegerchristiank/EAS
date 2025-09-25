@@ -22,6 +22,11 @@ using EsgAsAService.Application.Calculations;
 using EsgAsAService.Application.Schema;
 using EsgAsAService.Infrastructure.Schema;
 using EsgAsAService.Infrastructure.Factors;
+using EsgAsAService.Web.Services;
+using EsgAsAService.Web.Localization;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -59,6 +64,8 @@ if (builder.Environment.IsDevelopment())
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+builder.Services.AddHttpClient();
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
 // In dev, show detailed Blazor Server circuit errors
 if (builder.Environment.IsDevelopment())
@@ -123,6 +130,20 @@ builder.Services.Configure<FactorRepositoryOptions>(options =>
 builder.Services.AddSingleton<IFactorRepository, JsonFactorRepository>();
 builder.Services.AddSingleton(ModuleFunctions.CreateDefaultRegistry());
 builder.Services.AddScoped<IEsgCalculationEngine, ModuleCalculationEngine>();
+builder.Services.AddScoped<AppState>();
+builder.Services.AddScoped<DirectoryService>();
+builder.Services.AddScoped<DashboardDataService>();
+builder.Services.AddScoped<WorklistService>();
+builder.Services.AddScoped<DiagnosticsClient>();
+builder.Services.AddScoped<ToastService>();
+builder.Services.AddScoped<LocalizationService>();
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var cultures = new[] { new CultureInfo("da-DK"), new CultureInfo("en-US") };
+    options.DefaultRequestCulture = new RequestCulture("da-DK");
+    options.SupportedCultures = cultures;
+    options.SupportedUICultures = cultures;
+});
 
 // Options from configuration / environment
 builder.Services.Configure<KlimakompassetOptions>(builder.Configuration.GetSection("Klimakompasset"));
@@ -199,6 +220,8 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
+var localizationOptions = app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value;
+app.UseRequestLocalization(localizationOptions);
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();

@@ -1,0 +1,21 @@
+@using Microsoft.AspNetCore.Components.Forms
+
+@if (Messages.Any())
+{
+    <div class="alert alert-danger" role="alert" aria-live="assertive">
+        <strong>Valideringsfejl</strong>
+        <ul class="mb-0 mt-2">
+            @foreach (var message in Messages)
+            {
+                <li>@message</li>
+            }
+        </ul>
+    </div>
+}
+
+@code {
+    [CascadingParameter]
+    public EditContext? EditContext { get; set; }
+
+    private IEnumerable<string> Messages => EditContext?.GetValidationMessages() ?? Enumerable.Empty<string>();
+}

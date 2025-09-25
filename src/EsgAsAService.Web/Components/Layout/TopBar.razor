@@ -1,0 +1,145 @@
+@using EsgAsAService.Web.Localization
+@using EsgAsAService.Web.Models
+@using EsgAsAService.Web.Services
+
+@inject AppState AppState
+@inject LocalizationService L10n
+@implements IDisposable
+
+<div class="topbar d-flex align-items-center gap-3 px-4 py-2 border-bottom bg-white shadow-sm">
+    <div class="brand fw-semibold text-uppercase">ESG Portal</div>
+
+    <div class="d-flex align-items-center gap-2">
+        <label class="form-label mb-0 small text-muted" for="org-select">@L10n["SelectOrganization"]</label>
+        <InputSelect class="form-select form-select-sm" id="org-select" @bind-Value="SelectedOrganizationId">
+            @if (AppState.Organizations.Count == 0)
+            {
+                <option value="">Loading...</option>
+            }
+            else
+            {
+                @foreach (var org in AppState.Organizations)
+                {
+                    <option value="@org.Id">@org.Name</option>
+                }
+            }
+        </InputSelect>
+    </div>
+
+    <div class="d-flex align-items-center gap-2">
+        <label class="form-label mb-0 small text-muted" for="period-select">@L10n["SelectPeriod"]</label>
+        <InputSelect class="form-select form-select-sm" id="period-select" @bind-Value="SelectedPeriodId">
+            @if (AppState.Periods.Count == 0)
+            {
+                <option value="">-</option>
+            }
+            else
+            {
+                @foreach (var period in AppState.Periods)
+                {
+                    <option value="@period.Id">@period.Name (@period.Status)</option>
+                }
+            }
+        </InputSelect>
+    </div>
+
+    <div class="flex-grow-1">
+        <input class="form-control form-control-sm" placeholder="@L10n["SearchPlaceholder"]" aria-label="Global search" @bind="_searchText" />
+    </div>
+
+    <div class="d-flex align-items-center gap-2">
+        <button class="btn btn-sm btn-outline-secondary" @onclick="ToggleLanguage">@L10n["LanguageToggle"] (@L10n.CurrentCulture.TwoLetterISOLanguageName.ToUpperInvariant())</button>
+        <button class="btn btn-sm btn-outline-primary position-relative" title="@L10n["Notifications"]">
+            <span class="bi bi-bell"></span>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span>
+        </button>
+    </div>
+</div>
+
+@code {
+    private string? _selectedOrganizationId;
+    private string? _selectedPeriodId;
+    private string? _searchText;
+
+    protected override async Task OnInitializedAsync()
+    {
+        AppState.StateChanged += HandleStateChanged;
+        L10n.CultureChanged += HandleCultureChanged;
+        await AppState.EnsureInitializedAsync();
+        _selectedOrganizationId = AppState.SelectedOrganization?.Id.ToString();
+        _selectedPeriodId = AppState.SelectedPeriod?.Id.ToString();
+    }
+
+    private async Task OnOrganizationChanged(ChangeEventArgs args)
+    {
+        if (Guid.TryParse(args.Value?.ToString(), out var id))
+        {
+            await AppState.SetOrganizationAsync(id);
+        }
+        else
+        {
+            await AppState.SetOrganizationAsync(null);
+        }
+    }
+
+    private async Task OnPeriodChanged(ChangeEventArgs args)
+    {
+        if (Guid.TryParse(args.Value?.ToString(), out var id))
+        {
+            await AppState.SetPeriodAsync(id);
+        }
+        else
+        {
+            await AppState.SetPeriodAsync(null);
+        }
+    }
+
+    private void HandleStateChanged(object? sender, AppStateChangedEventArgs e)
+    {
+        _selectedOrganizationId = e.Organization?.Id.ToString();
+        _selectedPeriodId = e.Period?.Id.ToString();
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void ToggleLanguage()
+    {
+        var next = L10n.CurrentCulture.TwoLetterISOLanguageName.Equals("da", StringComparison.OrdinalIgnoreCase)
+            ? "en-US"
+            : "da-DK";
+        L10n.SetCulture(next);
+    }
+
+    public void Dispose()
+    {
+        AppState.StateChanged -= HandleStateChanged;
+        L10n.CultureChanged -= HandleCultureChanged;
+    }
+
+    private string? SelectedOrganizationId
+    {
+        get => _selectedOrganizationId;
+        set
+        {
+            if (_selectedOrganizationId != value)
+            {
+                _selectedOrganizationId = value;
+                _ = OnOrganizationChanged(new ChangeEventArgs { Value = value });
+            }
+        }
+    }
+
+    private string? SelectedPeriodId
+    {
+        get => _selectedPeriodId;
+        set
+        {
+            if (_selectedPeriodId != value)
+            {
+                _selectedPeriodId = value;
+                _ = OnPeriodChanged(new ChangeEventArgs { Value = value });
+            }
+        }
+    }
+
+    private void HandleCultureChanged(object? sender, EventArgs e) => InvokeAsync(StateHasChanged);
+}
