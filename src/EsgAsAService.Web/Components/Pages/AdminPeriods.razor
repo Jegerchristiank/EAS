@@ -1,0 +1,44 @@
+@page "/admin/periods"
+
+<PageTitle>Rapporteringsperioder</PageTitle>
+
+<div class="panel">
+    <div class="panel-header">
+        <h1 class="h4">Rapporteringsperioder</h1>
+        <button class="btn btn-sm btn-primary">Ny periode</button>
+    </div>
+    <table class="table table-hover align-middle">
+        <thead>
+            <tr>
+                <th>Navn</th>
+                <th>Status</th>
+                <th>Deadline</th>
+                <th>Ansvarlig</th>
+                <th>Historik</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var period in _periods)
+            {
+                <tr>
+                    <td>@period.Name</td>
+                    <td><span class="badge text-bg-@period.StatusVariant">@period.Status</span></td>
+                    <td>@period.Deadline</td>
+                    <td>@period.Owner</td>
+                    <td>@period.History</td>
+                    <td class="text-end"><button class="btn btn-sm btn-outline-secondary">Vis</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@code {
+    private readonly IReadOnlyList<(string Name, string Status, string StatusVariant, string Deadline, string Owner, string History)> _periods = new[]
+    {
+        ("2023", "I gang", "warning", "30-03-2024", "Jonas Madsen", "Oprettet 01-01, låst 30-03"),
+        ("2022", "Låst", "secondary", "30-03-2023", "Sofie Kragh", "Godkendt 22-03"),
+        ("2021", "Indsendt", "success", "30-03-2022", "Liva Bendtsen", "Arkiveret"),
+    };
+}

@@ -1,88 +1,155 @@
-﻿@implements IDisposable
+@using EsgAsAService.Web.Localization
+@using EsgAsAService.Web.Models
+@using EsgAsAService.Web.Services
+@implements IDisposable
 
-@inject NavigationManager NavigationManager
+@inject LocalizationService L10n
+@inject AppState AppState
+@inject WorklistService Worklists
 
-<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">EsgAsAService.Web</a>
+<nav class="nav-shell" aria-label="Main menu">
+    <div class="nav-brand">
+        <span class="bi bi-globe2 me-2"></span> ESG-as-a-Service
     </div>
-</div>
 
-<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+    <div class="nav-section">
+        <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
+            <span class="bi bi-speedometer2 me-2"></span>
+            <span>@L10n["LandingDashboard"]</span>
+        </NavLink>
+    </div>
 
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-
-        
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="auth">
-                <span class="bi bi-lock-nav-menu" aria-hidden="true"></span> Auth Required
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="wizard">
-                <span class="bi bi-clipboard-data-nav-menu" aria-hidden="true"></span> ESG Wizard
-            </NavLink>
-        </div>
-
-        <AuthorizeView>
-            <Authorized>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="Account/Manage">
-                        <span class="bi bi-person-fill-nav-menu" aria-hidden="true"></span> @context.User.Identity?.Name
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <form @formname="logout" action="Account/Logout" method="post">
-                        <AntiforgeryToken />
-                        <input type="hidden" name="ReturnUrl" value="@currentUrl" />
-                        <button type="submit" class="nav-link">
-                            <span class="bi bi-arrow-bar-left-nav-menu" aria-hidden="true"></span> Logout
-                        </button>
-                    </form>
-                </div>
-            </Authorized>
-            <NotAuthorized>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="Account/Register">
-                        <span class="bi bi-person-nav-menu" aria-hidden="true"></span> Register
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="Account/Login">
-                        <span class="bi bi-person-badge-nav-menu" aria-hidden="true"></span> Login
-                    </NavLink>
-                </div>
-            </NotAuthorized>
-        </AuthorizeView>
-    </nav>
-</div>
-
-@code {
-    private string? currentUrl;
-
-    protected override void OnInitialized()
+    @foreach (var section in _sections)
     {
-        currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
-        NavigationManager.LocationChanged += OnLocationChanged;
+        <div class="nav-section">
+            <div class="nav-title" title="@section.Description">
+                <span class="bi @section.Icon me-2"></span>@section.Title
+            </div>
+            <ul class="nav-list">
+                @foreach (var item in section.Items)
+                {
+                    if (!item.RequiresAuthentication)
+                    {
+                        <li>
+                            <a class="nav-link" href="@item.Href" title="@item.Tooltip">
+                                <span class="bi @item.Icon me-2"></span>@item.Title
+                                @if (item.BadgeKey is not null && _badges.TryGetValue(item.BadgeKey, out var count) && count > 0)
+                                {
+                                    <span class="badge rounded-pill bg-info ms-auto">@count</span>
+                                }
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <NavLink class="nav-link" href="@item.Href" title="@item.Tooltip">
+                                <span class="bi @item.Icon me-2"></span>@item.Title
+                                @if (item.BadgeKey is not null && _badges.TryGetValue(item.BadgeKey, out var count) && count > 0)
+                                {
+                                    <span class="badge rounded-pill bg-info ms-auto">@count</span>
+                                }
+                            </NavLink>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
     }
 
-    private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+    <div class="nav-footer">
+        <NavLink class="nav-link" href="/support">
+            <span class="bi bi-life-preserver me-2"></span>@L10n["HelpSupport"]
+        </NavLink>
+        <NavLink class="nav-link" href="/styleguide">
+            <span class="bi bi-journal-code me-2"></span>Styleguide
+        </NavLink>
+    </div>
+
+    <AuthorizeView>
+        <Authorized>
+            <div class="nav-footer small text-white-50">
+                @context.User.Identity?.Name
+                <form class="mt-2" @formname="logout" action="Account/Logout" method="post">
+                    <AntiforgeryToken />
+                    <button class="btn btn-outline-light btn-sm w-100" type="submit">Log ud</button>
+                </form>
+            </div>
+        </Authorized>
+        <NotAuthorized>
+            <div class="nav-footer">
+                <NavLink class="nav-link" href="Account/Login">
+                    <span class="bi bi-box-arrow-in-right me-2"></span>Login
+                </NavLink>
+            </div>
+        </NotAuthorized>
+    </AuthorizeView>
+</nav>
+
+@code {
+    private IReadOnlyList<NavMenuSection> _sections = Array.Empty<NavMenuSection>();
+    private readonly Dictionary<string, int> _badges = new(StringComparer.OrdinalIgnoreCase);
+
+    protected override async Task OnInitializedAsync()
     {
-        currentUrl = NavigationManager.ToBaseRelativePath(e.Location);
-        StateHasChanged();
+        L10n.CultureChanged += HandleCultureChanged;
+        AppState.StateChanged += HandleAppStateChanged;
+        BuildSections();
+        await LoadBadgesAsync();
+    }
+
+    private void BuildSections()
+    {
+        _sections = new List<NavMenuSection>
+        {
+            new(L10n["DataCollection"], "bi-cloud-arrow-up", new List<NavMenuItem>
+            {
+                new("Energi", "bi-lightning-charge", "/data/energy", "tasks", "Energi-import og godkendelser"),
+                new("Vand", "bi-droplet-half", "/data/water"),
+                new("Affald", "bi-recycle", "/data/waste"),
+                new("Materialer", "bi-box-seam", "/data/materials"),
+                new("HR", "bi-people", "/data/hr"),
+                new("Governance", "bi-diagram-3", "/data/governance")
+            }),
+            new(L10n["Reports"], "bi-graph-up", new List<NavMenuItem>
+            {
+                new("Rapportcentral", "bi-folder-symlink", "/reports/center"),
+                new("Metrics dashboard", "bi-bar-chart", "/metrics", "metrics"),
+            }),
+            new(L10n["Administration"], "bi-gear", new List<NavMenuItem>
+            {
+                new("Organisationer", "bi-building", "/admin/organisations"),
+                new("Perioder", "bi-calendar3", "/admin/periods"),
+                new("Brugere & roller", "bi-person-gear", "/admin/users"),
+            }),
+            new(L10n["Wizard"], "bi-magic", new List<NavMenuItem>
+            {
+                new("Wizard", "bi-clipboard-check", "/wizard"),
+            })
+        };
+    }
+
+    private async Task LoadBadgesAsync()
+    {
+        var openTasks = await Worklists.GetOpenTaskCountAsync(AppState.SelectedOrganization?.Id);
+        _badges["tasks"] = openTasks;
+    }
+
+    private async void HandleAppStateChanged(object? sender, AppStateChangedEventArgs e)
+    {
+        await LoadBadgesAsync();
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async void HandleCultureChanged(object? sender, EventArgs e)
+    {
+        BuildSections();
+        await InvokeAsync(StateHasChanged);
     }
 
     public void Dispose()
     {
-        NavigationManager.LocationChanged -= OnLocationChanged;
+        L10n.CultureChanged -= HandleCultureChanged;
+        AppState.StateChanged -= HandleAppStateChanged;
     }
 }
-

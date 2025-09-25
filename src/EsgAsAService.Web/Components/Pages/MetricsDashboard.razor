@@ -1,0 +1,38 @@
+@page "/metrics"
+
+<PageTitle>Metrics dashboard</PageTitle>
+
+<div class="panel">
+    <div class="panel-header">
+        <h1 class="h4">Emissions- og ESG-metrics</h1>
+        <span class="badge text-bg-secondary">Beregnet @DateTime.Now:dd-MM-yyyy HH:mm</span>
+    </div>
+    <div class="metrics-grid">
+        @foreach (var card in _cards)
+        {
+            <div class="metric-card">
+                <div class="metric-title">@card.Title</div>
+                <div class="metric-value">@card.Value</div>
+                <div class="metric-trend">
+                    <span class="badge @(card.Trend > 0 ? "text-bg-danger" : "text-bg-success")">
+                        @(card.Trend > 0 ? "+" : string.Empty)@card.Trend%
+                    </span>
+                    <span class="text-muted">y/y</span>
+                </div>
+                <div class="metric-chart" role="img" aria-label="Trend for @card.Title">
+                    <div class="metric-chart-line" style="width:@card.ChartWidth%"></div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    private readonly IReadOnlyList<(string Title, string Value, double Trend, int ChartWidth)> _cards = new[]
+    {
+        ("CO₂e emissioner", "18.430 t", -12.4, 72),
+        ("Energiintensitet", "72 kWh/m²", -6.1, 64),
+        ("Vandforbrug", "21.300 m³", 3.8, 48),
+        ("Kønsbalance", "47% kvinder", 1.5, 58),
+    };
+}

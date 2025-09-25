@@ -1,0 +1,36 @@
+@using EsgAsAService.Web.Services
+@implements IDisposable
+
+@inject ToastService Toasts
+
+<div class="toast-container position-fixed top-0 end-0 p-3" aria-live="polite" aria-atomic="true">
+    @foreach (var toast in Toasts.Messages)
+    {
+        <div class="toast show mb-2" role="status" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">@toast.Title</strong>
+                <small>@toast.CreatedAt.ToLocalTime().ToShortTimeString()</small>
+                <button type="button" class="btn-close" @onclick="() => Close(toast)"></button>
+            </div>
+            <div class="toast-body">
+                @toast.Message
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        Toasts.OnChanged += HandleChanged;
+    }
+
+    private void HandleChanged(object? sender, EventArgs e) => InvokeAsync(StateHasChanged);
+
+    private void Close(ToastMessage toast) => Toasts.Dismiss(toast);
+
+    public void Dispose()
+    {
+        Toasts.OnChanged -= HandleChanged;
+    }
+}

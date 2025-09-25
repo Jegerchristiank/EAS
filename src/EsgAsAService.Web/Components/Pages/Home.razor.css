@@ -1,0 +1,122 @@
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #124b8f, #1e6fa6);
+    color: #fff;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    box-shadow: 0 24px 40px -28px rgba(15, 23, 42, 0.6);
+}
+
+.stat-title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.stat-sub {
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+.panel {
+    background: #fff;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 20px 40px -30px rgba(15, 23, 42, 0.4);
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.timeline li {
+    position: relative;
+    padding-left: 1.75rem;
+    margin-bottom: 1rem;
+}
+
+.timeline li::before {
+    content: "";
+    position: absolute;
+    left: 0.5rem;
+    top: 0.4rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 999px;
+    background: #1e6fa6;
+}
+
+.timeline li::after {
+    content: "";
+    position: absolute;
+    left: 0.85rem;
+    top: 1.5rem;
+    width: 2px;
+    height: calc(100% - 1.5rem);
+    background: rgba(18, 75, 143, 0.2);
+}
+
+.timeline li:last-child::after {
+    display: none;
+}
+
+.quick-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #f2f6fb;
+    border-radius: 1rem;
+    padding: 1rem 1.25rem;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.quick-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px -32px rgba(15, 23, 42, 0.6);
+}
+
+.quick-card .icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    background: #fff;
+    color: #1e6fa6;
+    font-size: 1.5rem;
+}
+
+.quick-title {
+    font-weight: 600;
+}
+
+.quick-text {
+    font-size: 0.9rem;
+    color: #475569;
+}
+
+@media (max-width: 768px) {
+    .panel {
+        padding: 1rem;
+    }
+}

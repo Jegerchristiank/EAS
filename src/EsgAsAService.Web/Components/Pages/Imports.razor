@@ -1,0 +1,55 @@
+@page "/imports"
+
+<PageTitle>Dataimports</PageTitle>
+
+<div class="panel">
+    <div class="panel-header">
+        <h1 class="h4">CSV-importer</h1>
+        <button class="btn btn-sm btn-outline-primary">Historik</button>
+    </div>
+    <div class="import-drop" tabindex="0" role="button" aria-label="Træk og slip CSV-filer">
+        <span class="bi bi-cloud-arrow-up"></span>
+        <div>Slip filer her eller <button class="btn btn-sm btn-link">vælg filer</button></div>
+        <small class="text-muted">Understøtter .csv og .xlsx – maks 10 MB</small>
+    </div>
+
+    <h2 class="h5 mt-4">Valideringsresumé</h2>
+    <ul class="list-unstyled d-flex flex-wrap gap-3">
+        <li><span class="badge text-bg-success">12 accepteret</span></li>
+        <li><span class="badge text-bg-warning">3 advarsler</span></li>
+        <li><span class="badge text-bg-danger">1 blokerende</span></li>
+    </ul>
+
+    <table class="table table-sm align-middle">
+        <thead>
+            <tr>
+                <th>Filnavn</th>
+                <th>Type</th>
+                <th>Rækker</th>
+                <th>Opdaget</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var file in _files)
+            {
+                <tr>
+                    <td>@file.Name</td>
+                    <td>@file.Type</td>
+                    <td>@file.Rows</td>
+                    <td>@file.Timestamp</td>
+                    <td><span class="badge text-bg-@file.Variant">@file.Status</span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@code {
+    private readonly IReadOnlyList<(string Name, string Type, int Rows, string Timestamp, string Status, string Variant)> _files = new[]
+    {
+        ("energy_q1.csv", "Energi", 1240, "12-03-2024 09:32", "Importeret", "success"),
+        ("water_q1.csv", "Vand", 320, "12-03-2024 09:31", "Advarsler", "warning"),
+        ("waste_q1.csv", "Affald", 120, "12-03-2024 09:30", "Afvist", "danger"),
+    };
+}

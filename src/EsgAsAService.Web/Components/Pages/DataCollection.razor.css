@@ -1,0 +1,18 @@
+.panel {
+    background: #fff;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 16px 32px -26px rgba(15, 23, 42, 0.4);
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.table tr td,
+.table tr th {
+    vertical-align: middle;
+}

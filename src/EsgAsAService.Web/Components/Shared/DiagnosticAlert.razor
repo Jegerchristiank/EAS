@@ -1,0 +1,59 @@
+@using EsgAsAService.Web.Models
+@using EsgAsAService.Web.Services
+@implements IDisposable
+
+@inject DiagnosticsClient Diagnostics
+@inject AppState AppState
+
+@if (_issues?.Count > 0)
+{
+    <div class="alert alert-warning d-flex align-items-start gap-3" role="alert">
+        <span class="bi bi-shield-exclamation fs-3"></span>
+        <div>
+            <strong>@_issues.Count udfordringer kræver opmærksomhed</strong>
+            <ul class="mb-0 small">
+                @foreach (var issue in _issues.Take(3))
+                {
+                    <li><span class="badge text-bg-secondary me-2">@issue.Code</span>@issue.Message (@issue.CreatedDisplay)</li>
+                }
+            </ul>
+        </div>
+        <button class="btn btn-sm btn-outline-secondary ms-auto" @onclick="Refresh">Opdater</button>
+    </div>
+}
+
+@code {
+    private IReadOnlyList<DiagnosticIssue>? _issues;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadAsync();
+        AppState.StateChanged += HandleStateChanged;
+    }
+
+    private async void HandleStateChanged(object? sender, AppStateChangedEventArgs e)
+    {
+        await LoadAsync();
+        StateHasChanged();
+    }
+
+    private async Task Refresh()
+    {
+        await LoadAsync(force: true);
+        StateHasChanged();
+    }
+
+    private async Task LoadAsync(bool force = false)
+    {
+        _issues = await Diagnostics.GetUnresolvedAsync();
+        if (!force && _issues.Count == 1 && _issues[0].Code == "UI-FALLBACK")
+        {
+            // treat fallback as informational
+        }
+    }
+
+    public void Dispose()
+    {
+        AppState.StateChanged -= HandleStateChanged;
+    }
+}

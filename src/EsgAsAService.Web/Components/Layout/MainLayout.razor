@@ -1,31 +1,36 @@
-﻿@inherits LayoutComponentBase
-@using EsgAsAService.Web.Components.Shared
+@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
+<div class="app-shell">
+    <aside class="app-nav" aria-label="Primary navigation">
         <NavMenu />
-    </div>
+    </aside>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+    <div class="app-main">
+        <TopBar />
+
+        <div class="app-body">
+            <section class="app-alerts">
+                <DiagnosticAlert />
+            </section>
+
+            <section class="app-content" tabindex="-1">
+                <ErrorBoundary>
+                    <ChildContent>
+                        <AntiforgeryToken />
+                        @Body
+                    </ChildContent>
+                    <ErrorContent>
+                        <ErrorDisplay Exception="context" />
+                    </ErrorContent>
+                </ErrorBoundary>
+            </section>
         </div>
-
-        <article class="content px-4">
-            <ErrorBoundary>
-                <ChildContent>
-                    <AntiforgeryToken />
-                    @Body
-                </ChildContent>
-                <ErrorContent>
-                    <ErrorDisplay Exception="context" />
-                </ErrorContent>
-            </ErrorBoundary>
-        </article>
-    </main>
+    </div>
 </div>
 
-<div id="blazor-error-ui">
+<ToastContainer />
+
+<div id="blazor-error-ui" class="visually-hidden" aria-live="assertive">
     An unhandled error has occurred.
     <a href="" class="reload">Reload</a>
     <a class="dismiss">🗙</a>

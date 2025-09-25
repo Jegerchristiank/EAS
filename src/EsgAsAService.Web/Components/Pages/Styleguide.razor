@@ -1,0 +1,57 @@
+@page "/styleguide"
+
+<PageTitle>UI styleguide</PageTitle>
+
+<div class="panel">
+    <div class="panel-header">
+        <h1 class="h4">UI styleguide</h1>
+        <span class="text-muted">Internt referencebibliotek</span>
+    </div>
+    <section class="mb-4">
+        <h2 class="h5">Kort</h2>
+        <div class="d-flex flex-wrap gap-3">
+            <div class="stat-card" style="width: 200px;">
+                <div class="stat-title">KPI</div>
+                <div class="stat-value">128</div>
+                <div class="stat-sub">Eksempel på stat-kort</div>
+            </div>
+            <a class="quick-card" href="#" style="width: 260px;">
+                <div class="icon"><span class="bi bi-rocket"></span></div>
+                <div>
+                    <div class="quick-title">Hurtig action</div>
+                    <div class="quick-text">Beskrivelse af CTA</div>
+                </div>
+                <span class="btn btn-sm btn-primary">Start</span>
+            </a>
+        </div>
+    </section>
+    <section class="mb-4">
+        <h2 class="h5">Formularer</h2>
+        <EditForm Model="_model">
+            <ValidationSummary />
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">Organisation</label>
+                    <InputText class="form-control" @bind-Value="_model.Organization" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Periode</label>
+                    <InputText class="form-control" @bind-Value="_model.Period" />
+                </div>
+            </div>
+            <div class="mt-3">
+                <button class="btn btn-primary" type="submit">Gem</button>
+            </div>
+        </EditForm>
+    </section>
+</div>
+
+@code {
+    private readonly StyleguideModel _model = new();
+
+    private sealed class StyleguideModel
+    {
+        public string Organization { get; set; } = "Nordic Renewables";
+        public string Period { get; set; } = "2023";
+    }
+}

@@ -1,0 +1,68 @@
+@page "/data/{Type}"
+@using EsgAsAService.Web.Services
+@using EsgAsAService.Web.Localization
+@inject AppState AppState
+@inject LocalizationService L10n
+
+<PageTitle>@(FormatTitle(Type)) dataindsamling</PageTitle>
+
+<div class="panel">
+    <div class="panel-header">
+        <h1 class="h4 text-capitalize">@FormatTitle(Type) dataindsamling</h1>
+        <a class="btn btn-sm btn-outline-primary" href="/imports">Importer CSV</a>
+    </div>
+    <p class="text-muted">Opsætning af valideringsregler, inline-kommentarer og historik for @Type. Denne prototype viser placeholder-data indtil API-integration fuldendes.</p>
+
+    <table class="table table-hover align-middle">
+        <thead>
+            <tr>
+                <th>Enhed</th>
+                <th>Periode</th>
+                <th>Mængde</th>
+                <th>Kilde</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in _rows)
+            {
+                <tr>
+                    <td>@row.Unit</td>
+                    <td>@row.Period</td>
+                    <td>@row.Amount</td>
+                    <td>@row.Source</td>
+                    <td><span class="badge rounded-pill bg-@row.Variant">@row.Status</span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@code {
+    [Parameter] public string Type { get; set; } = "energy";
+
+    protected override void OnParametersSet()
+    {
+        if (string.IsNullOrWhiteSpace(Type))
+        {
+            Type = "energy";
+        }
+    }
+
+    private static string FormatTitle(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            return "Data";
+        }
+
+        return char.ToUpperInvariant(value[0]) + value[1..];
+    }
+
+    private readonly IReadOnlyList<(string Unit, string Period, string Amount, string Source, string Variant, string Status)> _rows = new[]
+    {
+        ("KWh", "Q1 2024", "124.500", "SCADA import", "success", "Valideret"),
+        ("m³", "Q1 2024", "2.430", "CSV", "warning", "Afventer godkendelse"),
+        ("t", "Q1 2024", "12,4", "Manuel", "danger", "Afvigelse")
+    };
+}
