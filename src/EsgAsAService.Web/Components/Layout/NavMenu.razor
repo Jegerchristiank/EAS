@@ -94,6 +94,7 @@
     {
         L10n.CultureChanged += HandleCultureChanged;
         AppState.StateChanged += HandleAppStateChanged;
+        await AppState.EnsureInitializedAsync();
         BuildSections();
         await LoadBadgesAsync();
     }
