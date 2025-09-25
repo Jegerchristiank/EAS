@@ -27,7 +27,7 @@ public sealed class DashboardDataService
         var organizationsTask = _httpClient.GetFromJsonAsync<IReadOnlyList<OrganizationSummary>>("/v1/organisations?status=active", cancellationToken);
         var periodsTask = organizationId.HasValue
             ? _httpClient.GetFromJsonAsync<IReadOnlyList<ReportingPeriodSummary>>($"/v1/reporting-periods?orgId={organizationId}", cancellationToken)
-            : Task.FromResult<IReadOnlyList<ReportingPeriodSummary>>(Array.Empty<ReportingPeriodSummary>());
+            : Task.FromResult<IReadOnlyList<ReportingPeriodSummary>?>(Array.Empty<ReportingPeriodSummary>());
         var activitiesTask = _httpClient.GetFromJsonAsync<IReadOnlyList<ActivitySummary>>("/v1/activities", cancellationToken);
         var tasksTask = _httpClient.GetFromJsonAsync<IReadOnlyList<TaskSummary>>(tasksUrl, cancellationToken);
 
@@ -82,7 +82,7 @@ public sealed class DashboardDataService
             new TaskSummary(Guid.Parse("66666666-6666-6666-6666-666666666666"), "Afklar afvigelse", "Governance", DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-1)), "Noah", "overdue", "/tasks/issue"),
         };
 
-    private async Task<IReadOnlyList<T>> SafeResultAsync<T>(Task<IReadOnlyList<T>> task, Func<IReadOnlyList<T>> fallback)
+    private async Task<IReadOnlyList<T>> SafeResultAsync<T>(Task<IReadOnlyList<T>?> task, Func<IReadOnlyList<T>> fallback)
     {
         try
         {
