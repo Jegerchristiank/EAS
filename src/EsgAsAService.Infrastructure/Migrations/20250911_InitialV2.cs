@@ -1,10 +1,13 @@
 using System;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace EsgAsAService.Infrastructure.Migrations
 {
+    [DbContext(typeof(EsgAsAService.Infrastructure.Data.EsgDbContext))]
+    [Migration("20250911_InitialV2")]
     public partial class Initial20250911V2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

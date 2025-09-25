@@ -1,0 +1,620 @@
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (14ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*) FROM "sqlite_master" WHERE "type" = 'table' AND "rootpage" IS NOT NULL;
+warn: Microsoft.EntityFrameworkCore.Query[10102]
+      The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+fail: Microsoft.EntityFrameworkCore.Database.Command[20102]
+      Failed executing DbCommand (3ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+      SELECT DISTINCT "e"."Country", "e"."Year", "e"."Type"
+      FROM "EmissionFactorsV2" AS "e"
+      WHERE "e"."IsActive"
+      LIMIT @__p_0
+fail: Microsoft.EntityFrameworkCore.Query[10100]
+      An exception occurred while iterating over the results of a query for context type 'EsgAsAService.Infrastructure.Data.EsgDbContext'.
+      Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such table: EmissionFactorsV2'.
+         at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+         at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+         at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+         at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+         at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+         at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReader(CommandBehavior behavior)
+         at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+         at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.InitializeReader(Enumerator enumerator)
+         at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.<>c.<MoveNext>b__21_0(DbContext _, Enumerator enumerator)
+         at Microsoft.EntityFrameworkCore.Storage.NonRetryingExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+         at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+      Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such table: EmissionFactorsV2'.
+         at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+         at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+         at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+         at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+         at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+         at Microsoft.Data.Sqlite.SqliteCommand.ExecuteDbDataReader(CommandBehavior behavior)
+         at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+         at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.InitializeReader(Enumerator enumerator)
+         at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.<>c.<MoveNext>b__21_0(DbContext _, Enumerator enumerator)
+         at Microsoft.EntityFrameworkCore.Storage.NonRetryingExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+         at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5198
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /workspace/EAS/src/EsgAsAService.Api
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:5198/health - - -
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]
+      Failed to determine the https port for redirect.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'Health checks'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'Health checks'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:5198/health - 200 - text/plain 226.7191ms
+Activity.TraceId:            71a3d5bc35d5164e8c2706705c65faba
+Activity.SpanId:             f7c44e1bbc6771c9
+Activity.TraceFlags:         Recorded
+Activity.ActivitySourceName: Microsoft.AspNetCore
+Activity.DisplayName:        GET /health
+Activity.Kind:               Server
+Activity.StartTime:          2025-09-25T09:41:19.3285664Z
+Activity.Duration:           00:00:00.2334829
+Activity.Tags:
+    server.address: localhost
+    server.port: 5198
+    http.request.method: GET
+    url.scheme: http
+    url.path: /health
+    network.protocol.version: 1.1
+    user_agent.original: curl/8.5.0
+    http.route: /health
+    http.response.status_code: 200
+Resource associated with Activity:
+    service.name: EsgAsAService.Api
+    service.instance.id: 0f00df23-d2dc-4d4d-8483-bcf37beccd5f
+    telemetry.sdk.name: opentelemetry
+    telemetry.sdk.language: dotnet
+    telemetry.sdk.version: 1.9.0
+
+Resource associated with Metric:
+    service.name: EsgAsAService.Api
+    service.instance.id: 0f00df23-d2dc-4d4d-8483-bcf37beccd5f
+    telemetry.sdk.name: opentelemetry
+    telemetry.sdk.language: dotnet
+    telemetry.sdk.version: 1.9.0
+
+Metric Name: kestrel.active_connections, Number of connections that are currently active on the server., Unit: {connection}, Meter: Microsoft.AspNetCore.Server.Kestrel
+(2025-09-25T09:41:13.9946018Z, 2025-09-25T09:41:23.9626766Z] network.transport: tcp network.type: ipv6 server.address: ::1 server.port: 5198 LongSumNonMonotonic
+Value: 0
+
+Metric Name: kestrel.connection.duration, The duration of connections on the server., Unit: s, Meter: Microsoft.AspNetCore.Server.Kestrel
+(2025-09-25T09:41:13.9980640Z, 2025-09-25T09:41:23.9628836Z] network.protocol.name: http network.protocol.version: 1.1 network.transport: tcp network.type: ipv6 server.address: ::1 server.port: 5198 Histogram
+Value: Sum: 0.3144556 Count: 1 Min: 0.3144556 Max: 0.3144556 
+(-Infinity,0.01]:0
+(0.01,0.02]:0
+(0.02,0.05]:0
+(0.05,0.1]:0
+(0.1,0.2]:0
+(0.2,0.5]:1
+(0.5,1]:0
+(1,2]:0
+(2,5]:0
+(5,10]:0
+(10,30]:0
+(30,60]:0
+(60,120]:0
+(120,300]:0
+(300,+Infinity]:0
+
+
+Metric Name: kestrel.queued_connections, Number of connections that are currently queued and are waiting to start., Unit: {connection}, Meter: Microsoft.AspNetCore.Server.Kestrel
+(2025-09-25T09:41:13.9982075Z, 2025-09-25T09:41:23.9628863Z] network.transport: tcp network.type: ipv6 server.address: ::1 server.port: 5198 LongSumNonMonotonic
+Value: 0
+
+Metric Name: http.server.active_requests, Number of active HTTP server requests., Unit: {request}, Meter: Microsoft.AspNetCore.Hosting
+(2025-09-25T09:41:13.9984027Z, 2025-09-25T09:41:23.9628909Z] http.request.method: GET url.scheme: http LongSumNonMonotonic
+Value: 0
+
+Metric Name: http.server.request.duration, Duration of HTTP server requests., Unit: s, Meter: Microsoft.AspNetCore.Hosting
+(2025-09-25T09:41:13.9984523Z, 2025-09-25T09:41:23.9628921Z] http.request.method: GET http.response.status_code: 200 http.route: /health network.protocol.version: 1.1 url.scheme: http Histogram
+Value: Sum: 0.2267191 Count: 1 Min: 0.2267191 Max: 0.2267191 
+(-Infinity,0.005]:0
+(0.005,0.01]:0
+(0.01,0.025]:0
+(0.025,0.05]:0
+(0.05,0.075]:0
+(0.075,0.1]:0
+(0.1,0.25]:1
+(0.25,0.5]:0
+(0.5,0.75]:0
+(0.75,1]:0
+(1,2.5]:0
+(2.5,5]:0
+(5,7.5]:0
+(7.5,10]:0
+(10,+Infinity]:0
+
+
+Metric Name: aspnetcore.rate_limiting.active_request_leases, Number of HTTP requests that are currently active on the server that hold a rate limiting lease., Unit: {request}, Meter: Microsoft.AspNetCore.RateLimiting
+(2025-09-25T09:41:14.1023142Z, 2025-09-25T09:41:23.9628930Z] LongSumNonMonotonic
+Value: 0
+
+Metric Name: aspnetcore.rate_limiting.request_lease.duration, The duration of rate limiting leases held by HTTP requests on the server., Unit: s, Meter: Microsoft.AspNetCore.RateLimiting
+(2025-09-25T09:41:14.1028679Z, 2025-09-25T09:41:23.9628943Z] Histogram
+Value: Sum: 0.0963671 Count: 1 Min: 0.0963671 Max: 0.0963671 
+(-Infinity,0.005]:0
+(0.005,0.01]:0
+(0.01,0.025]:0
+(0.025,0.05]:0
+(0.05,0.075]:0
+(0.075,0.1]:1
+(0.1,0.25]:0
+(0.25,0.5]:0
+(0.5,0.75]:0
+(0.75,1]:0
+(1,2.5]:0
+(2.5,5]:0
+(5,7.5]:0
+(7.5,10]:0
+(10,+Infinity]:0
+
+
+Metric Name: aspnetcore.rate_limiting.requests, Number of requests that tried to acquire a rate limiting lease. Requests could be rejected by global or endpoint rate limiting policies. Or the request could be canceled while waiting for the lease., Unit: {request}, Meter: Microsoft.AspNetCore.RateLimiting
+(2025-09-25T09:41:14.1030628Z, 2025-09-25T09:41:23.9629007Z] aspnetcore.rate_limiting.result: acquired LongSum
+Value: 1
+
+Metric Name: aspnetcore.routing.match_attempts, Number of requests that were attempted to be matched to an endpoint., Unit: {match_attempt}, Meter: Microsoft.AspNetCore.Routing
+(2025-09-25T09:41:14.1338139Z, 2025-09-25T09:41:23.9629018Z] aspnetcore.routing.is_fallback: false aspnetcore.routing.match_status: success http.route: /health LongSum
+Value: 1
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost:5198/healthz - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost:5198/healthz - 404 0 - 7.3183ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[16]
+      Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5198/healthz, Response status code: 404
+Activity.TraceId:            589e482838cfd960e3efee1d14483265
+Activity.SpanId:             6a1564e442f90666
+Activity.TraceFlags:         Recorded
+Activity.ActivitySourceName: Microsoft.AspNetCore
+Activity.DisplayName:        GET
+Activity.Kind:               Server
+Activity.StartTime:          2025-09-25T09:41:26.9712569Z
+Activity.Duration:           00:00:00.0101768
+Activity.Tags:
+    server.address: localhost
+    server.port: 5198
+    http.request.method: GET
+    url.scheme: http
+    url.path: /healthz
+    network.protocol.version: 1.1
+    user_agent.original: curl/8.5.0
+    http.response.status_code: 404
+Resource associated with Activity:
+    service.name: EsgAsAService.Api
+    service.instance.id: 0f00df23-d2dc-4d4d-8483-bcf37beccd5f
+    telemetry.sdk.name: opentelemetry
+    telemetry.sdk.language: dotnet
+    telemetry.sdk.version: 1.9.0
+
+
+Metric Name: kestrel.active_connections, Number of connections that are currently active on the server., Unit: {connection}, Meter: Microsoft.AspNetCore.Server.Kestrel
+(2025-09-25T09:41:13.9946018Z, 2025-09-25T09:41:33.9595501Z] network.transport: tcp network.type: ipv6 server.address: ::1 server.port: 5198 LongSumNonMonotonic
+Value: 0
+
+Metric Name: kestrel.connection.duration, The duration of connections on the server., Unit: s, Meter: Microsoft.AspNetCore.Server.Kestrel
+(2025-09-25T09:41:13.9980640Z, 2025-09-25T09:41:33.9595576Z] network.protocol.name: http network.protocol.version: 1.1 network.transport: tcp network.type: ipv6 server.address: ::1 server.port: 5198 Histogram
+Value: Sum: 0.3264421 Count: 2 Min: 0.0119865 Max: 0.3144556 
+(-Infinity,0.01]:0
+(0.01,0.02]:1
+(0.02,0.05]:0
+(0.05,0.1]:0
+(0.1,0.2]:0
+(0.2,0.5]:1
+(0.5,1]:0
+(1,2]:0
+(2,5]:0
+(5,10]:0
+(10,30]:0
+(30,60]:0
+(60,120]:0
+(120,300]:0
+(300,+Infinity]:0
+
+
+Metric Name: kestrel.queued_connections, Number of connections that are currently queued and are waiting to start., Unit: {connection}, Meter: Microsoft.AspNetCore.Server.Kestrel
+(2025-09-25T09:41:13.9982075Z, 2025-09-25T09:41:33.9595601Z] network.transport: tcp network.type: ipv6 server.address: ::1 server.port: 5198 LongSumNonMonotonic
+Value: 0
+
+Metric Name: http.server.active_requests, Number of active HTTP server requests., Unit: {request}, Meter: Microsoft.AspNetCore.Hosting
+(2025-09-25T09:41:13.9984027Z, 2025-09-25T09:41:33.9596052Z] http.request.method: GET url.scheme: http LongSumNonMonotonic
+Value: 0
+
+Metric Name: http.server.request.duration, Duration of HTTP server requests., Unit: s, Meter: Microsoft.AspNetCore.Hosting
+(2025-09-25T09:41:13.9984523Z, 2025-09-25T09:41:33.9596110Z] http.request.method: GET http.response.status_code: 200 http.route: /health network.protocol.version: 1.1 url.scheme: http Histogram
+Value: Sum: 0.2267191 Count: 1 Min: 0.2267191 Max: 0.2267191 
+(-Infinity,0.005]:0
+(0.005,0.01]:0
+(0.01,0.025]:0
+(0.025,0.05]:0
+(0.05,0.075]:0
+(0.075,0.1]:0
+(0.1,0.25]:1
+(0.25,0.5]:0
+(0.5,0.75]:0
+(0.75,1]:0
+(1,2.5]:0
+(2.5,5]:0
+(5,7.5]:0
+(7.5,10]:0
+(10,+Infinity]:0
+
+(2025-09-25T09:41:13.9984523Z, 2025-09-25T09:41:33.9596110Z] aspnetcore.request.is_unhandled: true http.request.method: GET http.response.status_code: 404 network.protocol.version: 1.1 url.scheme: http Histogram
+Value: Sum: 0.0073183 Count: 1 Min: 0.0073183 Max: 0.0073183 
+(-Infinity,0.005]:0
+(0.005,0.01]:1
+(0.01,0.025]:0
+(0.025,0.05]:0
+(0.05,0.075]:0
+(0.075,0.1]:0
+(0.1,0.25]:0
+(0.25,0.5]:0
+(0.5,0.75]:0
+(0.75,1]:0
+(1,2.5]:0
+(2.5,5]:0
+(5,7.5]:0
+(7.5,10]:0
+(10,+Infinity]:0
+
+
+Metric Name: aspnetcore.rate_limiting.active_request_leases, Number of HTTP requests that are currently active on the server that hold a rate limiting lease., Unit: {request}, Meter: Microsoft.AspNetCore.RateLimiting
+(2025-09-25T09:41:14.1023142Z, 2025-09-25T09:41:33.9596124Z] LongSumNonMonotonic
+Value: 0
+
+Metric Name: aspnetcore.rate_limiting.request_lease.duration, The duration of rate limiting leases held by HTTP requests on the server., Unit: s, Meter: Microsoft.AspNetCore.RateLimiting
+(2025-09-25T09:41:14.1028679Z, 2025-09-25T09:41:33.9596169Z] Histogram
+Value: Sum: 0.0979391 Count: 2 Min: 0.001572 Max: 0.0963671 
+(-Infinity,0.005]:1
+(0.005,0.01]:0
+(0.01,0.025]:0
+(0.025,0.05]:0
+(0.05,0.075]:0
+(0.075,0.1]:1
+(0.1,0.25]:0
+(0.25,0.5]:0
+(0.5,0.75]:0
+(0.75,1]:0
+(1,2.5]:0
+(2.5,5]:0
+(5,7.5]:0
+(7.5,10]:0
+(10,+Infinity]:0
+
+
+Metric Name: aspnetcore.rate_limiting.requests, Number of requests that tried to acquire a rate limiting lease. Requests could be rejected by global or endpoint rate limiting policies. Or the request could be canceled while waiting for the lease., Unit: {request}, Meter: Microsoft.AspNetCore.RateLimiting
+(2025-09-25T09:41:14.1030628Z, 2025-09-25T09:41:33.9596200Z] aspnetcore.rate_limiting.result: acquired LongSum
+Value: 2
+
+Metric Name: aspnetcore.routing.match_attempts, Number of requests that were attempted to be matched to an endpoint., Unit: {match_attempt}, Meter: Microsoft.AspNetCore.Routing
+(2025-09-25T09:41:14.1338139Z, 2025-09-25T09:41:33.9596216Z] aspnetcore.routing.is_fallback: false aspnetcore.routing.match_status: success http.route: /health LongSum
+Value: 1
+(2025-09-25T09:41:14.1338139Z, 2025-09-25T09:41:33.9596216Z] aspnetcore.routing.match_status: failure LongSum
+Value: 1
+
+Metric Name: kestrel.active_connections, Number of connections that are currently active on the server., Unit: {connection}, Meter: Microsoft.AspNetCore.Server.Kestrel
+(2025-09-25T09:41:13.9946018Z, 2025-09-25T09:41:43.9895874Z] network.transport: tcp network.type: ipv6 server.address: ::1 server.port: 5198 LongSumNonMonotonic
+Value: 0
+
+Metric Name: kestrel.connection.duration, The duration of connections on the server., Unit: s, Meter: Microsoft.AspNetCore.Server.Kestrel
+(2025-09-25T09:41:13.9980640Z, 2025-09-25T09:41:43.9895961Z] network.protocol.name: http network.protocol.version: 1.1 network.transport: tcp network.type: ipv6 server.address: ::1 server.port: 5198 Histogram
+Value: Sum: 0.3264421 Count: 2 Min: 0.0119865 Max: 0.3144556 
+(-Infinity,0.01]:0
+(0.01,0.02]:1
+(0.02,0.05]:0
+(0.05,0.1]:0
+(0.1,0.2]:0
+(0.2,0.5]:1
+(0.5,1]:0
+(1,2]:0
+(2,5]:0
+(5,10]:0
+(10,30]:0
+(30,60]:0
+(60,120]:0
+(120,300]:0
+(300,+Infinity]:0
+
+
+Metric Name: kestrel.queued_connections, Number of connections that are currently queued and are waiting to start., Unit: {connection}, Meter: Microsoft.AspNetCore.Server.Kestrel
+(2025-09-25T09:41:13.9982075Z, 2025-09-25T09:41:43.9895983Z] network.transport: tcp network.type: ipv6 server.address: ::1 server.port: 5198 LongSumNonMonotonic
+Value: 0
+
+Metric Name: http.server.active_requests, Number of active HTTP server requests., Unit: {request}, Meter: Microsoft.AspNetCore.Hosting
+(2025-09-25T09:41:13.9984027Z, 2025-09-25T09:41:43.9896024Z] http.request.method: GET url.scheme: http LongSumNonMonotonic
+Value: 0
+
+Metric Name: http.server.request.duration, Duration of HTTP server requests., Unit: s, Meter: Microsoft.AspNetCore.Hosting
+(2025-09-25T09:41:13.9984523Z, 2025-09-25T09:41:43.9896054Z] http.request.method: GET http.response.status_code: 200 http.route: /health network.protocol.version: 1.1 url.scheme: http Histogram
+Value: Sum: 0.2267191 Count: 1 Min: 0.2267191 Max: 0.2267191 
+(-Infinity,0.005]:0
+(0.005,0.01]:0
+(0.01,0.025]:0
+(0.025,0.05]:0
+(0.05,0.075]:0
+(0.075,0.1]:0
+(0.1,0.25]:1
+(0.25,0.5]:0
+(0.5,0.75]:0
+(0.75,1]:0
+(1,2.5]:0
+(2.5,5]:0
+(5,7.5]:0
+(7.5,10]:0
+(10,+Infinity]:0
+
+(2025-09-25T09:41:13.9984523Z, 2025-09-25T09:41:43.9896054Z] aspnetcore.request.is_unhandled: true http.request.method: GET http.response.status_code: 404 network.protocol.version: 1.1 url.scheme: http Histogram
+Value: Sum: 0.0073183 Count: 1 Min: 0.0073183 Max: 0.0073183 
+(-Infinity,0.005]:0
+(0.005,0.01]:1
+(0.01,0.025]:0
+(0.025,0.05]:0
+(0.05,0.075]:0
+(0.075,0.1]:0
+(0.1,0.25]:0
+(0.25,0.5]:0
+(0.5,0.75]:0
+(0.75,1]:0
+(1,2.5]:0
+(2.5,5]:0
+(5,7.5]:0
+(7.5,10]:0
+(10,+Infinity]:0
+
+
+Metric Name: aspnetcore.rate_limiting.active_request_leases, Number of HTTP requests that are currently active on the server that hold a rate limiting lease., Unit: {request}, Meter: Microsoft.AspNetCore.RateLimiting
+(2025-09-25T09:41:14.1023142Z, 2025-09-25T09:41:43.9896068Z] LongSumNonMonotonic
+Value: 0
+
+Metric Name: aspnetcore.rate_limiting.request_lease.duration, The duration of rate limiting leases held by HTTP requests on the server., Unit: s, Meter: Microsoft.AspNetCore.RateLimiting
+(2025-09-25T09:41:14.1028679Z, 2025-09-25T09:41:43.9896137Z] Histogram
+Value: Sum: 0.0979391 Count: 2 Min: 0.001572 Max: 0.0963671 
+(-Infinity,0.005]:1
+(0.005,0.01]:0
+(0.01,0.025]:0
+(0.025,0.05]:0
+(0.05,0.075]:0
+(0.075,0.1]:1
+(0.1,0.25]:0
+(0.25,0.5]:0
+(0.5,0.75]:0
+(0.75,1]:0
+(1,2.5]:0
+(2.5,5]:0
+(5,7.5]:0
+(7.5,10]:0
+(10,+Infinity]:0
+
+
+Metric Name: aspnetcore.rate_limiting.requests, Number of requests that tried to acquire a rate limiting lease. Requests could be rejected by global or endpoint rate limiting policies. Or the request could be canceled while waiting for the lease., Unit: {request}, Meter: Microsoft.AspNetCore.RateLimiting
+(2025-09-25T09:41:14.1030628Z, 2025-09-25T09:41:43.9896278Z] aspnetcore.rate_limiting.result: acquired LongSum
+Value: 2
+
+Metric Name: aspnetcore.routing.match_attempts, Number of requests that were attempted to be matched to an endpoint., Unit: {match_attempt}, Meter: Microsoft.AspNetCore.Routing
+(2025-09-25T09:41:14.1338139Z, 2025-09-25T09:41:43.9896306Z] aspnetcore.routing.is_fallback: false aspnetcore.routing.match_status: success http.route: /health LongSum
+Value: 1
+(2025-09-25T09:41:14.1338139Z, 2025-09-25T09:41:43.9896306Z] aspnetcore.routing.match_status: failure LongSum
+Value: 1
+
+Metric Name: kestrel.active_connections, Number of connections that are currently active on the server., Unit: {connection}, Meter: Microsoft.AspNetCore.Server.Kestrel
+(2025-09-25T09:41:13.9946018Z, 2025-09-25T09:41:53.9594995Z] network.transport: tcp network.type: ipv6 server.address: ::1 server.port: 5198 LongSumNonMonotonic
+Value: 0
+
+Metric Name: kestrel.connection.duration, The duration of connections on the server., Unit: s, Meter: Microsoft.AspNetCore.Server.Kestrel
+(2025-09-25T09:41:13.9980640Z, 2025-09-25T09:41:53.9595060Z] network.protocol.name: http network.protocol.version: 1.1 network.transport: tcp network.type: ipv6 server.address: ::1 server.port: 5198 Histogram
+Value: Sum: 0.3264421 Count: 2 Min: 0.0119865 Max: 0.3144556 
+(-Infinity,0.01]:0
+(0.01,0.02]:1
+(0.02,0.05]:0
+(0.05,0.1]:0
+(0.1,0.2]:0
+(0.2,0.5]:1
+(0.5,1]:0
+(1,2]:0
+(2,5]:0
+(5,10]:0
+(10,30]:0
+(30,60]:0
+(60,120]:0
+(120,300]:0
+(300,+Infinity]:0
+
+
+Metric Name: kestrel.queued_connections, Number of connections that are currently queued and are waiting to start., Unit: {connection}, Meter: Microsoft.AspNetCore.Server.Kestrel
+(2025-09-25T09:41:13.9982075Z, 2025-09-25T09:41:53.9595076Z] network.transport: tcp network.type: ipv6 server.address: ::1 server.port: 5198 LongSumNonMonotonic
+Value: 0
+
+Metric Name: http.server.active_requests, Number of active HTTP server requests., Unit: {request}, Meter: Microsoft.AspNetCore.Hosting
+(2025-09-25T09:41:13.9984027Z, 2025-09-25T09:41:53.9595108Z] http.request.method: GET url.scheme: http LongSumNonMonotonic
+Value: 0
+
+Metric Name: http.server.request.duration, Duration of HTTP server requests., Unit: s, Meter: Microsoft.AspNetCore.Hosting
+(2025-09-25T09:41:13.9984523Z, 2025-09-25T09:41:53.9595131Z] http.request.method: GET http.response.status_code: 200 http.route: /health network.protocol.version: 1.1 url.scheme: http Histogram
+Value: Sum: 0.2267191 Count: 1 Min: 0.2267191 Max: 0.2267191 
+(-Infinity,0.005]:0
+(0.005,0.01]:0
+(0.01,0.025]:0
+(0.025,0.05]:0
+(0.05,0.075]:0
+(0.075,0.1]:0
+(0.1,0.25]:1
+(0.25,0.5]:0
+(0.5,0.75]:0
+(0.75,1]:0
+(1,2.5]:0
+(2.5,5]:0
+(5,7.5]:0
+(7.5,10]:0
+(10,+Infinity]:0
+
+(2025-09-25T09:41:13.9984523Z, 2025-09-25T09:41:53.9595131Z] aspnetcore.request.is_unhandled: true http.request.method: GET http.response.status_code: 404 network.protocol.version: 1.1 url.scheme: http Histogram
+Value: Sum: 0.0073183 Count: 1 Min: 0.0073183 Max: 0.0073183 
+(-Infinity,0.005]:0
+(0.005,0.01]:1
+(0.01,0.025]:0
+(0.025,0.05]:0
+(0.05,0.075]:0
+(0.075,0.1]:0
+(0.1,0.25]:0
+(0.25,0.5]:0
+(0.5,0.75]:0
+(0.75,1]:0
+(1,2.5]:0
+(2.5,5]:0
+(5,7.5]:0
+(7.5,10]:0
+(10,+Infinity]:0
+
+
+Metric Name: aspnetcore.rate_limiting.active_request_leases, Number of HTTP requests that are currently active on the server that hold a rate limiting lease., Unit: {request}, Meter: Microsoft.AspNetCore.RateLimiting
+(2025-09-25T09:41:14.1023142Z, 2025-09-25T09:41:53.9595149Z] LongSumNonMonotonic
+Value: 0
+
+Metric Name: aspnetcore.rate_limiting.request_lease.duration, The duration of rate limiting leases held by HTTP requests on the server., Unit: s, Meter: Microsoft.AspNetCore.RateLimiting
+(2025-09-25T09:41:14.1028679Z, 2025-09-25T09:41:53.9595205Z] Histogram
+Value: Sum: 0.0979391 Count: 2 Min: 0.001572 Max: 0.0963671 
+(-Infinity,0.005]:1
+(0.005,0.01]:0
+(0.01,0.025]:0
+(0.025,0.05]:0
+(0.05,0.075]:0
+(0.075,0.1]:1
+(0.1,0.25]:0
+(0.25,0.5]:0
+(0.5,0.75]:0
+(0.75,1]:0
+(1,2.5]:0
+(2.5,5]:0
+(5,7.5]:0
+(7.5,10]:0
+(10,+Infinity]:0
+
+
+Metric Name: aspnetcore.rate_limiting.requests, Number of requests that tried to acquire a rate limiting lease. Requests could be rejected by global or endpoint rate limiting policies. Or the request could be canceled while waiting for the lease., Unit: {request}, Meter: Microsoft.AspNetCore.RateLimiting
+(2025-09-25T09:41:14.1030628Z, 2025-09-25T09:41:53.9595246Z] aspnetcore.rate_limiting.result: acquired LongSum
+Value: 2
+
+Metric Name: aspnetcore.routing.match_attempts, Number of requests that were attempted to be matched to an endpoint., Unit: {match_attempt}, Meter: Microsoft.AspNetCore.Routing
+(2025-09-25T09:41:14.1338139Z, 2025-09-25T09:41:53.9595257Z] aspnetcore.routing.is_fallback: false aspnetcore.routing.match_status: success http.route: /health LongSum
+Value: 1
+(2025-09-25T09:41:14.1338139Z, 2025-09-25T09:41:53.9595257Z] aspnetcore.routing.match_status: failure LongSum
+Value: 1
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+
+Metric Name: kestrel.active_connections, Number of connections that are currently active on the server., Unit: {connection}, Meter: Microsoft.AspNetCore.Server.Kestrel
+(2025-09-25T09:41:13.9946018Z, 2025-09-25T09:41:56.9347524Z] network.transport: tcp network.type: ipv6 server.address: ::1 server.port: 5198 LongSumNonMonotonic
+Value: 0
+
+Metric Name: kestrel.connection.duration, The duration of connections on the server., Unit: s, Meter: Microsoft.AspNetCore.Server.Kestrel
+(2025-09-25T09:41:13.9980640Z, 2025-09-25T09:41:56.9347617Z] network.protocol.name: http network.protocol.version: 1.1 network.transport: tcp network.type: ipv6 server.address: ::1 server.port: 5198 Histogram
+Value: Sum: 0.3264421 Count: 2 Min: 0.0119865 Max: 0.3144556 
+(-Infinity,0.01]:0
+(0.01,0.02]:1
+(0.02,0.05]:0
+(0.05,0.1]:0
+(0.1,0.2]:0
+(0.2,0.5]:1
+(0.5,1]:0
+(1,2]:0
+(2,5]:0
+(5,10]:0
+(10,30]:0
+(30,60]:0
+(60,120]:0
+(120,300]:0
+(300,+Infinity]:0
+
+
+Metric Name: kestrel.queued_connections, Number of connections that are currently queued and are waiting to start., Unit: {connection}, Meter: Microsoft.AspNetCore.Server.Kestrel
+(2025-09-25T09:41:13.9982075Z, 2025-09-25T09:41:56.9347637Z] network.transport: tcp network.type: ipv6 server.address: ::1 server.port: 5198 LongSumNonMonotonic
+Value: 0
+
+Metric Name: http.server.active_requests, Number of active HTTP server requests., Unit: {request}, Meter: Microsoft.AspNetCore.Hosting
+(2025-09-25T09:41:13.9984027Z, 2025-09-25T09:41:56.9347683Z] http.request.method: GET url.scheme: http LongSumNonMonotonic
+Value: 0
+
+Metric Name: http.server.request.duration, Duration of HTTP server requests., Unit: s, Meter: Microsoft.AspNetCore.Hosting
+(2025-09-25T09:41:13.9984523Z, 2025-09-25T09:41:56.9347710Z] http.request.method: GET http.response.status_code: 200 http.route: /health network.protocol.version: 1.1 url.scheme: http Histogram
+Value: Sum: 0.2267191 Count: 1 Min: 0.2267191 Max: 0.2267191 
+(-Infinity,0.005]:0
+(0.005,0.01]:0
+(0.01,0.025]:0
+(0.025,0.05]:0
+(0.05,0.075]:0
+(0.075,0.1]:0
+(0.1,0.25]:1
+(0.25,0.5]:0
+(0.5,0.75]:0
+(0.75,1]:0
+(1,2.5]:0
+(2.5,5]:0
+(5,7.5]:0
+(7.5,10]:0
+(10,+Infinity]:0
+
+(2025-09-25T09:41:13.9984523Z, 2025-09-25T09:41:56.9347710Z] aspnetcore.request.is_unhandled: true http.request.method: GET http.response.status_code: 404 network.protocol.version: 1.1 url.scheme: http Histogram
+Value: Sum: 0.0073183 Count: 1 Min: 0.0073183 Max: 0.0073183 
+(-Infinity,0.005]:0
+(0.005,0.01]:1
+(0.01,0.025]:0
+(0.025,0.05]:0
+(0.05,0.075]:0
+(0.075,0.1]:0
+(0.1,0.25]:0
+(0.25,0.5]:0
+(0.5,0.75]:0
+(0.75,1]:0
+(1,2.5]:0
+(2.5,5]:0
+(5,7.5]:0
+(7.5,10]:0
+(10,+Infinity]:0
+
+
+Metric Name: aspnetcore.rate_limiting.active_request_leases, Number of HTTP requests that are currently active on the server that hold a rate limiting lease., Unit: {request}, Meter: Microsoft.AspNetCore.RateLimiting
+(2025-09-25T09:41:14.1023142Z, 2025-09-25T09:41:56.9347719Z] LongSumNonMonotonic
+Value: 0
+
+Metric Name: aspnetcore.rate_limiting.request_lease.duration, The duration of rate limiting leases held by HTTP requests on the server., Unit: s, Meter: Microsoft.AspNetCore.RateLimiting
+(2025-09-25T09:41:14.1028679Z, 2025-09-25T09:41:56.9347735Z] Histogram
+Value: Sum: 0.0979391 Count: 2 Min: 0.001572 Max: 0.0963671 
+(-Infinity,0.005]:1
+(0.005,0.01]:0
+(0.01,0.025]:0
+(0.025,0.05]:0
+(0.05,0.075]:0
+(0.075,0.1]:1
+(0.1,0.25]:0
+(0.25,0.5]:0
+(0.5,0.75]:0
+(0.75,1]:0
+(1,2.5]:0
+(2.5,5]:0
+(5,7.5]:0
+(7.5,10]:0
+(10,+Infinity]:0
+
+
+Metric Name: aspnetcore.rate_limiting.requests, Number of requests that tried to acquire a rate limiting lease. Requests could be rejected by global or endpoint rate limiting policies. Or the request could be canceled while waiting for the lease., Unit: {request}, Meter: Microsoft.AspNetCore.RateLimiting
+(2025-09-25T09:41:14.1030628Z, 2025-09-25T09:41:56.9347812Z] aspnetcore.rate_limiting.result: acquired LongSum
+Value: 2
+
+Metric Name: aspnetcore.routing.match_attempts, Number of requests that were attempted to be matched to an endpoint., Unit: {match_attempt}, Meter: Microsoft.AspNetCore.Routing
+(2025-09-25T09:41:14.1338139Z, 2025-09-25T09:41:56.9347825Z] aspnetcore.routing.is_fallback: false aspnetcore.routing.match_status: success http.route: /health LongSum
+Value: 1
+(2025-09-25T09:41:14.1338139Z, 2025-09-25T09:41:56.9347825Z] aspnetcore.routing.match_status: failure LongSum
+Value: 1
