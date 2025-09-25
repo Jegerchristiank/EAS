@@ -19,14 +19,14 @@
         </NavLink>
     </div>
 
-    @foreach (var section in _sections)
+    @foreach (var menuSection in _sections)
     {
         <div class="nav-section">
-            <div class="nav-title" title="@section.Description">
-                <span class="bi @section.Icon me-2"></span>@section.Title
+            <div class="nav-title" title="@menuSection.Description">
+                <span class="bi @menuSection.Icon me-2"></span>@menuSection.Title
             </div>
             <ul class="nav-list">
-                @foreach (var item in section.Items)
+                @foreach (var item in menuSection.Items)
                 {
                     if (!item.RequiresAuthentication)
                     {
