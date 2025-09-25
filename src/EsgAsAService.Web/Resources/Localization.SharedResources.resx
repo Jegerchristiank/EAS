@@ -21,6 +21,9 @@
   <data name="Reports" xml:space="preserve">
     <value>Reports &amp; insights</value>
   </data>
+  <data name="Worklists" xml:space="preserve">
+    <value>Worklists &amp; approvals</value>
+  </data>
   <data name="Administration" xml:space="preserve">
     <value>Administration</value>
   </data>
@@ -53,6 +56,60 @@
   </data>
   <data name="OpenTasks" xml:space="preserve">
     <value>Open tasks</value>
+  </data>
+  <data name="TaskCenterTitle" xml:space="preserve">
+    <value>Task centre</value>
+  </data>
+  <data name="TaskCenterDescription" xml:space="preserve">
+    <value>Monitor approvals, evidence collection and outstanding work.</value>
+  </data>
+  <data name="TaskFilterStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="TaskFilterScope" xml:space="preserve">
+    <value>Ownership</value>
+  </data>
+  <data name="TaskScopeAll" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="TaskScopeMine" xml:space="preserve">
+    <value>Mine</value>
+  </data>
+  <data name="TaskScopeTeam" xml:space="preserve">
+    <value>Team</value>
+  </data>
+  <data name="TaskStatusAll" xml:space="preserve">
+    <value>All statuses</value>
+  </data>
+  <data name="TaskStatusOpen" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="TaskStatusOverdue" xml:space="preserve">
+    <value>Overdue</value>
+  </data>
+  <data name="TaskStatusCompleted" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="TaskEmptyState" xml:space="preserve">
+    <value>No tasks match the selected filters.</value>
+  </data>
+  <data name="TaskTableTitle" xml:space="preserve">
+    <value>Task</value>
+  </data>
+  <data name="TaskTableCategory" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="TaskTableActions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="TaskDueSoon" xml:space="preserve">
+    <value>Due soon</value>
+  </data>
+  <data name="TaskActionView" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="TaskActionComplete" xml:space="preserve">
+    <value>Complete</value>
   </data>
   <data name="QuickActions" xml:space="preserve">
     <value>Quick start</value>
