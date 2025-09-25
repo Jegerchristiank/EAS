@@ -94,6 +94,7 @@
     {
         L10n.CultureChanged += HandleCultureChanged;
         AppState.StateChanged += HandleAppStateChanged;
+        await AppState.EnsureInitializedAsync();
         BuildSections();
         await LoadBadgesAsync();
     }
@@ -110,6 +111,10 @@
                 new("Materialer", "bi-box-seam", "/data/materials"),
                 new("HR", "bi-people", "/data/hr"),
                 new("Governance", "bi-diagram-3", "/data/governance")
+            }),
+            new(L10n["Worklists"], "bi-list-check", new List<NavMenuItem>
+            {
+                new(L10n["TaskCenterTitle"], "bi-check2-circle", "/tasks", "tasks", "Godkendelser, evidens og afvigelser")
             }),
             new(L10n["Reports"], "bi-graph-up", new List<NavMenuItem>
             {

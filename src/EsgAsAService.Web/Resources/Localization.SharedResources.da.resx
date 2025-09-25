@@ -21,6 +21,9 @@
   <data name="Reports" xml:space="preserve">
     <value>Rapporter &amp; analyser</value>
   </data>
+  <data name="Worklists" xml:space="preserve">
+    <value>Arbejdsopgaver</value>
+  </data>
   <data name="Administration" xml:space="preserve">
     <value>Administration</value>
   </data>
@@ -53,6 +56,60 @@
   </data>
   <data name="OpenTasks" xml:space="preserve">
     <value>Åbne opgaver</value>
+  </data>
+  <data name="TaskCenterTitle" xml:space="preserve">
+    <value>Arbejdscenter</value>
+  </data>
+  <data name="TaskCenterDescription" xml:space="preserve">
+    <value>Hold styr på godkendelser, evidens og resterende arbejde.</value>
+  </data>
+  <data name="TaskFilterStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="TaskFilterScope" xml:space="preserve">
+    <value>Ansvar</value>
+  </data>
+  <data name="TaskScopeAll" xml:space="preserve">
+    <value>Alle</value>
+  </data>
+  <data name="TaskScopeMine" xml:space="preserve">
+    <value>Mine</value>
+  </data>
+  <data name="TaskScopeTeam" xml:space="preserve">
+    <value>Teamet</value>
+  </data>
+  <data name="TaskStatusAll" xml:space="preserve">
+    <value>Alle statuser</value>
+  </data>
+  <data name="TaskStatusOpen" xml:space="preserve">
+    <value>Åben</value>
+  </data>
+  <data name="TaskStatusOverdue" xml:space="preserve">
+    <value>Forfalden</value>
+  </data>
+  <data name="TaskStatusCompleted" xml:space="preserve">
+    <value>Afsluttet</value>
+  </data>
+  <data name="TaskEmptyState" xml:space="preserve">
+    <value>Ingen opgaver matcher de valgte filtre.</value>
+  </data>
+  <data name="TaskTableTitle" xml:space="preserve">
+    <value>Opgave</value>
+  </data>
+  <data name="TaskTableCategory" xml:space="preserve">
+    <value>Kategori</value>
+  </data>
+  <data name="TaskTableActions" xml:space="preserve">
+    <value>Handlinger</value>
+  </data>
+  <data name="TaskDueSoon" xml:space="preserve">
+    <value>Forfalder snart</value>
+  </data>
+  <data name="TaskActionView" xml:space="preserve">
+    <value>Vis</value>
+  </data>
+  <data name="TaskActionComplete" xml:space="preserve">
+    <value>Fuldfør</value>
   </data>
   <data name="QuickActions" xml:space="preserve">
     <value>Hurtig start</value>

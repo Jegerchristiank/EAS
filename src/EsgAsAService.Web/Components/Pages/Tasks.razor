@@ -1,0 +1,227 @@
+@page "/tasks"
+@using System.Linq
+@using Microsoft.AspNetCore.Components
+@using EsgAsAService.Web.Localization
+@using EsgAsAService.Web.Models
+@using EsgAsAService.Web.Services
+@implements IDisposable
+
+@inject WorklistService Worklists
+@inject AppState AppState
+@inject LocalizationService L10n
+
+<PageTitle>@L10n["TaskCenterTitle"]</PageTitle>
+
+<div class="panel">
+    <div class="panel-header flex-column flex-lg-row align-items-lg-end">
+        <div>
+            <h1 class="h4 mb-1">@L10n["TaskCenterTitle"]</h1>
+            <p class="text-muted mb-0">@L10n["TaskCenterDescription"]</p>
+        </div>
+        <div class="d-flex flex-wrap gap-3 align-items-end mt-3 mt-lg-0">
+            <div>
+                <label class="form-label small text-muted" for="status-filter">@L10n["TaskFilterStatus"]</label>
+                <select id="status-filter" class="form-select form-select-sm" value="@_statusFilter" @onchange="OnStatusChanged">
+                    <option value="all">@L10n["TaskStatusAll"]</option>
+                    <option value="open">@L10n["TaskStatusOpen"]</option>
+                    <option value="overdue">@L10n["TaskStatusOverdue"]</option>
+                    <option value="completed">@L10n["TaskStatusCompleted"]</option>
+                </select>
+            </div>
+            <div class="d-flex flex-column">
+                <span class="form-label small text-muted">@L10n["TaskFilterScope"]</span>
+                <div class="btn-group btn-group-sm" role="group" aria-label="@(L10n["TaskFilterScope"])">
+                    <button type="button" class="btn @(ScopeClass("all"))" @onclick="@(() => SetScope("all"))">@L10n["TaskScopeAll"]</button>
+                    <button type="button" class="btn @(ScopeClass("mine"))" @onclick="@(() => SetScope("mine"))">@L10n["TaskScopeMine"]</button>
+                    <button type="button" class="btn @(ScopeClass("team"))" @onclick="@(() => SetScope("team"))">@L10n["TaskScopeTeam"]</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex flex-wrap gap-2 mb-4" role="status">
+        <span class="badge rounded-pill bg-primary">@GetStatusBadgeText("open")</span>
+        <span class="badge rounded-pill bg-danger">@GetStatusBadgeText("overdue")</span>
+        <span class="badge rounded-pill bg-success">@GetStatusBadgeText("completed")</span>
+    </div>
+
+    @if (_loading)
+    {
+        <div class="d-flex justify-content-center py-5" aria-live="polite">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    }
+    else if (_filteredTasks.Count == 0)
+    {
+        <div class="text-center text-muted py-5">
+            <span class="bi bi-check2-square display-6 d-block mb-2"></span>
+            <p class="mb-0">@L10n["TaskEmptyState"]</p>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th scope="col">@L10n["TaskTableTitle"]</th>
+                        <th scope="col">@L10n["TaskTableCategory"]</th>
+                        <th scope="col">@L10n["Assignee"]</th>
+                        <th scope="col">@L10n["Due"]</th>
+                        <th scope="col">@L10n["Status"]</th>
+                        <th scope="col" class="text-end">@L10n["TaskTableActions"]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var task in _filteredTasks)
+                    {
+                        <tr>
+                            <td>
+                                <a href="@task.Link" class="link-body-emphasis">@task.Title</a>
+                            </td>
+                            <td>
+                                <span class="badge rounded-pill bg-secondary">@task.Category</span>
+                            </td>
+                            <td>@task.Assignee</td>
+                            <td>
+                                <span class="d-block">@task.DueDisplay</span>
+                                @if (IsDueSoon(task))
+                                {
+                                    <small class="text-danger">@L10n["TaskDueSoon"]</small>
+                                }
+                            </td>
+                            <td>
+                                <span class="badge rounded-pill bg-@StatusVariant(task.Status)">@GetStatusLabel(task.Status)</span>
+                            </td>
+                            <td class="text-end">
+                                <div class="btn-group btn-group-sm" role="group" aria-label="@task.Title">
+                                    <button class="btn btn-outline-secondary">@L10n["TaskActionView"]</button>
+                                    <button class="btn btn-outline-secondary">@L10n["TaskActionComplete"]</button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+@code {
+    private readonly List<TaskSummary> _allTasks = new();
+    private readonly List<TaskSummary> _filteredTasks = new();
+    private readonly string _currentUser = "Maja Holm";
+    private bool _loading = true;
+    private string _statusFilter = "all";
+    private string _scopeFilter = "all";
+
+    protected override async Task OnInitializedAsync()
+    {
+        AppState.StateChanged += HandleStateChanged;
+        await AppState.EnsureInitializedAsync();
+        await LoadAsync();
+    }
+
+    private async Task LoadAsync()
+    {
+        _loading = true;
+        StateHasChanged();
+
+        var query = new TaskQuery(AppState.SelectedOrganization?.Id, AppState.SelectedPeriod?.Id, null, null, _currentUser);
+        var tasks = await Worklists.GetTasksAsync(query);
+
+        _allTasks.Clear();
+        _allTasks.AddRange(tasks);
+
+        ApplyFilters();
+        _loading = false;
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private void ApplyFilters()
+    {
+        IEnumerable<TaskSummary> result = _allTasks;
+
+        if (!string.Equals(_statusFilter, "all", StringComparison.OrdinalIgnoreCase))
+        {
+            result = result.Where(t => string.Equals(t.Status, _statusFilter, StringComparison.OrdinalIgnoreCase));
+        }
+
+        if (string.Equals(_scopeFilter, "mine", StringComparison.OrdinalIgnoreCase))
+        {
+            result = result.Where(t => string.Equals(t.Assignee, _currentUser, StringComparison.OrdinalIgnoreCase));
+        }
+        else if (string.Equals(_scopeFilter, "team", StringComparison.OrdinalIgnoreCase))
+        {
+            result = result.Where(t => !string.Equals(t.Assignee, _currentUser, StringComparison.OrdinalIgnoreCase));
+        }
+
+        _filteredTasks.Clear();
+        _filteredTasks.AddRange(result.OrderBy(t => t.DueDate ?? DateOnly.MaxValue));
+    }
+
+    private void SetScope(string scope)
+    {
+        if (!string.Equals(_scopeFilter, scope, StringComparison.OrdinalIgnoreCase))
+        {
+            _scopeFilter = scope;
+            ApplyFilters();
+        }
+    }
+
+    private string ScopeClass(string scope)
+        => string.Equals(_scopeFilter, scope, StringComparison.OrdinalIgnoreCase) ? "btn-primary" : "btn-outline-primary";
+
+    private void OnStatusChanged(ChangeEventArgs args)
+    {
+        _statusFilter = args.Value?.ToString() ?? "all";
+        ApplyFilters();
+    }
+
+    private string GetStatusLabel(string status)
+        => status.ToLowerInvariant() switch
+        {
+            "open" => L10n["TaskStatusOpen"],
+            "overdue" => L10n["TaskStatusOverdue"],
+            "completed" => L10n["TaskStatusCompleted"],
+            _ => status
+        };
+
+    private string StatusVariant(string status)
+        => status.ToLowerInvariant() switch
+        {
+            "open" => "info",
+            "overdue" => "danger",
+            "completed" => "success",
+            _ => "secondary"
+        };
+
+    private string GetStatusBadgeText(string status)
+    {
+        var count = _allTasks.Count(t => string.Equals(t.Status, status, StringComparison.OrdinalIgnoreCase));
+        return $"{count} {GetStatusLabel(status)}";
+    }
+
+    private bool IsDueSoon(TaskSummary task)
+    {
+        if (!task.DueDate.HasValue)
+        {
+            return false;
+        }
+
+        var today = DateOnly.FromDateTime(DateTime.UtcNow);
+        return task.DueDate.Value <= today.AddDays(1) && !string.Equals(task.Status, "completed", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private async void HandleStateChanged(object? sender, AppStateChangedEventArgs e)
+    {
+        await LoadAsync();
+    }
+
+    public void Dispose()
+    {
+        AppState.StateChanged -= HandleStateChanged;
+    }
+}

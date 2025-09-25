@@ -30,6 +30,7 @@ public sealed class AppState
             return;
         }
 
+        var publish = false;
         await _loadLock.WaitAsync(cancellationToken).ConfigureAwait(false);
         try
         {
@@ -40,12 +41,18 @@ public sealed class AppState
                 {
                     SelectedOrganization = _organizations[0];
                     await LoadPeriodsAsync(SelectedOrganization.Id, cancellationToken).ConfigureAwait(false);
+                    publish = true;
                 }
             }
         }
         finally
         {
             _loadLock.Release();
+        }
+
+        if (publish)
+        {
+            PublishChange();
         }
     }
 
