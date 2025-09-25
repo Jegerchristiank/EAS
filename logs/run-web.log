@@ -1,0 +1,254 @@
+Using launch settings from src/EsgAsAService.Web/Properties/launchSettings.json...
+Building...
+info: Microsoft.EntityFrameworkCore.Migrations[20411]
+      Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (16ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*) FROM "sqlite_master" WHERE "name" = '__EFMigrationsLock' AND "type" = 'table';
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (7ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      INSERT OR IGNORE INTO "__EFMigrationsLock"("Id", "Timestamp") VALUES(1, '2025-09-25 09:42:14.6351697+00:00');
+      SELECT changes();
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+          "MigrationId" TEXT NOT NULL CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY,
+          "ProductVersion" TEXT NOT NULL
+      );
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT COUNT(*) FROM "sqlite_master" WHERE "name" = '__EFMigrationsHistory' AND "type" = 'table';
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT "MigrationId", "ProductVersion"
+      FROM "__EFMigrationsHistory"
+      ORDER BY "MigrationId";
+info: Microsoft.EntityFrameworkCore.Migrations[20402]
+      Applying migration '20250911_InitialV2'.
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE "Organisations" (
+          "Id" TEXT NOT NULL CONSTRAINT "PK_Organisations" PRIMARY KEY,
+          "RevisionGroupId" TEXT NOT NULL,
+          "Version" INTEGER NOT NULL,
+          "IsActive" INTEGER NOT NULL,
+          "CreatedAt" TEXT NOT NULL,
+          "CreatedBy" TEXT NULL,
+          "Name" TEXT NOT NULL,
+          "Industry" TEXT NULL,
+          "CountryCode" TEXT NULL,
+          "OrganizationNumber" TEXT NULL
+      );
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE "ReportingPeriodsV2" (
+          "Id" TEXT NOT NULL CONSTRAINT "PK_ReportingPeriodsV2" PRIMARY KEY,
+          "RevisionGroupId" TEXT NOT NULL,
+          "Version" INTEGER NOT NULL,
+          "IsActive" INTEGER NOT NULL,
+          "CreatedAt" TEXT NOT NULL,
+          "CreatedBy" TEXT NULL,
+          "OrganisationId" TEXT NOT NULL,
+          "StartDate" TEXT NOT NULL,
+          "EndDate" TEXT NOT NULL,
+          "Year" INTEGER NOT NULL
+      );
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE "DataSources" (
+          "Id" TEXT NOT NULL CONSTRAINT "PK_DataSources" PRIMARY KEY,
+          "RevisionGroupId" TEXT NOT NULL,
+          "Version" INTEGER NOT NULL,
+          "IsActive" INTEGER NOT NULL,
+          "CreatedAt" TEXT NOT NULL,
+          "CreatedBy" TEXT NULL,
+          "Name" TEXT NOT NULL,
+          "Description" TEXT NULL,
+          "Url" TEXT NULL
+      );
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE "Units" (
+          "Id" TEXT NOT NULL CONSTRAINT "PK_Units" PRIMARY KEY,
+          "RevisionGroupId" TEXT NOT NULL,
+          "Version" INTEGER NOT NULL,
+          "IsActive" INTEGER NOT NULL,
+          "CreatedAt" TEXT NOT NULL,
+          "CreatedBy" TEXT NULL,
+          "Code" TEXT NOT NULL,
+          "Name" TEXT NULL
+      );
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE "UnitConversions" (
+          "Id" TEXT NOT NULL CONSTRAINT "PK_UnitConversions" PRIMARY KEY,
+          "RevisionGroupId" TEXT NOT NULL,
+          "Version" INTEGER NOT NULL,
+          "IsActive" INTEGER NOT NULL,
+          "CreatedAt" TEXT NOT NULL,
+          "CreatedBy" TEXT NULL,
+          "FromUnitId" TEXT NOT NULL,
+          "ToUnitId" TEXT NOT NULL,
+          "Factor" REAL NOT NULL
+      );
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE "EmissionFactorsV2" (
+          "Id" TEXT NOT NULL CONSTRAINT "PK_EmissionFactorsV2" PRIMARY KEY,
+          "RevisionGroupId" TEXT NOT NULL,
+          "Version" INTEGER NOT NULL,
+          "IsActive" INTEGER NOT NULL,
+          "CreatedAt" TEXT NOT NULL,
+          "CreatedBy" TEXT NULL,
+          "Country" TEXT NOT NULL,
+          "Year" INTEGER NOT NULL,
+          "Type" TEXT NOT NULL,
+          "UnitId" TEXT NOT NULL,
+          "Value" REAL NOT NULL,
+          "ValidFrom" TEXT NULL,
+          "ValidTo" TEXT NULL,
+          "DataSourceId" TEXT NULL
+      );
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE "Activities" (
+          "Id" TEXT NOT NULL CONSTRAINT "PK_Activities" PRIMARY KEY,
+          "RevisionGroupId" TEXT NOT NULL,
+          "Version" INTEGER NOT NULL,
+          "IsActive" INTEGER NOT NULL,
+          "CreatedAt" TEXT NOT NULL,
+          "CreatedBy" TEXT NULL,
+          "OrganisationId" TEXT NOT NULL,
+          "ReportingPeriodId" TEXT NOT NULL,
+          "Category" TEXT NOT NULL,
+          "ActivityDate" TEXT NULL,
+          "Quantity" REAL NOT NULL,
+          "UnitId" TEXT NOT NULL
+      );
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE "ScopeEntries" (
+          "Id" TEXT NOT NULL CONSTRAINT "PK_ScopeEntries" PRIMARY KEY,
+          "RevisionGroupId" TEXT NOT NULL,
+          "Version" INTEGER NOT NULL,
+          "IsActive" INTEGER NOT NULL,
+          "CreatedAt" TEXT NOT NULL,
+          "CreatedBy" TEXT NULL,
+          "ActivityId" TEXT NOT NULL,
+          "Scope" INTEGER NOT NULL,
+          "EmissionFactorId" TEXT NULL,
+          "Adjustment" REAL NULL
+      );
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE "EvidenceDocuments" (
+          "Id" TEXT NOT NULL CONSTRAINT "PK_EvidenceDocuments" PRIMARY KEY,
+          "RevisionGroupId" TEXT NOT NULL,
+          "Version" INTEGER NOT NULL,
+          "IsActive" INTEGER NOT NULL,
+          "CreatedAt" TEXT NOT NULL,
+          "CreatedBy" TEXT NULL,
+          "ScopeEntryId" TEXT NOT NULL,
+          "FileName" TEXT NOT NULL,
+          "BlobUrl" TEXT NOT NULL,
+          "Description" TEXT NULL
+      );
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE "CalculationResults" (
+          "Id" TEXT NOT NULL CONSTRAINT "PK_CalculationResults" PRIMARY KEY,
+          "RevisionGroupId" TEXT NOT NULL,
+          "Version" INTEGER NOT NULL,
+          "IsActive" INTEGER NOT NULL,
+          "CreatedAt" TEXT NOT NULL,
+          "CreatedBy" TEXT NULL,
+          "ScopeEntryId" TEXT NOT NULL,
+          "QuantityNormalized" REAL NOT NULL,
+          "Factor" REAL NOT NULL,
+          "Adjustment" REAL NOT NULL,
+          "Co2eKg" REAL NOT NULL
+      );
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE "Deviations" (
+          "Id" TEXT NOT NULL CONSTRAINT "PK_Deviations" PRIMARY KEY,
+          "RevisionGroupId" TEXT NOT NULL,
+          "Version" INTEGER NOT NULL,
+          "IsActive" INTEGER NOT NULL,
+          "CreatedAt" TEXT NOT NULL,
+          "CreatedBy" TEXT NULL,
+          "ScopeEntryId" TEXT NOT NULL,
+          "Reason" TEXT NOT NULL
+      );
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE "Approvals" (
+          "Id" TEXT NOT NULL CONSTRAINT "PK_Approvals" PRIMARY KEY,
+          "RevisionGroupId" TEXT NOT NULL,
+          "Version" INTEGER NOT NULL,
+          "IsActive" INTEGER NOT NULL,
+          "CreatedAt" TEXT NOT NULL,
+          "CreatedBy" TEXT NULL,
+          "ReportingPeriodId" TEXT NOT NULL,
+          "Status" TEXT NOT NULL,
+          "Comment" TEXT NULL
+      );
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE "ReportDrafts" (
+          "Id" TEXT NOT NULL CONSTRAINT "PK_ReportDrafts" PRIMARY KEY,
+          "RevisionGroupId" TEXT NOT NULL,
+          "Version" INTEGER NOT NULL,
+          "IsActive" INTEGER NOT NULL,
+          "CreatedAt" TEXT NOT NULL,
+          "CreatedBy" TEXT NULL,
+          "ReportingPeriodId" TEXT NOT NULL,
+          "Json" TEXT NOT NULL
+      );
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE "VsmeMappings" (
+          "Id" TEXT NOT NULL CONSTRAINT "PK_VsmeMappings" PRIMARY KEY,
+          "RevisionGroupId" TEXT NOT NULL,
+          "Version" INTEGER NOT NULL,
+          "IsActive" INTEGER NOT NULL,
+          "CreatedAt" TEXT NOT NULL,
+          "CreatedBy" TEXT NULL,
+          "Json" TEXT NOT NULL
+      );
+fail: Microsoft.EntityFrameworkCore.Database.Command[20102]
+      Failed executing DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CREATE TABLE "AuditLogs" (
+          "Id" TEXT NOT NULL CONSTRAINT "PK_AuditLogs" PRIMARY KEY,
+          "Timestamp" TEXT NOT NULL,
+          "UserId" TEXT NULL,
+          "EntityName" TEXT NOT NULL,
+          "EntityId" TEXT NOT NULL,
+          "Action" TEXT NOT NULL,
+          "PayloadHash" TEXT NOT NULL,
+          "PayloadJson" TEXT NULL
+      );
+Unhandled exception. Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'table "AuditLogs" already exists'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteNonQuery()
+   at System.Data.Common.DbCommand.ExecuteNonQueryAsync(CancellationToken cancellationToken)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteNonQueryAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteNonQueryAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteNonQueryAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.MigrationCommandExecutor.ExecuteAsync(IReadOnlyList`1 migrationCommands, IRelationalConnection connection, MigrationExecutionState executionState, Boolean beginTransaction, Boolean commitTransaction, Nullable`1 isolationLevel, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.MigrationCommandExecutor.ExecuteAsync(IReadOnlyList`1 migrationCommands, IRelationalConnection connection, MigrationExecutionState executionState, Boolean beginTransaction, Boolean commitTransaction, Nullable`1 isolationLevel, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.MigrationCommandExecutor.ExecuteNonQueryAsync(IReadOnlyList`1 migrationCommands, IRelationalConnection connection, MigrationExecutionState executionState, Boolean commitTransaction, Nullable`1 isolationLevel, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateImplementationAsync(DbContext context, String targetMigration, MigrationExecutionState state, Boolean useTransaction, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateImplementationAsync(DbContext context, String targetMigration, MigrationExecutionState state, Boolean useTransaction, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.<>c.<<MigrateAsync>b__22_1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at Program.<Main>$(String[] args) in /workspace/EAS/src/EsgAsAService.Web/Program.cs:line 145
+   at Program.<Main>(String[] args)

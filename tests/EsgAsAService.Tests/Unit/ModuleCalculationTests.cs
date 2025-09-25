@@ -49,19 +49,19 @@ public class ModuleCalculationTests
         var payload = new EsgInputPayload(sections, new Dictionary<string, string>());
         var factors = new FactorSet(
             "v2025.1",
-            new Dictionary<string, EmissionFactorDefinition>(
+            new Dictionary<string, EmissionFactorDefinition>
             {
                 ["electricity.dk.location"] = new EmissionFactorDefinition(
-                    name: "electricity.dk.location",
-                    unit: "kgCO2e/kWh",
-                    value: 0.192m,
-                    source: "Energinet",
-                    region: "DK",
-                    year: 2024,
-                    validFrom: null,
-                    validTo: null,
-                    methodology: "")
-            }),
+                    Name: "electricity.dk.location",
+                    Unit: "kgCO2e/kWh",
+                    Value: 0.192m,
+                    Source: "Energinet",
+                    Region: "DK",
+                    Year: 2024,
+                    ValidFrom: null,
+                    ValidTo: null,
+                    Methodology: "")
+            },
             new Dictionary<string, EmissionFactorDefinition>());
 
         var result = RunModule("B3", payload, factors);

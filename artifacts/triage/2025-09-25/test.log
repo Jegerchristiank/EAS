@@ -1,0 +1,304 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  EsgAsAService.Domain -> /workspace/EAS/src/EsgAsAService.Domain/bin/Debug/net9.0/EsgAsAService.Domain.dll
+  EsgAsAService.Application -> /workspace/EAS/src/EsgAsAService.Application/bin/Debug/net9.0/EsgAsAService.Application.dll
+  EsgAsAService.Infrastructure -> /workspace/EAS/src/EsgAsAService.Infrastructure/bin/Debug/net9.0/EsgAsAService.Infrastructure.dll
+  EsgAsAService.Web -> /workspace/EAS/src/EsgAsAService.Web/bin/Debug/net9.0/EsgAsAService.Web.dll
+  EsgAsAService.Api -> /workspace/EAS/src/EsgAsAService.Api/bin/Debug/net9.0/EsgAsAService.Api.dll
+  EsgAsAService.Tests -> /workspace/EAS/tests/EsgAsAService.Tests/bin/Debug/net9.0/EsgAsAService.Tests.dll
+Test run for /workspace/EAS/tests/EsgAsAService.Tests/bin/Debug/net9.0/EsgAsAService.Tests.dll (.NETCoreApp,Version=v9.0)
+VSTest version 17.14.1 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+/workspace/EAS/tests/EsgAsAService.Tests/bin/Debug/net9.0/EsgAsAService.Tests.dll
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.5.3.1+6b60a9e56a (64-bit .NET 9.0.9)
+[xUnit.net 00:00:00.23]   Discovering: EsgAsAService.Tests
+[xUnit.net 00:00:00.36]   Discovered:  EsgAsAService.Tests
+[xUnit.net 00:00:00.37]   Starting:    EsgAsAService.Tests
+  Passed EsgAsAService.Tests.Infrastructure.OpenAiTextGeneratorTests.SuccessParsesResponseAndSendsBearerAuth [240 ms]
+  Passed EsgAsAService.Tests.Infrastructure.OpenAiTextGeneratorTests.MissingApiKeyReturnsDisabledMessage [10 ms]
+  Passed EsgAsAService.Tests.Infrastructure.OpenAiTextGeneratorTests.HttpFailureReturnsPlaceholder [8 ms]
+  Passed EsgAsAService.Tests.Api.ReportsControllerTests.GenerateJson_ReturnsPayload_WhenServiceRegistered [2 s]
+  Passed EsgAsAService.Tests.Unit.CalculationServiceTests.Computes_Co2e_Deterministically [2 s]
+  Passed EsgAsAService.Tests.Api.ReportsControllerTests.GenerateJson_Returns404_WhenPeriodMissing [86 ms]
+  Passed EsgAsAService.Tests.Api.ReportsControllerTests.GenerateJson_Returns501_WhenServiceNotRegistered [11 ms]
+  Passed EsgAsAService.Tests.Api.ReportsControllerTests.ExportXbrlFormatsInvariantAndEscapes [25 ms]
+  Passed EsgAsAService.Tests.Api.RbacTests.ConfigurePolicies_DefinesExpectedPolicies [10 ms]
+  Passed EsgAsAService.Tests.Api.ControllersBasicTests.EvidencePresignReturnsAbsoluteUri [42 ms]
+  Passed EsgAsAService.Tests.Api.ControllersBasicTests.DeviationsCreateReturnsCreated [20 ms]
+  Passed EsgAsAService.Tests.Api.ControllersBasicTests.DataSourcesCreateReturnsCreated [69 ms]
+  Passed EsgAsAService.Tests.Api.ImportsProcessingTests.Waste_Process_ImportsLines_AndIsIdempotent [2 s]
+  Passed EsgAsAService.Tests.Api.ControllersBasicTests.OrganisationsCreateAndUpdate [30 ms]
+  Passed EsgAsAService.Tests.Api.ControllersBasicTests.EmissionFactorsCreateReturnsCreated [9 ms]
+  Passed EsgAsAService.Tests.Api.ImportsProcessingTests.Waste_Process_ConvertsUnits_WhenProvided [158 ms]
+  Passed EsgAsAService.Tests.Api.ControllersBasicTests.SectionMetricsUpsertAndGet [206 ms]
+  Passed EsgAsAService.Tests.Api.ImportsProcessingTests.Water_Process_ConvertsUnits_WhenProvided [113 ms]
+  Passed EsgAsAService.Tests.Api.EsgFullReportServiceTests.Generate_ReturnsBasicSections [3 s]
+  Passed EsgAsAService.Tests.Api.ImportsProcessingTests.Water_Process_ImportsLines_AndIsIdempotent [141 ms]
+  Passed EsgAsAService.Tests.Unit.EmissionFactorLookupTests.LookupByCountryYearType [142 ms]
+  Passed EsgAsAService.Tests.Infrastructure.DiagnosticServiceTests.CaptureReturnsCodeAndUsesExpectedFormat [11 ms]
+  Passed EsgAsAService.Tests.Unit.EmissionFactorValidityTests.PicksMostRecentByValidFrom [44 ms]
+  Passed EsgAsAService.Tests.CalculationServiceTests.CalculatesScope1Diesel [16 ms]
+  Passed EsgAsAService.Tests.CalculationServiceTests.SummarizeAggregatesScopes [6 ms]
+  Passed EsgAsAService.Tests.Unit.CalculationClampTests.Summarize_Aggregates_Scopes_Correctly [226 ms]
+  Passed EsgAsAService.Tests.Unit.CalculationClampTests.NegativeQuantity_IsClampedToZero [70 ms]
+info: Microsoft.EntityFrameworkCore.Update[30100]
+      Saved 0 entities to in-memory store.
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '/root/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+  Passed EsgAsAService.Tests.Unit.UnitConversionTests.ThrowsWhenMissingConversion [14 ms]
+  Passed EsgAsAService.Tests.Unit.UnitConversionTests.ConvertsByFactor [5 ms]
+  Passed EsgAsAService.Tests.Infrastructure.EsgDataServiceTests.UpsertCompanyAddsAndUpdatesWithAuditLogs [35 ms]
+  Passed EsgAsAService.Tests.Infrastructure.EsgDataServiceTests.UpsertReportingPeriodAddsAndGetsById [133 ms]
+  Passed EsgAsAService.Tests.Integration.ConcurrencyTests.ConcurrentUpserts_DoNotThrow_AfterRetry [585 ms]
+  Passed EsgAsAService.Tests.Infrastructure.ReportGeneratorTests.GenerateXbrlContainsBasicTags [66 ms]
+  Passed EsgAsAService.Tests.Unit.CsvImportTests.AnalyzeReturnsHeaders [18 ms]
+  Passed EsgAsAService.Tests.Unit.CsvImportTests.CommitPersistsActivitiesAndScopeEntries [85 ms]
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://localhost/health - - -
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]
+      Failed to determine the https port for redirect.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'Health checks'
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'Health checks'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://localhost/health - 200 - text/plain 311.6486ms
+Activity.TraceId:            f85f8727f153fdba9dfd74af6bace286
+Activity.SpanId:             86e7b4691920d623
+Activity.TraceFlags:         Recorded
+Activity.ActivitySourceName: Microsoft.AspNetCore
+Activity.DisplayName:        GET /health
+Activity.Kind:               Server
+Activity.StartTime:          2025-09-25T09:31:54.2742334Z
+Activity.Duration:           00:00:00.2992778
+Activity.Tags:
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://localhost/v1/reports/generate/json?periodId=384b2ff4-f535-411c-9ace-168197d34fbd - text/plain;+charset=utf-8 0
+    server.address: localhost
+    http.request.method: GET
+    url.scheme: http
+    url.path: /health
+    network.protocol.version: 1.1
+    http.route: /health
+    http.response.status_code: 200
+Resource associated with Activity:
+    service.name: EsgAsAService.Api
+    service.instance.id: b90ec6e0-f786-472d-b2ea-3f53a5926eca
+    telemetry.sdk.name: opentelemetry
+    telemetry.sdk.language: dotnet
+    telemetry.sdk.version: 1.9.0
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'EsgAsAService.Api.Controllers.ReportsController.GenerateJson (EsgAsAService.Api)'
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[102]
+      Route matched with {action = "GenerateJson", controller = "Reports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GenerateJson(System.Guid) on controller EsgAsAService.Api.Controllers.ReportsController (EsgAsAService.Api).
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor[1]
+      Executing ObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ProblemDetails'.
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[105]
+      Executed action EsgAsAService.Api.Controllers.ReportsController.GenerateJson (EsgAsAService.Api) in 82.4871ms
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'EsgAsAService.Api.Controllers.ReportsController.GenerateJson (EsgAsAService.Api)'
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://localhost/v1/reports/generate/json?periodId=384b2ff4-f535-411c-9ace-168197d34fbd - 404 - application/problem+json;+charset=utf-8 154.7118ms
+Activity.TraceId:            71bc75398868175bed5d70e8e1a8070d
+Activity.SpanId:             99cd5e77eeeffd5c
+Activity.TraceFlags:         Recorded
+Activity.ActivitySourceName: Microsoft.AspNetCore
+Activity.DisplayName:        POST v1/reports/generate/json
+Activity.Kind:               Server
+Activity.StartTime:          2025-09-25T09:31:54.6028216Z
+Activity.Duration:           00:00:00.1547058
+Activity.Tags:
+    server.address: localhost
+    url.query: ?periodId=Redacted
+    http.request.method: POST
+    url.scheme: http
+    url.path: /v1/reports/generate/json
+    network.protocol.version: 1.1
+    http.route: v1/reports/generate/json
+    http.response.status_code: 404
+Resource associated with Activity:
+    service.name: EsgAsAService.Api
+    service.instance.id: b90ec6e0-f786-472d-b2ea-3f53a5926eca
+    telemetry.sdk.name: opentelemetry
+    telemetry.sdk.language: dotnet
+    telemetry.sdk.version: 1.9.0
+  Passed EsgAsAService.Tests.Unit.ModuleCalculationTests.RunC3_ScoresTransitionPlan [37 ms]
+  Passed EsgAsAService.Tests.Unit.ModuleCalculationTests.RunB3_DerivesScope2FromElectricityFactor [14 ms]
+  Passed EsgAsAService.Tests.Api.ControllersBasicTests.NarrativesUpsertAndGet [1 s]
+  Passed EsgAsAService.Tests.Api.ControllersBasicTests.ActivitiesCreateNullRequestReturnsBadRequest [1 ms]
+  Passed EsgAsAService.Tests.Api.ControllersBasicTests.ApprovalsSubmitAndPatch [111 ms]
+  Passed EsgAsAService.Tests.Api.ControllersBasicTests.ReportingPeriodsCreateAndUpdateRespectNulls [26 ms]
+  Passed EsgAsAService.Tests.Api.ControllersBasicTests.ActivitiesCreatePersistsAndReturnsCreated [53 ms]
+  Passed EsgAsAService.Tests.Integration.ApiIntegrationTests.Health_Returns200 [2 s]
+  Passed EsgAsAService.Tests.Integration.ApiIntegrationTests.Reports_GenerateJson_FeatureDisabled_Returns404 [171 ms]
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://localhost/v1/imports/water/invoice - multipart/form-data;+boundary="f02e185e-0c64-4799-9789-a7c1371849c3" 387
+warn: Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware[9]
+      A request body size limit could not be applied. This server does not support the IHttpMaxRequestBodySizeFeature.
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[0]
+      Executing endpoint 'EsgAsAService.Api.Controllers.Importing.WaterImportsController.Invoice (EsgAsAService.Api)'
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[102]
+      Route matched with {action = "Invoice", controller = "WaterImports"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Invoice(System.Guid, System.Nullable`1[System.Guid], Microsoft.AspNetCore.Http.IFormFile) on controller EsgAsAService.Api.Controllers.Importing.WaterImportsController (EsgAsAService.Api).
+warn: Microsoft.AspNetCore.Mvc.Filters.RequestSizeLimitFilter[1]
+      A request body size limit could not be applied. This server does not support the IHttpRequestBodySizeFeature.
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[101]
+      Executing action method EsgAsAService.Api.Controllers.Importing.WaterImportsController.Invoice (EsgAsAService.Api) - Validation state: Valid
+info: Microsoft.EntityFrameworkCore.Update[30100]
+      Saved 2 entities to in-memory store.
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[103]
+      Executed action method EsgAsAService.Api.Controllers.Importing.WaterImportsController.Invoice (EsgAsAService.Api), returned result Microsoft.AspNetCore.Mvc.CreatedAtRouteResult in 13.5931ms.
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ObjectResultExecutor[1]
+      Executing CreatedAtRouteResult, writing value of type '<>f__AnonymousType9`1[[System.Guid, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+info: Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker[105]
+      Executed action EsgAsAService.Api.Controllers.Importing.WaterImportsController.Invoice (EsgAsAService.Api) in 88.9881ms
+info: Microsoft.AspNetCore.Routing.EndpointMiddleware[1]
+      Executed endpoint 'EsgAsAService.Api.Controllers.Importing.WaterImportsController.Invoice (EsgAsAService.Api)'
+Activity.TraceId:            af97c5ae63ac32349992778d3325313f
+Activity.SpanId:             49333a1e242069ea
+Activity.TraceFlags:         Recorded
+Activity.ActivitySourceName: Microsoft.AspNetCore
+Activity.DisplayName:        POST v1/imports/water/invoice
+Activity.Kind:               Server
+Activity.StartTime:          2025-09-25T09:31:54.7718056Z
+Activity.Duration:           00:00:00.1167346
+Activity.Tags:
+    server.address: localhost
+    http.request.method: POST
+    url.scheme: http
+    url.path: /v1/imports/water/invoice
+    network.protocol.version: 1.1
+    http.route: v1/imports/water/invoice
+    http.response.status_code: 201
+Resource associated with Activity:
+    service.name: EsgAsAService.Api
+    service.instance.id: b90ec6e0-f786-472d-b2ea-3f53a5926eca
+    telemetry.sdk.name: opentelemetry
+    telemetry.sdk.language: dotnet
+    telemetry.sdk.version: 1.9.0
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://localhost/v1/imports/water/invoice - 201 - application/json;+charset=utf-8 116.5903ms
+[xUnit.net 00:00:05.36]   Finished:    EsgAsAService.Tests
+Resource associated with Metric:
+    service.name: EsgAsAService.Api
+    service.instance.id: b90ec6e0-f786-472d-b2ea-3f53a5926eca
+    telemetry.sdk.name: opentelemetry
+    telemetry.sdk.language: dotnet
+    telemetry.sdk.version: 1.9.0
+Metric Name: http.server.active_requests, Number of active HTTP server requests., Unit: {request}, Meter: Microsoft.AspNetCore.Hosting
+(2025-09-25T09:31:53.8362001Z, 2025-09-25T09:31:54.9164603Z] http.request.method: GET url.scheme: http LongSumNonMonotonic
+Value: 0
+(2025-09-25T09:31:53.8362001Z, 2025-09-25T09:31:54.9164603Z] http.request.method: POST url.scheme: http LongSumNonMonotonic
+Value: 0
+Metric Name: http.server.request.duration, Duration of HTTP server requests., Unit: s, Meter: Microsoft.AspNetCore.Hosting
+(2025-09-25T09:31:53.8417384Z, 2025-09-25T09:31:54.9177409Z] http.request.method: GET http.response.status_code: 200 http.route: /health network.protocol.version: 1.1 url.scheme: http Histogram
+Value: Sum: 0.3116486 Count: 1 Min: 0.3116486 Max: 0.3116486 
+(-Infinity,0.005]:0
+(0.005,0.01]:0
+(0.01,0.025]:0
+(0.025,0.05]:0
+(0.05,0.075]:0
+(0.075,0.1]:0
+(0.1,0.25]:0
+(0.25,0.5]:1
+(0.5,0.75]:0
+(0.75,1]:0
+(1,2.5]:0
+(2.5,5]:0
+(5,7.5]:0
+(7.5,10]:0
+(10,+Infinity]:0
+(2025-09-25T09:31:53.8417384Z, 2025-09-25T09:31:54.9177409Z] http.request.method: POST http.response.status_code: 404 http.route: v1/reports/generate/json network.protocol.version: 1.1 url.scheme: http Histogram
+Value: Sum: 0.1547118 Count: 1 Min: 0.1547118 Max: 0.1547118 
+(-Infinity,0.005]:0
+(0.005,0.01]:0
+(0.01,0.025]:0
+(0.025,0.05]:0
+(0.05,0.075]:0
+(0.075,0.1]:0
+(0.1,0.25]:1
+(0.25,0.5]:0
+(0.5,0.75]:0
+(0.75,1]:0
+(1,2.5]:0
+(2.5,5]:0
+(5,7.5]:0
+(7.5,10]:0
+(10,+Infinity]:0
+(2025-09-25T09:31:53.8417384Z, 2025-09-25T09:31:54.9177409Z] http.request.method: POST http.response.status_code: 201 http.route: v1/imports/water/invoice network.protocol.version: 1.1 url.scheme: http Histogram
+Value: Sum: 0.1165903 Count: 1 Min: 0.1165903 Max: 0.1165903 
+(-Infinity,0.005]:0
+(0.005,0.01]:0
+(0.01,0.025]:0
+(0.025,0.05]:0
+(0.05,0.075]:0
+(0.075,0.1]:0
+(0.1,0.25]:1
+(0.25,0.5]:0
+(0.5,0.75]:0
+(0.75,1]:0
+(1,2.5]:0
+(2.5,5]:0
+(5,7.5]:0
+(7.5,10]:0
+(10,+Infinity]:0
+Metric Name: aspnetcore.rate_limiting.active_request_leases, Number of HTTP requests that are currently active on the server that hold a rate limiting lease., Unit: {request}, Meter: Microsoft.AspNetCore.RateLimiting
+(2025-09-25T09:31:54.1099169Z, 2025-09-25T09:31:54.9177444Z] LongSumNonMonotonic
+Value: 0
+(2025-09-25T09:31:54.1099169Z, 2025-09-25T09:31:54.9177444Z] aspnetcore.rate_limiting.policy: ingest LongSumNonMonotonic
+Value: 0
+Metric Name: aspnetcore.rate_limiting.request_lease.duration, The duration of rate limiting leases held by HTTP requests on the server., Unit: s, Meter: Microsoft.AspNetCore.RateLimiting
+(2025-09-25T09:31:54.1114694Z, 2025-09-25T09:31:54.9177463Z] Histogram
+Value: Sum: 0.1909173 Count: 2 Min: 0.0627043 Max: 0.128213 
+(-Infinity,0.005]:0
+(0.005,0.01]:0
+(0.01,0.025]:0
+(0.025,0.05]:0
+(0.05,0.075]:1
+(0.075,0.1]:0
+(0.1,0.25]:1
+(0.25,0.5]:0
+(0.5,0.75]:0
+(0.75,1]:0
+(1,2.5]:0
+(2.5,5]:0
+(5,7.5]:0
+(7.5,10]:0
+(10,+Infinity]:0
+(2025-09-25T09:31:54.1114694Z, 2025-09-25T09:31:54.9177463Z] aspnetcore.rate_limiting.policy: ingest Histogram
+Value: Sum: 0.0999159 Count: 1 Min: 0.0999159 Max: 0.0999159 
+(-Infinity,0.005]:0
+(0.005,0.01]:0
+(0.01,0.025]:0
+(0.025,0.05]:0
+(0.05,0.075]:0
+(0.075,0.1]:1
+(0.1,0.25]:0
+(0.25,0.5]:0
+(0.5,0.75]:0
+(0.75,1]:0
+(1,2.5]:0
+(2.5,5]:0
+(5,7.5]:0
+(7.5,10]:0
+(10,+Infinity]:0
+Metric Name: aspnetcore.rate_limiting.requests, Number of requests that tried to acquire a rate limiting lease. Requests could be rejected by global or endpoint rate limiting policies. Or the request could be canceled while waiting for the lease., Unit: {request}, Meter: Microsoft.AspNetCore.RateLimiting
+(2025-09-25T09:31:54.1123380Z, 2025-09-25T09:31:54.9177484Z] aspnetcore.rate_limiting.result: acquired LongSum
+Value: 2
+(2025-09-25T09:31:54.1123380Z, 2025-09-25T09:31:54.9177484Z] aspnetcore.rate_limiting.policy: ingest aspnetcore.rate_limiting.result: acquired LongSum
+Value: 1
+Metric Name: aspnetcore.routing.match_attempts, Number of requests that were attempted to be matched to an endpoint., Unit: {match_attempt}, Meter: Microsoft.AspNetCore.Routing
+(2025-09-25T09:31:54.1779645Z, 2025-09-25T09:31:54.9177497Z] aspnetcore.routing.is_fallback: false aspnetcore.routing.match_status: success http.route: /health LongSum
+Value: 1
+(2025-09-25T09:31:54.1779645Z, 2025-09-25T09:31:54.9177497Z] aspnetcore.routing.is_fallback: false aspnetcore.routing.match_status: success http.route: v1/reports/generate/json LongSum
+Value: 1
+(2025-09-25T09:31:54.1779645Z, 2025-09-25T09:31:54.9177497Z] aspnetcore.routing.is_fallback: false aspnetcore.routing.match_status: success http.route: v1/imports/water/invoice LongSum
+Value: 1
+  Passed EsgAsAService.Tests.Infrastructure.ReportGeneratorTests.GeneratePdfReturnsPdfBytes [931 ms]
+  Passed EsgAsAService.Tests.Integration.ApiIntegrationTests.Water_Invoice_RequiresCsv_Returns201_OnValid [127 ms]
+
+Test Run Successful.
+Total tests: 46
+     Passed: 46
+ Total time: 6.4708 Seconds

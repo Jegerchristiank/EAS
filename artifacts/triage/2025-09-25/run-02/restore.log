@@ -1,0 +1,8 @@
+  Determining projects to restore...
+  Restored /workspace/EAS/src/EsgAsAService.Domain/EsgAsAService.Domain.csproj (in 330 ms).
+  Restored /workspace/EAS/src/EsgAsAService.Application/EsgAsAService.Application.csproj (in 527 ms).
+  Restored /workspace/EAS/src/EsgAsAService.Web/EsgAsAService.Web.csproj (in 119 ms).
+  Restored /workspace/EAS/tools/SchemaCoverage/SchemaCoverage.csproj (in 278 ms).
+  Restored /workspace/EAS/src/EsgAsAService.Infrastructure/EsgAsAService.Infrastructure.csproj (in 679 ms).
+  Restored /workspace/EAS/tests/EsgAsAService.Tests/EsgAsAService.Tests.csproj (in 696 ms).
+  Restored /workspace/EAS/src/EsgAsAService.Api/EsgAsAService.Api.csproj (in 34 ms).
